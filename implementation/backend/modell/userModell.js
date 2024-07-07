@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 const usersSchema = new Schema({
 
@@ -14,17 +14,9 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
-    password:{
-        type: String,
-        required: true,
-    },
-    logged:{
-        type: Boolean,
-        required: true,
-    }
 
 }, {
     timestamps: true
 })
 
-export const User = mongoose.model('user', usersSchema);
+export const User = mongoose.model('users', usersSchema);
