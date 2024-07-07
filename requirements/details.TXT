@@ -1,0 +1,166 @@
+Cashbox-System
+
+Verbindungsabfrage
+. Kurz vor dem Login soll die Abfrage erfolgen, ob der eigene Server oder ein entfernter genutzt werden soll
+. für die Entscheidung soll es zwei Buttons geben
+. nach dem Klick soll im Backend stets versucht werden die Verbindung zum Server aufzubauen.
+In dieser Zeit soll ein "Spinner" laufen bis diese besteht
+. wenn die Verbindung steht, dann soll zum Login weitergeleitet werden (automatisch)
+
+
+Login-Seite
+. eine Meldung erscheint auf dem Bildschirm und gibt aus, das die TCP-Verbindung steht
+
+
+Login-erfolgreich
+. Nur registrierten Usern darf der Zugang zum Kassensystem gewährt werden
+. das jeweilige gültige Passwort eines Users ist notwendig
+. nach dem Login-Prozess soll man automatisch zum Hauptmenu weitergeleitet werden
+
+
+Login-nicht erfolgreich
+. eine passende Meldung soll auf dem Bildschirm erscheinen
+. der Screen wechselt nicht
+
+
+Login nicht erfolgreich (Gründe)
+. wenn eine ungültige Eingabe vorliegt
+. wenn das Password nicht bekannt ist
+. wenn keine Eingabe gemacht wurde
+
+
+Registrierung - erfolgreich
+. Eingabe aller relavanten Daten (Vorname, Nachname, eMail, Mobile) mittels Felder
+. Eingabeprozess wird mit dem Button "senden" oder ähnliches beendet
+. an die hinterlegte Handynummer wid automatisch ein neues Passwort geschickt
+
+
+Registierung nicht erfolgreich
+. eine passende Meldung soll auf dem Bildschirm erscheinen
+. der Screen wechselt nicht
+
+
+Registierung nicht erfolgreich (Gründe)
+. es wurden nicht alle Felder ausgefüllt
+. die Eingabe war ungültig
+
+
+Passwortgenerierung
+. das Passwort besteht aus einer 10-stelligen Zahl
+. die ersten 5 Zahlen sind fest
+. die letzten 5 werden per Zufall erstellt
+. Jedes Passwort ist dabei uniq
+
+
+Daten ändern erfolgreich
+. der eingeloggte User soll seine Daten (Nachname, eMail, Mobile) ändern können mittels Formular
+. Bestätigung der Änderung mittels Button
+. nach der Bestäting durch den User soll eine kurze Meldung erscheinen
+. automatischer Screenwechsel zurück ins Hauptmenu soll dann erfolgen
+
+
+Daten ändern nicht erfolgreich
+. eine passende Meldung soll  auf dem Bildschirm erscheinen
+. der Screen wechselt nicht
+
+
+Daten ändern nicht erfolgreich (Gründe)
+. Eingaben sind ungültig
+. Felder sind nicht ausgefüllt wurden
+
+
+Passwort vergessen erfolgreich
+. Eingabe der Handynummer des betroffenen Users
+. Bestätigung erfolgt durch einen Klick auf einen Button
+. automatisch wird das gespeicherte Passwort an die angegebene Handynummer verschickt
+. ein automatischer Screenwechsel zum Login erfolgt dann
+
+
+Passwort vergessen nicht erfolgreich
+. eine passende Meldung soll auf dem Bildschirm erscheinen
+. der Screen wechselt dann nicht
+
+
+Passwort vergessen erfolgreich (Gründe)
+. wenn die angegebene Handynummer unbekannt ist
+. wenn die Eingabe ungültig  ist
+. wenn das Feld nicht ausgefüllt wurde
+
+
+Einzahlung erfolgreich
+. ein Betrag wird mittels eines Feldes eingegeben
+. es soll dann für einen Moment eine Meldung (Prozess erfolgeich erfolgt) auf dem Bildschirm erscheinen
+. der User entscheidet, ob er zum Hauptmenu zurück kehren möchte
+
+
+Einzahlung nicht erfolgreich
+. es soll die Meldung auf dem Bildschirm erscheinen, warum etwas nicht geklappt hat
+. der Kassenbestand bliebt unverändert
+. einen automatischen Screenwechsel soll es dann nicht geben
+
+
+Einzahlung nicht erfolgreich (Gründe)
+. Eingabe war ungültig
+
+
+Auszahlung erfolgreich
+. solange der Kassenbestand größer als 0 ist
+. für einen Moment soll eine Meldung erscheinen, mit der Info, dass es geklappt hat
+. automatischer Screenwechsel zurück ins Hauptmenu soll es dann geben
+. Der Kassenbestand soll dann im Hintergrund automatisch angepasst werden
+
+
+Auszahlung nicht erolgreich
+. soll es auch eine passende Meldung geben
+
+
+Auszahlung nicht erolgreich (Gründe)
+. wenn die Eingabe > Kassenbestand ist
+. Eingabe ist ungültig
+. beträgt der Kassenstand 0.00 so sind nur noch Einzahlungen möglich, dies soll per Meldung mitgeteilt werden
+
+
+Account löschen erfolgreich
+. nach einem Klick soll der User gesondert gefragt werden, ob das bestehende Konto wirklich gelöscht werden soll
+. erst nach dem gesondert mit "ok" bestätigt wird, erfolgt eine Kontolöschung
+. eine Meldung auf dem Bildschirm soll darüber infomrieren
+. nach dem Prozess soll es einen Screenwechsel zum Login geben
+
+
+Meine Daten
+. nach einem Klick wird auf eine separate Seite geführt
+. auf dieser werden tabellarisch alle Daten (Vorname, Nachname, Mobile, Account seit, Letzte Änderung)
+gelistet
+. ein Button soll zum Hauptmenu zurück führen
+
+
+Hauptmenü
+. Dort sollen übersichtlich alle Dienste (Einzahlung, Auszahlung, Daten ändern und Logout) angezeigt werden
+. Mit einem Klick auf einen Dienst öffnet sich ein Fenster, wo alle notwendigen Daten eingetragen werden können
+. Oben links soll der Name des User stehen (Vorname und Nachname), der aktuell eingeloggt ist
+. Oben rechts der aktuelle Kassenbestand mit der Währung
+
+
+Warnsignal
+. Wenn der Kassenbestand 0.00 € erreicht hat bzw. die Eingabe bei einer Auszahlung > Kassenbestand,
+so wird automatisch eine SMS an den Betreiber verschickt
+. mit dem Hinweis, das nichdt genug Geld in der Kasse ist.
+. Diese Meldung soll allerdings erst nach einer bestimmten Zeit (1 Stunde oder 30 Minuten) verschickt werden
+
+
+Rotes X
+. nach einen Klick soll das vordere Fenster geschlossen werden
+. ging es beim Fenster um die Registierung oder das Vergessen des Passwortes,
+so soll automatisch zum Login weiter geleitet werden
+. ging es beim Fenster ums Einzahlen, Auszahlen oder um die Accountdaten,
+soll automatisch zum Hauptmenü weiter geleitet werden
+
+
+Backend
+Verbindung-TCP
+. der Server läuft auf einem anderen Rechner
+. Client verbindet sich automatisch mit dem anderen Rechner
+
+
+Verbindung-Lokal
+. der Server läuft auf dem gleichen Rechner
