@@ -14,6 +14,14 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
+    password:{
+        type: String,
+        required: true,
+    },
+    logged:{
+        type: Boolean,
+        required: true,
+    },
 
 }, {
     timestamps: true
