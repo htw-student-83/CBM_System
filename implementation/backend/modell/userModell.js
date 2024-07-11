@@ -14,9 +14,17 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
+    password:{
+        type: String,
+        required: true,
+    },
+    logged:{
+        type: Boolean,
+        required: true,
+    },
 
 }, {
     timestamps: true
 })
 
-export const User = mongoose.model('users', usersSchema);
+export const Users = mongoose.model('users', usersSchema);
