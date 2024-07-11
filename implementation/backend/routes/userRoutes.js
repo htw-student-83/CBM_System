@@ -1,8 +1,7 @@
 import express from "express";
 import { Users } from "../modell/userModell.js";
 import twilio from 'twilio';
-//import usreController from '../controller/userController.js'
-
+const { createUser } = require('../controller/userController.js');
 const router = express.Router();
 
 //const irgendetwas = "KLLFQCQ3L935E6MZV5WWCR4H";
@@ -12,23 +11,10 @@ const twilioServer = new twilio(accountSid, authToken);
 
 //Route to save a new user
 router.post('/', async (req, res) => {
-    try {
-        if(!req.body.vorname || !req.body.nachname || !req.body.mobile  || !req.body.password  || !req.body.logged){
-            res.status(400).send({message: "You didn't send all data of the new user."})
-        }
-        const newUser = {
-            vorname: req.body.vorname,
-            nachname: req.body.nachname,
-            mobile: req.body.mobile,
-            password: req.body.password,
-            logged: req.body.logged,
-        }
-        const user = await Users.create(newUser);
-        res.status(201).json({msg: "New user added to the DB.", user})
-    }catch (error){
-        res.status(400).json({msg: error});
-    }
+
 });
+
+router.post('/', createUser);
 
 //Route to get all user
 router.get('/', async (req, res) => {
