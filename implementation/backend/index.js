@@ -1,16 +1,16 @@
-import express from 'express';
-import { PORT, mongo_URL } from './configuration.js';
-import mongoose from "mongoose";
-import userRoutes from '../backend/routes/userRoutes.js'
-import cors from 'cors';
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const userRoutes = require('../backend/routes/userRoutes');
+//const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+//app.use(cors());
 
-app.use('/user', userRoutes);
+app.use('/api/user/', userRoutes);
 
 app.get('/', (req, res) => {
     console.log(req);
@@ -19,10 +19,10 @@ app.get('/', (req, res) => {
 
 
 mongoose
-    .connect(mongo_URL)
+    .connect(process.env.MONGO_URL)
     .then(()=>{
-        app.listen(PORT, () => {
-            console.log(`Server is listening on port ${PORT}`);
+        app.listen(process.env.PORT, () => {
+            console.log(`Server is listening on port ${process.env.PORT}`);
         })
         console.log("Connected with the db cash-box-system")
     })

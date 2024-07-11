@@ -1,20 +1,27 @@
-import express from "express";
-import { Users } from "../modell/userModell.js";
-import twilio from 'twilio';
-const { createUser } = require('../controller/userController.js');
+const express = require('express');
 const router = express.Router();
-
-//const irgendetwas = "KLLFQCQ3L935E6MZV5WWCR4H";
-const accountSid = 'ACc1c65c753d9cd9297249c5164146f73f';
-const authToken = '9812377579d9c2f611df5183fae56a9e';
-const twilioServer = new twilio(accountSid, authToken);
+const Users = require("../modell/userModell");
 
 //Route to save a new user
 router.post('/', async (req, res) => {
-
+    try {
+        if(!req.body.vorname || !req.body.nachname || !req.body.mobile  || !req.body.password  || !req.body.logged){
+            res.status(400).send({message: "You didn't send all data of the new user."})
+        }
+        const newUser = {
+            vorname: req.body.vorname,
+            nachname: req.body.nachname,
+            mobile: req.body.mobile,
+            password: req.body.password,
+            logged: req.body.logged,
+        }
+        const user = await Users.create(newUser);
+        res.status(201).json({msg: "New user added to the DB.", user})
+    }catch (error){
+        res.status(400).json({msg: error});
+    }
 });
 
-router.post('/', createUser);
 
 //Route to get all user
 router.get('/', async (req, res) => {
@@ -58,6 +65,7 @@ router.patch('/:id', async (req, res) => {
     res.status(204).end();
 })
 
+/*
 router.get('/', async (req, res) => {
     const { mobile } = req.params
     const user = await Users.findOne({mobile: mobile});
@@ -78,6 +86,8 @@ router.get('/', async (req, res) => {
         .catch(error => console.error("Twilioerror: " + error));
 })
 
+ */
+
 //Route to check an user
 router.get('/:mobile', async (req, res) => {
     const { mobile } = req.params
@@ -86,9 +96,8 @@ router.get('/:mobile', async (req, res) => {
     if(!user){
         return res.status(404).end();
     }
-
     return res.status(200).end();
 })
 
+module.exports = router;
 
-export default router;
