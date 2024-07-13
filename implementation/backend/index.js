@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const net = require('net');
 const mongoose = require('mongoose');
 const userRoutes = require('../backend/routes/userRoutes');
 //const cors = require('cors');
@@ -17,6 +18,8 @@ app.get('/', (req, res) => {
     return res.status(200).send("Welcome to the CBM-System");
 })
 
+//TODO
+//implement the possibility to start the tcp-server next the local-server
 
 mongoose
     .connect(process.env.MONGO_URL)
