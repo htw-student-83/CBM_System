@@ -1,69 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const Users = require("../modell/userModell");
+const { createUser, getUsers, getUser, updateUserData, checkUser, deleteUser } = require('../controller/userController');
 
 //Route to save a new user
-router.post('/', async (req, res) => {
-    try {
-        if(!req.body.vorname || !req.body.nachname || !req.body.mobile  || !req.body.password  || !req.body.logged){
-            res.status(400).send({message: "You didn't send all data of the new user."})
-        }
-        const newUser = {
-            vorname: req.body.vorname,
-            nachname: req.body.nachname,
-            mobile: req.body.mobile,
-            password: req.body.password,
-            logged: req.body.logged,
-        }
-        const user = await Users.create(newUser);
-        res.status(201).json({msg: "New user added to the DB.", user})
-    }catch (error){
-        res.status(400).json({msg: error});
-    }
-});
-
+router.post('/', createUser);
 
 //Route to get all user
-router.get('/', async (req, res) => {
-    const user = await Users.find({});
-    res.status(200).json(user);
-})
+router.get('/', getUsers);
 
 //Route to get an user by the password
-router.get('/:password', async (req, res) => {
-    const {password} = req.params
-    const user = await Users.findOne({password: password});
-    if(!user){
-        return res.status(404).json({msg: "User not found."});
-    }
-    res.status(200).json(user);
-})
+router.get('/:password', getUser);
 
 //Route to delete an user
-router.delete('/', async (req, res) => {
-    try {
-        const user = await Users.findOne({ logged: true });
-        const user_deleted = await Users.findOneAndDelete({_id: user.id});
-        if(!user_deleted){
-            return res.status(404).json({msg: "Not user found for deleting."});
-        }
-        return res.status(204).end();
-    }catch (error){
-        return res.status(404).json({msg: "Nobody found."});
-    }
-})
+router.delete('/', deleteUser);
 
 //Route to change the data of an user
-router.patch('/:id', async (req, res) => {
-    const { id } = req.params
-    const user_updated = await Users.findOneAndUpdate({_id: id}, {
-        ...req.body
-    })
-    if(!user_updated){
-        return res.status(404).json({msg: "Not user found for updating."});
-    }
-    res.status(204).end();
-})
+router.patch('/:id', updateUserData);
+
+//Route to check an stored user
+router.get('/:mobile', checkUser);
 
 /*
 router.get('/', async (req, res) => {
@@ -87,17 +42,6 @@ router.get('/', async (req, res) => {
 })
 
  */
-
-//Route to check an user
-router.get('/:mobile', async (req, res) => {
-    const { mobile } = req.params
-    const user = await Users.findOne({mobile: mobile});
-
-    if(!user){
-        return res.status(404).end();
-    }
-    return res.status(200).end();
-})
 
 module.exports = router;
 
