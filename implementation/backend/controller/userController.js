@@ -1,6 +1,13 @@
-import { Users } from "../modell/userModell.js";
+const Users = require("../modell/userModell");
+const { isValidObjectId} = require("mongoose");
 
-const createUser = async (req, res) => {
+/**
+ * Save an new user into the db
+ * @param req the data of an new user
+ * @param res the message, that the process was successful
+ * @returns {Promise<void>}
+ */
+const createUser =  async (req, res) => {
     try {
         if(!req.body.vorname || !req.body.nachname || !req.body.mobile  || !req.body.password  || !req.body.logged){
             res.status(400).send({message: "You didn't send all data of the new user."})
@@ -19,6 +26,95 @@ const createUser = async (req, res) => {
     }
 }
 
+
+/**
+ * Get all users from the db
+ * @param req not used
+ * @param res the stored users in form of json
+ * @returns {Promise<void>}
+ */
+const getUsers = async (req, res) => {
+    const user = await Users.find({});
+    res.status(200).json(user);
+}
+
+
+/**
+ * get an user by the password
+ * @param req the passwort of a stored user
+ * @param res the user with this password
+ * @returns {Promise<*>}
+ */
+const getUser = async (req, res) => {
+    const { password } = req.params
+    const user = await Users.findOne({password: password});
+    if(!user){
+        return res.status(404).json({msg: "User not found."});
+    }
+    res.status(200).json(user);
+}
+
+
+/**
+ * Change the data of an stored user
+ * @param req new new data
+ * @param res not used
+ * @returns {Promise<*>}
+ */
+const updateUserData = async (req, res)=> {
+    const { id } = req.params
+    if(!isValidObjectId(id)){
+        return res.status(400).json({msg: "The User-ID is invalid."});
+    }
+    const user_updated = await Users.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+    if(!user_updated){
+        return res.status(404).json({msg: "Not user found for updating."});
+    }
+    res.status(204).end();
+}
+
+
+/**
+ * delete an stored user out of the db under the condition logged is true
+ * @param req nothing
+ * @param res nothing message if everything is working otherwise with a message
+ * @returns {Promise<*>}
+ */
+const deleteUser = async (req, res) => {
+    try {
+        const user = await Users.findOne({ logged: true });
+        const user_deleted = await Users.findOneAndDelete({_id: user.id});
+        if(!user_deleted){
+            return res.status(404).json({msg: "Not user found for deleting."});
+        }
+        return res.status(204).end();
+    }catch (error){
+        return res.status(404).json({msg: "Nobody found."});
+    }
+}
+
+/**
+ * verification of an user
+ * @param req the mobile number from the client
+ * @param res the status code from the server
+ * @returns {Promise<*>} true if the user is known otherwise false
+ */
+const checkUser = async (req, res) => {
+    const user = await Users.findOne({mobile: mobile});
+    if(!user){
+        return res.status(404).send({message: "Nobody found with this mobile number."});
+    }
+    return res.status(200).json(user);
+}
+
+
 module.exports = {
-    createUser
+    createUser,
+    getUsers,
+    getUser,
+    updateUserData,
+    deleteUser,
+    checkUser,
 }
