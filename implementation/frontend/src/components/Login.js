@@ -151,14 +151,14 @@ export default function Login(){
 
                 <div className="mt-5 italic">
                     <p className="text-sm">Du hast noch keinen Account?
-                        <Link to='/cashbox/registierung'>
+                        <Link to='/cashbox/user/registrierung'>
                                 <span
                                     className="font-mono underline-offset-2 hover: cursor-pointer"> Registrierung
                                 </span>
                         </Link>
                     </p>
                     <p className="text-sm mt-2">Passwort vergessen?
-                        <Link to='/cashbox/passwort_vergessen'>
+                        <Link to='/cashbox/user/password_vergessen'>
                             <span className="font-mono underline-offset-2 hover: cursor-pointer"> vergessen</span>
                         </Link>
                     </p>

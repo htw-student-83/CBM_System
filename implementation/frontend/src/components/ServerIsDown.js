@@ -14,7 +14,7 @@ const ServerDown = () => {
                 <div className="bg-white mx-4 border-amber-800 ml-auto mr-auto rounded-2xl p-4 w-fit pl-6 pr-6">
                     <h1 className="text-2xl text-center">Ohhh...der Server scheint nicht erreichbar zu sein...</h1>
                     <div className="flex flex-grow mx-2 ml-26 pt-10">
-                        <img src={CrySmily} style={{ width: '250px', height: '250px', marginLeft: '120px' }} alt="weinendes Smily"/>
+                        <img src={CrySmily} style={{ width: '250px', height: '250px', marginLeft: '130px' }} alt="weinendes Smily"/>
                     </div>
                 </div>
             </div>

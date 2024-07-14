@@ -1,0 +1,21 @@
+.SuccessfullyProcessContainer{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 40px;
+    background-color: rgba(0,215,0,0.9);
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.SuccessfullyProcessContainer .logo_Hacken{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+
+.SuccessfullyProcess_Content{
+    margin-top: 5px;
+    font-size: 12px;
+}
