@@ -1,0 +1,16 @@
+.componentFromLeftToRight{
+    position: absolute;
+    display: flex;
+    margin-right: 0;;
+    margin-top: -14px;
+    animation: moveRight 0.3s ease;
+}
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}

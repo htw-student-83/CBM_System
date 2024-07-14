@@ -13,13 +13,12 @@ const Lokal_Connection = () => {
            await axios.get(`http://localhost:4000/api/localserver/status`)
                .then((response) => {
                    if(response.status === 200){
-                       navigate('/cashbox/probeseite');
+                       navigate('/cashbox/login');
                    }
                })
                .catch((error) => {
-                   console.log("Not contact with the local server possible: " + error.message);
+                   navigate('/cashbox/serverFail');
                });
-
         } catch (error) {
             console.error(error);
         }
