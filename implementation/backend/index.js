@@ -20,15 +20,18 @@ app.get('/', (req, res) => {
 
 //TODO
 //implement the possibility to start the tcp-server next the local-server
-
-mongoose
-    .connect(process.env.MONGO_URL)
-    .then(()=>{
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is listening on port ${process.env.PORT}`);
+const serverConnect = async () => {
+    mongoose
+        .connect(process.env.MONGO_URL)
+        .then(()=>{
+            app.listen(process.env.PORT, () => {
+                console.log(`Server is listening on port ${process.env.PORT}`);
+            })
+            console.log("Connected with the db cash-box-system")
         })
-        console.log("Connected with the db cash-box-system")
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+module.exports = serverConnect
