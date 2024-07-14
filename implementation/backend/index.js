@@ -3,25 +3,24 @@ const express = require('express');
 const net = require('net');
 const mongoose = require('mongoose');
 const userRoutes = require('../backend/routes/userRoutes');
-//const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
 
-//app.use(cors());
+app.use(cors());
 
-app.use('/api/user/', userRoutes);
+//app.use('/api/user/', userRoutes);
+app.use('/api/', userRoutes);
+//app.use('/api/cashbox/', userRoutes);
 
 app.get('/', (req, res) => {
     console.log(req);
     return res.status(200).send("Welcome to the CBM-System");
 })
 
-//TODO
-//implement the possibility to start the tcp-server next the local-server
-const serverConnect = async () => {
-    mongoose
+mongoose
         .connect(process.env.MONGO_URL)
         .then(()=>{
             app.listen(process.env.PORT, () => {
@@ -32,6 +31,4 @@ const serverConnect = async () => {
         .catch((error) => {
             console.log(error);
         })
-}
 
-module.exports = serverConnect

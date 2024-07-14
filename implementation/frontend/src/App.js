@@ -3,6 +3,7 @@ import  Mainpage  from './components/main';
 import Server_Connection from "./components/Server_Connection";
 import TCP_Connection from "./components/TCP_Connection";
 import Lokal_Connection from "./components/Lokal_Connection";
+import ProbeSeite from "./components/probeSite";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <Route path = '/cashbox/serverArt' element = {<Server_Connection/>}/>
             <Route path = '/cashbox/serverArt/tcp' element= {<TCP_Connection/>}/>
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>
+            <Route path = '/cashbox/probeseite' element = {<ProbeSeite/>}/>
           </Routes>
         </class>
       </BrowserRouter>
