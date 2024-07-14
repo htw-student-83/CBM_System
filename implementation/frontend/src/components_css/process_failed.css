@@ -1,0 +1,21 @@
+.ProcessFailedContainer{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 33px;
+    background-color: rgba(270,0,0,0.9);
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.logo_Kreuz{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.ProcessFailed_Content{
+    margin-top: 1px;
+    font-size: 12px;
+}
