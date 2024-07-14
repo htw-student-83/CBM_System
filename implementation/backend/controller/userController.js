@@ -109,6 +109,10 @@ const checkUser = async (req, res) => {
     return res.status(200).json(user);
 }
 
+const checkLocalServer = async (req, res) => {
+    return res.sendStatus(200);
+}
+
 
 module.exports = {
     createUser,
@@ -117,4 +121,5 @@ module.exports = {
     updateUserData,
     deleteUser,
     checkUser,
+    checkLocalServer,
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, getUsers, getUser, updateUserData, checkUser, deleteUser } = require('../controller/userController');
+const { createUser, getUsers, getUser, updateUserData, checkUser, deleteUser, checkLocalServer } = require('../controller/userController');
 
 //Route to save a new user
 router.post('/', createUser);
@@ -19,6 +19,9 @@ router.patch('/:id', updateUserData);
 
 //Route to check an stored user
 router.get('/:mobile', checkUser);
+
+//Route to check the status of the lokal server
+router.get('/localserver/status', checkLocalServer);
 
 /*
 router.get('/', async (req, res) => {
