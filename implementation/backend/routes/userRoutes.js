@@ -18,8 +18,8 @@ router.delete('/', deleteUser);
 //Route to change the data of an user
 router.patch('/:id', updateUserData);
 
-//Route to check an stored user
-router.get('/:mobile', checkUser);
+//Route to check a stored user
+router.get('/check/:mobile', checkUser);
 
 //Route to check the status of the lokal server
 router.get('/localserver/status', checkLocalServer);

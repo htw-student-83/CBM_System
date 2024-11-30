@@ -102,6 +102,7 @@ const deleteUser = async (req, res) => {
  * @returns {Promise<*>} true if the user is known otherwise false
  */
 const checkUser = async (req, res) => {
+    const { mobile } = req.params
     const user = await User.findOne({mobile: mobile});
     if(!user){
         return res.status(404).send({message: "Nobody found with this mobile number."});
