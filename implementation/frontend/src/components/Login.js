@@ -36,9 +36,10 @@ export default function Login(){
             setLoginFailed(true);
         }else{
             setLoading(true);
-            axios.get(`/api/users/${password}`)
+            axios.get(`http://localhost:4000/api/${password}`)
                 .then((response) => {
-                    makeUserLogged(response.data._id);
+                    handleSuccessfullyLogin();
+                    //makeUserLogged(response.data._id);
                     setLoading(false)
                 })
                 .catch((error) => {
@@ -54,7 +55,7 @@ export default function Login(){
      */
     const makeUserLogged = async (id) =>{
         try {
-            await axios.patch(`/cashbox/api/users/logged/${id}`)
+            await axios.patch(`http://localhost:4000/api/logged/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })

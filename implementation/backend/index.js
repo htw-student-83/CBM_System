@@ -15,11 +15,6 @@ app.use(cors());
 app.use('/api', userRoutes);
 //app.use('/api/cashbox/', userRoutes);
 
-app.get('/', (req, res) => {
-    console.log(req);
-    return res.status(200).send("Welcome to the CBM-System");
-})
-
 mongoose
         .connect(MONGO_URL)
         .then(()=>{
