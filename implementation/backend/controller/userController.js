@@ -60,14 +60,12 @@ const getUser = async (req, res) => {
  * @param req new new data
  * @param res not used
  * @returns {Promise<*>}
-
+*/
 const updateUserData = async (req, res)=> {
     const { id } = req.params
     if(!isValidObjectId(id)){
         return res.status(400).json({msg: "The User-ID is invalid."});
     }
-
-    const {nachname, mobile} = req.body;
 
     const user_updated = await User.findOneAndUpdate({_id: id}, {
         ...req.body
@@ -77,7 +75,6 @@ const updateUserData = async (req, res)=> {
     }
     res.status(204).end();
 }
- */
 
 /**
  * delete an stored user out of the db under the condition logged is true
@@ -125,6 +122,5 @@ export default {
     updateUserData,
     deleteUser,
     checkUser,
-    changeState,
     checkLocalServer,
 }

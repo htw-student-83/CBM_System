@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import ServerDown from "./components/ServerIsDown";
 import PasswortVergessen from "./components/passwort_vergessen";
 import Registrierung from "./components/registrierung";
+import Hauptmenu from "./components/Hauptmenu";
+import Hauptmenu_final from "./components/Hauptmenu_final";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
             <Route path = '/cashbox/serverArt/tcp' element= {<TCP_Connection/>}/>
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>
             <Route path = '/cashbox/login' element = {<Login/>}/>
+            <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
+            <Route path = '/cashbox/final/hauptmenu' element = {<Hauptmenu_final/>}/>
             <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
             <Route path = '/cashbox/user/password_vergessen' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
