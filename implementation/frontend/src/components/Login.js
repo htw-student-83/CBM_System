@@ -34,18 +34,9 @@ export default function Login(){
         if (!password) {
             setContentError("The input filed doesn't keep empty.");
             setLoginFailed(true);
-        }else if(validation_password_length(password)) {
-            setContentError("Your password has not the requested length.");
-            setLoginFailed(true);
-        }else if(!password_contains_a_pattern(password)) {
-            setContentError("Your password is invalid.");
-            setLoginFailed(true);
-        }else if(!password_contains_only_numbers(password)) {
-            setContentError("Your password doesn't contain only numbers.");
-            setLoginFailed(true);
         }else{
             setLoading(true);
-            axios.get(`/cashbox/api/users/${password}`)
+            axios.get(`/api/users/${password}`)
                 .then((response) => {
                     makeUserLogged(response.data._id);
                     setLoading(false)

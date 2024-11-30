@@ -1,5 +1,5 @@
-const Users = require("../modell/userModell");
-const { isValidObjectId} = require("mongoose");
+import { User } from "../modell/userModell.js";
+import { isValidObjectId} from "mongoose";
 
 /**
  * Save an new user into the db
@@ -19,7 +19,7 @@ const createUser =  async (req, res) => {
             password: req.body.password,
             logged: req.body.logged,
         }
-        const user = await Users.create(newUser);
+        const user = await User.create(newUser);
         res.status(201).json({msg: "New user added to the DB.", user})
     }catch (error){
         res.status(400).json({msg: error});
@@ -34,7 +34,7 @@ const createUser =  async (req, res) => {
  * @returns {Promise<void>}
  */
 const getUsers = async (req, res) => {
-    const user = await Users.find({});
+    const user = await User.find({});
     res.status(200).json(user);
 }
 
@@ -47,7 +47,7 @@ const getUsers = async (req, res) => {
  */
 const getUser = async (req, res) => {
     const { password } = req.params
-    const user = await Users.findOne({password: password});
+    const user = await User.findOne({password: password});
     if(!user){
         return res.status(404).json({msg: "User not found."});
     }
@@ -66,7 +66,7 @@ const updateUserData = async (req, res)=> {
     if(!isValidObjectId(id)){
         return res.status(400).json({msg: "The User-ID is invalid."});
     }
-    const user_updated = await Users.findOneAndUpdate({_id: id}, {
+    const user_updated = await User.findOneAndUpdate({_id: id}, {
         ...req.body
     })
     if(!user_updated){
@@ -85,7 +85,7 @@ const updateUserData = async (req, res)=> {
 const deleteUser = async (req, res) => {
     try {
         const user = await Users.findOne({ logged: true });
-        const user_deleted = await Users.findOneAndDelete({_id: user.id});
+        const user_deleted = await User.findOneAndDelete({_id: user.id});
         if(!user_deleted){
             return res.status(404).json({msg: "Not user found for deleting."});
         }
@@ -102,7 +102,7 @@ const deleteUser = async (req, res) => {
  * @returns {Promise<*>} true if the user is known otherwise false
  */
 const checkUser = async (req, res) => {
-    const user = await Users.findOne({mobile: mobile});
+    const user = await User.findOne({mobile: mobile});
     if(!user){
         return res.status(404).send({message: "Nobody found with this mobile number."});
     }
@@ -114,7 +114,7 @@ const checkLocalServer = async (req, res) => {
 }
 
 
-module.exports = {
+export default {
     createUser,
     getUsers,
     getUser,

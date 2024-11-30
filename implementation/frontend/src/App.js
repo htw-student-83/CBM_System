@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <class className="page">
           <Routes>
-            <Route path = '/cashbox' element = {<Mainpage/>}/>
+            <Route path = '/' element = {<Mainpage/>}/>
             <Route path = '/cashbox/serverArt' element = {<Server_Connection/>}/>
             <Route path = '/cashbox/serverArt/tcp' element= {<TCP_Connection/>}/>
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>

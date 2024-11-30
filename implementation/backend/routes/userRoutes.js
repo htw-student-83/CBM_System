@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { createUser, getUsers, getUser, updateUserData, checkUser, deleteUser, checkLocalServer } = require('../controller/userController');
+import useController from "../controller/userController.js"
+const { createUser, getUsers, getUser, updateUserData, checkUser, deleteUser, checkLocalServer } = useController;
 
 //Route to save a new user
 router.post('/', createUser);
@@ -45,6 +46,5 @@ router.get('/', async (req, res) => {
 })
 
  */
-
-module.exports = router;
+export default router
 
