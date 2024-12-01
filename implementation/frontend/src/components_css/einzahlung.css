@@ -1,0 +1,20 @@
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Entfernt die Pfeile in Chrome, Safari */
+    margin: 0; /* Entfernt den Abstand */
+}
+
+/* Für Firefox */
+.no-spinner {
+    -moz-appearance: textfield; /* Entfernt die Pfeile in Firefox */
+    appearance: textfield; /* Entfernt die Pfeile in allen anderen Browsern */
+}
+
+/* Entfernt den Fokusrahmen */
+.no-spinner:focus {
+    outline: none; /* Entfernt den Fokusrahmen */
+}
+
+input[type="String"]{
+    background: #efefef;
+}
