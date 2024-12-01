@@ -1,9 +1,38 @@
 import IconUser from "../pictures/user2.png"
 import "../components_css/einzahlung.css"
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import "../components_css/UserDataView.css"
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-function User() {
+function User(probs) {
+    const [user, setUser] = useState({
+        vorname: null,
+        nachname: null,
+        mobile: null,
+    });
+
+    const [loading, setLoading] = useState(false);
+    const { id} = useParams();
+    console.log("Übertragene ID:" + id);
+
+    useEffect(() => {
+        setLoading(true);
+        axios
+            .get(`http://localhost:4000/api/${id}`)
+            .then((response) => {
+                if (response) {
+                    setUser(response.data);
+                    setLoading(false);
+                } else {
+                    return response.statusText;
+                }
+            })
+            .catch((error) => {
+                console.log("Data couldn't loaded: " + error.message);
+                setLoading(false);
+            });
+    }, [])
     return (
         <div className="flex flex-col w-96 ml-auto mr-auto mt-16 bg-blue-100 rounded-2xl h-auto " id="mainscreen">
             <div className="mt-10">
@@ -13,20 +42,20 @@ function User() {
                 </div>
                 <div className="pl-4 pt-5 mt-11 mb-10 border-2 ml-auto mr-auto border-black w-80 rounded-3xl">
                     <div className="mb-5">
-                        Vorname:
+                        Vorname:<span>{user.vorname}</span>
                     </div>
                     <div className="mb-5">
-                        Nachname:
+                        Nachname: <span>{user.nachname}</span>
                     </div>
                     <div className="mb-5">
-                        Mobile:
+                        Mobile:<span>{user.mobile}</span>
                     </div>
                     <div className="mb-5">
-                        Registriert seit:
+                        Registriert seit: <span> {new Date(user.createdAt).toString()}</span>
                     </div>
                 </div>
             </div>
-            <Link to='/cashbox/final/hauptmenu'>
+            <Link to='/cashbox/hauptmenu'>
                 <div className="p-2 text-center w-96 ml-auto mr-auto mt-3 font-bold bg-blue-200 hover:counter-pointer">
                     <button>zurück</button>
                 </div>

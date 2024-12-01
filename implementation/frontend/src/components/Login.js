@@ -38,8 +38,7 @@ export default function Login(){
             setLoading(true);
             axios.get(`http://localhost:4000/api/${password}`)
                 .then((response) => {
-                    handleSuccessfullyLogin();
-                    //makeUserLogged(response.data._id);
+                    makeUserLogged(response.data._id);
                     setLoading(false)
                 })
                 .catch((error) => {
@@ -54,8 +53,9 @@ export default function Login(){
      * @param id the identification of an user
      */
     const makeUserLogged = async (id) =>{
+        console.log("ID in der neuen Methode: " + id)
         try {
-            await axios.patch(`http://localhost:4000/api/logged/${id}`)
+            await axios.patch(`http://localhost:4000/api/changeState/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })

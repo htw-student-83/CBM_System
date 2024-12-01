@@ -54,6 +54,57 @@ const getUser = async (req, res) => {
     res.status(200).json(user);
 }
 
+/**
+ * Change the data of an stored user
+ * @param req new new data
+ * @param res not used
+ * @returns {Promise<*>}
+ */
+const getUserByID = async (req, res)=> {
+    const { id } = req.params
+    if(!isValidObjectId(id)){
+        return res.status(400).json({msg: "The User-ID is invalid."});
+    }
+
+    const user = await User.findById({_id: id})
+    if(!user){
+        return res.status(404).json({msg: "Not user found."});
+    }
+    res.status(200).send(user);
+}
+
+/**
+ * Change the state to true
+ * @param req id
+ * @param res
+ * @returns {Promise<*>}
+ */
+const changeUserState = async (req, res)=> {
+    const { id } = req.params
+    if(!isValidObjectId(id)){
+        return res.status(400).json({msg: "The User-ID is invalid."});
+    }
+
+    const user = await User.findById({_id: id})
+    if(!user){
+        return res.status(404).json({msg: "Not user found."});
+    }
+    try {
+        // Benutzerstatus aktualisieren und den aktualisierten Benutzer zurückgeben
+        const user = await User.findOneAndUpdate(
+            { _id: id }, // Filter
+            { logged: true }, // Update
+            { new: true } // Option: gibt das aktualisierte Dokument zurück
+        );
+        // Erfolgreiche Antwort
+        console.log("War erfolgreich")
+        res.status(204).end();
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal server error." });
+    }
+}
+
 
 /**
  * Change the data of an stored user
@@ -120,7 +171,9 @@ export default {
     getUsers,
     getUser,
     updateUserData,
+    changeUserState,
     deleteUser,
     checkUser,
+    getUserByID,
     checkLocalServer,
 }

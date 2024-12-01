@@ -8,7 +8,7 @@ import ServerDown from "./components/ServerIsDown";
 import PasswortVergessen from "./components/passwort_vergessen";
 import Registrierung from "./components/registrierung";
 import Hauptmenu from "./components/Hauptmenu";
-import Hauptmenu_final from "./components/Hauptmenu_final";
+import Hauptmenu_final from "./components/Hauptmenu";
 import Einzahlung from "./components/Einzahlung";
 import Auszahlung from "./components/Auszahlung";
 import User from "./components/UserDataView";
@@ -27,7 +27,6 @@ function App() {
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>
             <Route path = '/cashbox/login' element = {<Login/>}/>
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
-            <Route path = '/cashbox/final/hauptmenu' element = {<Hauptmenu_final/>}/>
             <Route path = '/cashbox/einzahlung' element = {<Einzahlung/>}/>
             <Route path = '/cashbox/auszahlung' element = {<Auszahlung/>}/>
             <Route path = '/cashbox/account_loeschung' element = {<AccountDelete/>}/>
