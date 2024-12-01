@@ -25,10 +25,12 @@ function MainFinal() {
                     Meine Daten
                 </div>
             </Link>
-            <div
-                className="text-xl p-3 w-96 text-center rounded-3xl bg-blue-100 mx-auto cursor-pointer hover:bg-yellow-300">
-            Account löschen
-            </div>
+            <Link to='/cashbox/account_loeschung'>
+                <div
+                    className="text-xl p-3 w-96 text-center rounded-3xl bg-blue-100 mx-auto cursor-pointer hover:bg-yellow-300">
+                    Account löschen
+                </div>
+            </Link>
         </div>
     );
 }
