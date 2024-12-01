@@ -24,6 +24,7 @@ function App() {
             <Route path = '/cashbox/login' element = {<Login/>}/>
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
             <Route path = '/cashbox/final/hauptmenu' element = {<Hauptmenu_final/>}/>
+            <Route path = '/cashbox/einzahlung' element = {<Hauptmenu_final/>}/>
             <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
             <Route path = '/cashbox/user/password_vergessen' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
