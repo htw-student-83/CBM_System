@@ -10,13 +10,16 @@ router.post('/', createUser);
 router.get('/', getUsers);
 
 //Route to get an user by the password
-router.get('/:password', getUserByPassword);
+router.get('/user/:password', getUserByPassword);
 
 //Route to get an user by the password
-router.get('/:id', getUserByID);
+router.get('/userdetail/:id', getUserByID);
 
 //Route to change the data of an user
 router.patch('/changeState/:id', changeUserState);
+
+//Route to change the data of an user
+router.patch('/changedate/:id', changeUserState);
 
 //Route to check a stored user
 router.get('/check/:mobile', checkUser);

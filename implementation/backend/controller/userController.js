@@ -65,7 +65,6 @@ const getUserByID = async (req, res)=> {
     if(!isValidObjectId(id)){
         return res.status(400).json({msg: "The User-ID is invalid."});
     }
-
     const user = await User.findById({_id: id})
     if(!user){
         return res.status(404).json({msg: "Not user found."});
@@ -97,7 +96,6 @@ const changeUserState = async (req, res)=> {
             { new: true } // Option: gibt das aktualisierte Dokument zurück
         );
         // Erfolgreiche Antwort
-        console.log("War erfolgreich")
         res.status(204).end();
     } catch (error) {
         console.error(error);

@@ -5,21 +5,14 @@ import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function User(probs) {
-    const [user, setUser] = useState({
-        vorname: null,
-        nachname: null,
-        mobile: null,
-    });
-
+function User() {
+    const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
-    const { id} = useParams();
-    console.log("Übertragene ID:" + id);
 
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/${id}`)
+            .get(`http://localhost:4000/api/userdetail/${id}`)
             .then((response) => {
                 if (response) {
                     setUser(response.data);
