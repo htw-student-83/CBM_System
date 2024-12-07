@@ -56,7 +56,7 @@ export default function Login(){
     const makeUserLogged = async (id) =>{
         console.log("ID in der neuen Methode: " + id)
         try {
-            await axios.patch(`http://localhost:4000/api/changeState/${id}`)
+            await axios.patch(`http://localhost:4000/api/login/changeState/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })
@@ -88,7 +88,7 @@ export default function Login(){
     }
 
     const handleSuccessfullyLogin = () =>{
-        navigate('/cashbox/hauptmenu');
+        navigate(`/cashbox/hauptmenu`);
     }
 
     /**

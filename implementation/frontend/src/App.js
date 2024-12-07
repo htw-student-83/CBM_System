@@ -13,6 +13,7 @@ import Einzahlung from "./components/Einzahlung";
 import Auszahlung from "./components/Auszahlung";
 import User from "./components/UserDataView";
 import AccountDelete from "./components/AccountDelete";
+import Logout from "./components/Logout";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path = '/cashbox/auszahlung' element = {<Auszahlung/>}/>
             <Route path = '/cashbox/account_loeschung' element = {<AccountDelete/>}/>
             <Route path = '/cashbox/userdataview' element = {<User/>}/>
+            <Route path = '/cashbox/logout/:id' element = {<Logout/>}/>
             <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
             <Route path = '/cashbox/user/password_vergessen' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
