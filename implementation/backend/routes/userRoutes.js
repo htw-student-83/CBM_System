@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import useController from "../controller/userController.js"
-const { changeUserState, createUser, getUsers, getUser, updateUserData, checkUser, deleteUser, checkLocalServer } = useController;
+const {createUser, getUsers, getUserByPassword, getUserByID,  changeUserState, checkUser, deleteUser, checkLocalServer } = useController;
 
 //Route to save a new user
 router.post('/', createUser);
@@ -10,10 +10,10 @@ router.post('/', createUser);
 router.get('/', getUsers);
 
 //Route to get an user by the password
-router.get('/:password', getUser);
+router.get('/:password', getUserByPassword);
 
-//Route to delete an user
-router.delete('/', deleteUser);
+//Route to get an user by the password
+router.get('/:id', getUserByID);
 
 //Route to change the data of an user
 router.patch('/changeState/:id', changeUserState);
@@ -23,6 +23,9 @@ router.get('/check/:mobile', checkUser);
 
 //Route to check the status of the lokal server
 router.get('/localserver/status', checkLocalServer);
+
+//Route to delete an user
+router.delete('/', deleteUser);
 
 /*
 router.get('/', async (req, res) => {

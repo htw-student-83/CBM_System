@@ -14,7 +14,7 @@ const AccountDelete = () => {
     }
 
     const goToMainPage = () =>{
-        navigate( '/cashbox/final/hauptmenu');
+        navigate( '/cashbox/hauptmenu');
     }
 
     return(

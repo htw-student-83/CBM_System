@@ -45,7 +45,7 @@ const getUsers = async (req, res) => {
  * @param res the user with this password
  * @returns {Promise<*>}
  */
-const getUser = async (req, res) => {
+const getUserByPassword = async (req, res) => {
     const { password } = req.params
     const user = await User.findOne({password: password});
     if(!user){
@@ -169,7 +169,7 @@ const checkLocalServer = async (req, res) => {
 export default {
     createUser,
     getUsers,
-    getUser,
+    getUserByPassword,
     updateUserData,
     changeUserState,
     deleteUser,
