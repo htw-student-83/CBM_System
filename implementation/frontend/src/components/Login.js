@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import LoginNegativ from "./Service_failed";
 import '../components_css/animationToRight.css'
 import axios from "axios";
+import userDataView from "./UserDataView";
 
 
 /**
@@ -36,7 +37,7 @@ export default function Login(){
             setLoginFailed(true);
         }else{
             setLoading(true);
-            axios.get(`http://localhost:4000/api/${password}`)
+            axios.get(`http://localhost:4000/api/user/${password}`)
                 .then((response) => {
                     makeUserLogged(response.data._id);
                     setLoading(false)

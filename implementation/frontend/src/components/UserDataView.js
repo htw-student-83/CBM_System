@@ -5,9 +5,10 @@ import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function User() {
+function User(props) {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
+    const { id } = useParams();
 
     useEffect(() => {
         setLoading(true);
