@@ -119,19 +119,14 @@ const changeUserStateToTrue = async (req, res)=> {
 }
 
 const changeUserStateToFalse = async (req, res)=> {
-    const { id } = req.params
-    if(!isValidObjectId(id)){
-        return res.status(400).json({msg: "The User-ID is invalid."});
-    }
-
-    const user = await User.findById({_id: id})
+    const user = await User.findOne({ logged: true });
     if(!user){
         return res.status(404).json({msg: "Not user found."});
     }
     try {
         // Benutzerstatus aktualisieren und den aktualisierten Benutzer zurückgeben
         const user = await User.findOneAndUpdate(
-            { _id: id }, // Filter
+            { logged: true }, // Filter
             { logged: false }, // Update
             { new: true } // Option: gibt das aktualisierte Dokument zurück
         );

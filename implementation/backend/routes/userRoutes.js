@@ -19,7 +19,7 @@ router.get('/userdetail', getUserDetails);
 router.patch('/login/changeState/:id', changeUserStateToTrue);
 
 //Route to change the state of false
-router.patch('/logout/changeState/:id', changeUserStateToFalse);
+router.patch('/logout/changeState', changeUserStateToFalse);
 
 //Route to check a stored user
 router.get('/check/:mobile', checkUser);
