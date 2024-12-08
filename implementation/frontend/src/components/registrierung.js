@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import { FaCashRegister } from "react-icons/fa6";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiMobile4 } from "react-icons/ci";
@@ -24,6 +24,10 @@ export default function Registrierung(){
         mobile: '',
         password: '',
         logged: false,
+    }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
     });
 
     /**
@@ -42,22 +46,13 @@ export default function Registrierung(){
      * handle the process after the user entered his data.
      * @param e keep all data
      */
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(!formData.vorname || !formData.nachname || !formData.mobile){
             setError("One or more fields are empty.")
             handleFailRegistration();
-        }else if(!namecheck.checkNameValues(formData.vorname) || !namecheck.checkNameValues(formData.nachname)) {
-            setError("Something with your inputs are wrong. Please check!");
-            handleFailRegistration();
-        }else if(!namecheck.checkCapitalLetter(formData.vorname) || !namecheck.checkCapitalLetter(formData.nachname)) {
-            setError("Your name doesn't start with a capital letter.");
-            handleFailRegistration();
-        }else if(mobilecheck.validationOfNumber(formData.mobile)) {
-            setError("Your phone number is invalid.");
-            handleFailRegistration();
-        }else if(!mobilecheck.prefixcheck(formData.mobile)) {
-            setError("The prefix of your phone number is unknown.");
+        }else if(await alreadyRegistered(formData.mobile)) {
+            setError("You already registered.");
             handleFailRegistration();
         }else{
             const password = createPasswort();
@@ -67,9 +62,9 @@ export default function Registrierung(){
             };
 
             setFormData(updatedFormData);
-            axios.post('/cashbox/api/users/', updatedFormData)
-                .then(function (response) {
-                    sendingWelcomeMessage(updatedFormData.mobile);
+            axios.post('http://localhost:4000/api/newuser', updatedFormData)
+                .then(function () {
+                    makeFieldsEmpty();
                 })
                 .catch((error) => {
                     setError(error.message);
@@ -83,17 +78,13 @@ export default function Registrierung(){
      * @returns {Promise<boolean>} true if the user is known otherwise false
      */
     const alreadyRegistered = async (mobile) => {
-        var isRegistered = false;
-        await axios.get(`/cashbox/api/users/usercheck/${mobile}`)
-            .then((response) =>{
-                if(response.status === 200){
-                    isRegistered = true;
-                }
-            })
-            .catch((error) => {
-                handleFailRegistration("Not answer from the server." + error.message);
-            })
-        return isRegistered;
+        try {
+            const response = await axios.get(`http://localhost:4000/api/check/${mobile}`);
+            return response.status === 200; // Rückgabe von true, wenn der Status 200 ist
+        } catch (error) {
+            handleFailRegistration("No answer from the server. " + error.message);
+            return false; // Rückgabe von false bei einem Fehler
+        }
     }
 
 
@@ -102,23 +93,17 @@ export default function Registrierung(){
      * @param mobile
      */
     const sendingWelcomeMessage = (mobile) =>{
+        console.log("TtTTTTEesst")
         axios.get(`/cashbox/api/users/registration/welcomemessage/${mobile}`)
-            .then((response) =>{
-                handleSuccessfullyRegistration()
+            .then(() =>{
                 setFormData({vorname: "",  nachname: "", mobile: ""});
+                handleSuccessfullyRegistration()
             })
             .catch((error) => {
                 setError("The registration was failed.")
                 handleFailRegistration();
             })
     }
-/*
-    useEffect(() => {
-        document.getElementById("mainscreen").style.display="none";
-    }, []);
-
- */
-
 
     /**
      * create a new password
@@ -130,6 +115,15 @@ export default function Registrierung(){
         var randomnumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
         var newPassword = pattern + randomnumber;
         return newPassword;
+    }
+
+    function makeFieldsEmpty(){
+        const inputs = document.querySelectorAll('input');
+        // Den Inhalt jedes Input-Feldes auf leer setzen
+        inputs.forEach(input => {
+            input.value = '';
+        });
+       // sendingWelcomeMessage(updatedFormData.mobile);
     }
 
     /**
@@ -221,7 +215,7 @@ export default function Registrierung(){
                     </form>
 
                     <button
-                        className="w-full h-fit bg-orange-300 p-2 text-xs font-bold hover:rounded-3xl hover:bg-orange-300"
+                        className="w-full h-fit bg-orange-300 p-2 text-lg font-bold hover:rounded-3xl hover:bg-orange-300"
                         onClick={handleSubmit}>Registrieren
                     </button>
 

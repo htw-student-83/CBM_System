@@ -9,7 +9,7 @@ import { isValidObjectId} from "mongoose";
  */
 const createUser =  async (req, res) => {
     try {
-        if(!req.body.vorname || !req.body.nachname || !req.body.mobile  || !req.body.password  || !req.body.logged){
+        if(!req.body.logged || !req.body.mobile || !req.body.nachname || !req.body.password || !req.body.vorname){
             res.status(400).send({message: "You didn't send all data of the new user."})
         }
         const newUser = {

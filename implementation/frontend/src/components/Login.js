@@ -1,12 +1,10 @@
 import { FaCashRegister } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
 import {Link, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import LoginNegativ from "./Service_failed";
 import '../components_css/animationToRight.css'
 import axios from "axios";
-import userDataView from "./UserDataView";
-
 
 /**
  * Represent the Login of the system
@@ -21,12 +19,6 @@ export default function Login(){
     const[loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
-
-    /*
-        useEffect(() => {
-            document.getElementById("mainscreen").style.display = "none";
-        });
-     */
 
     /**
      * handle the input of an user after a click
@@ -88,6 +80,9 @@ export default function Login(){
         return pattern_10000 === "10000";
     }
 
+    /**
+     *
+     */
     const handleSuccessfullyLogin = () =>{
         navigate(`/cashbox/hauptmenu`);
     }
@@ -135,7 +130,7 @@ export default function Login(){
 
                     <div>
                         <button
-                            className="w-full h-fit bg-orange-300 p-2 text-sm mt-3 font-bold hover:rounded-3xl hover:bg-orange-300"
+                            className="w-full h-fit bg-orange-300 p-2 text-lg mt-3 font-bold hover:rounded-3xl hover:bg-orange-300"
                             onClick={(e) => handelInputLogin(e)}>Login
                         </button>
                     </div>
