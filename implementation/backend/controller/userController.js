@@ -118,6 +118,12 @@ const changeUserStateToTrue = async (req, res)=> {
     }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 const changeUserStateToFalse = async (req, res)=> {
     const user = await User.findOne({ logged: true });
     if(!user){
@@ -194,6 +200,12 @@ const checkUser = async (req, res) => {
     return res.status(200).json(user);
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 const checkLocalServer = async (req, res) => {
     return res.sendStatus(200);
 }
