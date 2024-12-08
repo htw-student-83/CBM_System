@@ -55,6 +55,21 @@ const getUserByPassword = async (req, res) => {
 }
 
 /**
+ * get an user by the password
+ * @param req the passwort of a stored user
+ * @param res the user with this password
+ * @returns {Promise<*>}
+ */
+const getUserDetails = async (req, res) => {
+    const user = await User.findOne({ logged: true });
+    if(!user){
+        return res.status(404).json({msg: "User not found."});
+    }
+    res.status(200).json(user);
+}
+
+
+/**
  * Change the data of an stored user
  * @param req new new data
  * @param res not used
@@ -194,6 +209,7 @@ export default {
     getUsers,
     getUserByPassword,
     updateUserData,
+    getUserDetails,
     changeUserStateToTrue,
     changeUserStateToFalse,
     deleteUser,

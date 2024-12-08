@@ -14,6 +14,7 @@ import userDataView from "./UserDataView";
  */
 export default function Login(){
 
+    const [user, setUser] = useState([]);
     const[loginFailed, setLoginFailed] = useState(false);
     const[password, setPassword] = useState("");
     const[content_error, setContentError] = useState("");
@@ -39,6 +40,7 @@ export default function Login(){
             setLoading(true);
             axios.get(`http://localhost:4000/api/user/${password}`)
                 .then((response) => {
+                    setUser(response.data);
                     makeUserLogged(response.data._id);
                     setLoading(false)
                 })
@@ -54,7 +56,6 @@ export default function Login(){
      * @param id the identification of an user
      */
     const makeUserLogged = async (id) =>{
-        console.log("ID in der neuen Methode: " + id)
         try {
             await axios.patch(`http://localhost:4000/api/login/changeState/${id}`)
                 .then(()=>{

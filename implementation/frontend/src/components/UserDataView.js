@@ -5,15 +5,14 @@ import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function User(props) {
-    const [user, setUser] = useState({});
+function User() {
     const [loading, setLoading] = useState(false);
-    const { id } = useParams();
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/userdetail/${id}`)
+            .get(`http://localhost:4000/api/userdetail/`)
             .then((response) => {
                 if (response) {
                     setUser(response.data);
