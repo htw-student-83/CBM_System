@@ -55,6 +55,21 @@ const getUserByPassword = async (req, res) => {
 }
 
 /**
+ * get an user by the password
+ * @param req the passwort of a stored user
+ * @param res the user with this password
+ * @returns {Promise<*>}
+ */
+const getUserDetails = async (req, res) => {
+    const user = await User.findOne({ logged: true });
+    if(!user){
+        return res.status(404).json({msg: "User not found."});
+    }
+    res.status(200).json(user);
+}
+
+
+/**
  * Change the data of an stored user
  * @param req new new data
  * @param res not used
@@ -78,7 +93,7 @@ const getUserByID = async (req, res)=> {
  * @param res
  * @returns {Promise<*>}
  */
-const changeUserState = async (req, res)=> {
+const changeUserStateToTrue = async (req, res)=> {
     const { id } = req.params
     if(!isValidObjectId(id)){
         return res.status(400).json({msg: "The User-ID is invalid."});
@@ -93,6 +108,31 @@ const changeUserState = async (req, res)=> {
         const user = await User.findOneAndUpdate(
             { _id: id }, // Filter
             { logged: true }, // Update
+            { new: true } // Option: gibt das aktualisierte Dokument zurück
+        );
+        // Erfolgreiche Antwort
+        res.status(204).end();
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Internal server error." });
+    }
+}
+
+const changeUserStateToFalse = async (req, res)=> {
+    const { id } = req.params
+    if(!isValidObjectId(id)){
+        return res.status(400).json({msg: "The User-ID is invalid."});
+    }
+
+    const user = await User.findById({_id: id})
+    if(!user){
+        return res.status(404).json({msg: "Not user found."});
+    }
+    try {
+        // Benutzerstatus aktualisieren und den aktualisierten Benutzer zurückgeben
+        const user = await User.findOneAndUpdate(
+            { _id: id }, // Filter
+            { logged: false }, // Update
             { new: true } // Option: gibt das aktualisierte Dokument zurück
         );
         // Erfolgreiche Antwort
@@ -169,7 +209,9 @@ export default {
     getUsers,
     getUserByPassword,
     updateUserData,
-    changeUserState,
+    getUserDetails,
+    changeUserStateToTrue,
+    changeUserStateToFalse,
     deleteUser,
     checkUser,
     getUserByID,
