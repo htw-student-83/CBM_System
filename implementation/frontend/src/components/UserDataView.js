@@ -1,6 +1,6 @@
 import IconUser from "../pictures/user2.png"
 import "../components_css/einzahlung.css"
-import {Link, useParams} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -44,7 +44,7 @@ function User() {
                         Mobile:<span className="ml-20">{user.mobile}</span>
                     </div>
                     <div className="mb-5">
-                        Registriert seit: <span className="ml-5"> {new Date(user.createdAt).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                        Registriert seit: <span className="ml-6"> {new Date(user.createdAt).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}</span>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@ import axios from "axios";
 
 const AccountDelete = () => {
     const navigate = useNavigate();
-
     const deleteAccount = async() =>{
         try {
             await axios.delete(`http://localhost:4000/api/`)

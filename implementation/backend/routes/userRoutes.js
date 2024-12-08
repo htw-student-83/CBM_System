@@ -4,7 +4,7 @@ import useController from "../controller/userController.js"
 const {createUser, getUsers, getUserByPassword, getUserDetails,  changeUserStateToTrue,changeUserStateToFalse, checkUser, deleteUser, checkLocalServer } = useController;
 
 //Route to save a new user
-router.post('/', createUser);
+router.post('/newuser', createUser);
 
 //Route to get all user
 router.get('/', getUsers);
@@ -30,7 +30,7 @@ router.get('/localserver/status', checkLocalServer);
 //Route to delete an user
 router.delete('/', deleteUser);
 
-/*
+
 router.get('/', async (req, res) => {
     const { mobile } = req.params
     const user = await Users.findOne({mobile: mobile});
@@ -51,6 +51,5 @@ router.get('/', async (req, res) => {
         .catch(error => console.error("Twilioerror: " + error));
 })
 
- */
 export default router
 
