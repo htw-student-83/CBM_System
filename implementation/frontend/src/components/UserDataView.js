@@ -35,16 +35,16 @@ function User() {
                 </div>
                 <div className="pl-4 pt-5 mt-11 mb-10 border-2 ml-auto mr-auto border-black w-80 rounded-3xl">
                     <div className="mb-5">
-                        Vorname:<span>{user.vorname}</span>
+                        Vorname:<span className="ml-16">{user.vorname}</span>
                     </div>
                     <div className="mb-5">
-                        Nachname: <span>{user.nachname}</span>
+                        Nachname: <span className="ml-12">{user.nachname}</span>
                     </div>
                     <div className="mb-5">
-                        Mobile:<span>{user.mobile}</span>
+                        Mobile:<span className="ml-20">{user.mobile}</span>
                     </div>
                     <div className="mb-5">
-                        Registriert seit: <span> {new Date(user.createdAt).toString()}</span>
+                        Registriert seit: <span className="ml-5"> {new Date(user.createdAt).toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}</span>
                     </div>
                 </div>
             </div>

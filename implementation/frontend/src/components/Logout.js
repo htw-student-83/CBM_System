@@ -2,15 +2,15 @@ import {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 
-const Logout = ({id}) => {
+const Logout = () => {
     const [windowForLokalServer, setWindowForLokalServer] = useState(false);
     const navigate = useNavigate();
 
     const logout = async () => {
         try {
-            await axios.patch(`http://localhost:4000/api/logout/changeState/${id}`)
+            await axios.patch(`http://localhost:4000/api/logout/changeState`)
                 .then(()=>{
-
+                    navigate( '/cashbox/login');
                 })
                 .catch((error) => {
                     console.log("Not answer from the server." + error)
