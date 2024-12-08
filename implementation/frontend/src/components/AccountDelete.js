@@ -1,16 +1,21 @@
-import {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 
 const AccountDelete = () => {
-    const [windowForLokalServer, setWindowForLokalServer] = useState(false);
     const navigate = useNavigate();
 
-    const deleteAccount = () =>{
-        //TODO
-        //contact to the server and delete the account
-        //check the process by 200
-        //if the user was deleted, then navigate to the mainpage
-        navigate('/cashbox/login/');
+    const deleteAccount = async() =>{
+        try {
+            await axios.delete(`http://localhost:4000/api/`)
+                .then(()=>{
+                    navigate('/cashbox/login/');
+                })
+                .catch((error) => {
+                    console.log("Not answer from the server." + error)
+                })
+        } catch (error) {
+            console.error('Fehler beim Aktualisieren des Logged-Attributs:', error);
+        }
     }
 
     const goToMainPage = () =>{

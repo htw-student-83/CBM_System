@@ -1,9 +1,7 @@
-import {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 
 const Logout = () => {
-    const [windowForLokalServer, setWindowForLokalServer] = useState(false);
     const navigate = useNavigate();
 
     const logout = async () => {
@@ -18,10 +16,6 @@ const Logout = () => {
         } catch (error) {
             console.error('Fehler beim Aktualisieren des Logged-Attributs:', error);
         }
-        //TODO
-        //contact to the server and delete the account
-        //check the process by 200
-        //if the user was deleted, then navigate to the mainpage
         navigate( '/cashbox/login');
     }
 
