@@ -7,6 +7,7 @@ import { MdChangeCircle } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import ViewLogged from "./ViewLogged.js";
 import {FaCashRegister} from "react-icons/fa";
+import CashSystem  from "../pictures/cashbox.png";
 import Cash from "./ViewCurrentCashStand";
 
 function Mainmenu({id}) {
