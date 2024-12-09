@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Kreuz from "../pictures/kreuz_variante2.jpg";
 import '../components_css/process_failed.css'
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import net from 'net';
-import {PORT, MONGO_URL} from "./config.js";
-import mongoose from 'mongoose';
+import { connectDB} from "./db.js";
+import { PORT } from "./config.js";
 import userRoutes from "../backend/routes/userRoutes.js"
 import cors from 'cors';
 
@@ -11,19 +11,9 @@ app.use(express.json());
 
 app.use(cors());
 
-//app.use('/api/user/', userRoutes);
 app.use('/api', userRoutes);
-//app.use('/api/cashbox/', userRoutes);
 
-mongoose
-        .connect(MONGO_URL)
-        .then(()=>{
-            app.listen(PORT, () => {
-                console.log(`Server is listening on port ${PORT}`);
-            })
-            console.log("Connected with the db cash-box-system")
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-
+app.listen(4000, () =>{
+    connectDB();
+    console.log(`Server stated on http://localhost:${PORT}/api/`);
+})

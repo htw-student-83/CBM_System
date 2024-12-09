@@ -24,10 +24,6 @@ export default function Registrierung(){
         mobile: '',
         password: '',
         logged: false,
-    }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
     });
 
     /**
@@ -50,9 +46,11 @@ export default function Registrierung(){
         e.preventDefault();
         if(!formData.vorname || !formData.nachname || !formData.mobile){
             setError("One or more fields are empty.")
+            console.log("Ich bin hier1")
             handleFailRegistration();
         }else if(await alreadyRegistered(formData.mobile)) {
             setError("You already registered.");
+            console.log("Ich bin hier2")
             handleFailRegistration();
         }else{
             const password = createPasswort();
@@ -62,14 +60,20 @@ export default function Registrierung(){
             };
 
             setFormData(updatedFormData);
-            axios.post('http://localhost:4000/api/newuser', updatedFormData)
-                .then(function () {
-                    makeFieldsEmpty();
-                })
-                .catch((error) => {
-                    setError(error.message);
-                    handleFailRegistration();
-                })
+            axios.post('http://localhost:4000/api/newuser', updatedFormData,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response =>{
+                if (response.status === 201) {  // Check for successful status code
+                    handleSuccessfullyRegistration();
+                }
+            })
+            .catch(error => {
+                setError(error.message);
+                handleFailRegistration();
+            })
         }
     };
 
@@ -80,10 +84,11 @@ export default function Registrierung(){
     const alreadyRegistered = async (mobile) => {
         try {
             const response = await axios.get(`http://localhost:4000/api/check/${mobile}`);
-            return response.status === 200; // Rückgabe von true, wenn der Status 200 ist
-        } catch (error) {
-            handleFailRegistration("No answer from the server. " + error.message);
-            return false; // Rückgabe von false bei einem Fehler
+            console.log("Das ist der Wert: ", response);
+            return response.status === 200;
+        }catch (error) {
+            console.log("Das ist die Antwort: ", error.response);
+            //handleFailRegistration("No answer from the server. ");
         }
     }
 
@@ -92,18 +97,20 @@ export default function Registrierung(){
      * handle the process of a successful registration
      * @param mobile
      */
+    /*
     const sendingWelcomeMessage = (mobile) =>{
-        console.log("TtTTTTEesst")
-        axios.get(`/cashbox/api/users/registration/welcomemessage/${mobile}`)
+        axios.get(`http://localhost:4000/api/users/registration/welcomemessage/${mobile}`)
             .then(() =>{
                 setFormData({vorname: "",  nachname: "", mobile: ""});
-                handleSuccessfullyRegistration()
+                handleSuccessfullyRegistration();
             })
             .catch((error) => {
                 setError("The registration was failed.")
+                console.log("Ich bin hier5")
                 handleFailRegistration();
             })
     }
+     */
 
     /**
      * create a new password
@@ -130,6 +137,7 @@ export default function Registrierung(){
      * print the message if the registration was sucessfully
      */
     const handleSuccessfullyRegistration = () => {
+        console.log("Function handleSuccessfullyRegistration() aufgerufen. ")
         setRegistrierungSuccessfully(true);
         setContentforSuccess("The registration was successfully");
         setTimeout(() => {
@@ -142,10 +150,11 @@ export default function Registrierung(){
      * print the message if the registration was failed
      */
     const handleFailRegistration = () =>{
+        console.log("Teesst");
+        console.log("Function handleFailRegistration() aufgerufen. ")
         setRegistrierungFailed(true);
         setTimeout(() => {
             setRegistrierungFailed(false);
-           // navigate('/cashbox/login');
         }, 3000)
     }
 
