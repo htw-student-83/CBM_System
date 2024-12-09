@@ -8,21 +8,29 @@ import { isValidObjectId} from "mongoose";
  * @returns {Promise<void>}
  */
 const createUser =  async (req, res) => {
+    const newuser = req.body;
+
     try {
-        if(!req.body.logged || !req.body.mobile || !req.body.nachname || !req.body.password || !req.body.vorname){
-            res.status(400).send({message: "You didn't send all data of the new user."})
+        if(!newuser.vorname || !newuser.nachname || !newuser.mobile || !newuser.password ||
+            newuser.vorname.trim() === "" || newuser.nachname.trim() === "" || newuser.mobile.trim() === ""||
+            newuser.password.trim() === ""|| newuser.logged === undefined || newuser.logged === null){
+            return res.status(400).send({message: "You didn't send all data of the new user."})
         }
-        const newUser = {
-            vorname: req.body.vorname,
-            nachname: req.body.nachname,
-            mobile: req.body.mobile,
-            password: req.body.password,
-            logged: req.body.logged,
+
+        const newUserObject = {
+            vorname: newuser.vorname,
+            nachname: newuser.nachname,
+            mobile: newuser.mobile,
+            password: newuser.password,
+            logged: newuser.logged,
         }
-        const user = await User.create(newUser);
-        res.status(201).json({msg: "New user added to the DB.", user})
+
+        const newUserStored = await User.create(newUserObject);
+        if(newUserStored){
+            return res.status(201).json({msg: "New user added to the DB.", newUserStored})
+        }
     }catch (error){
-        res.status(400).json({msg: error});
+        return res.status(400).json({msg: error.message});
     }
 }
 
@@ -187,11 +195,16 @@ const deleteUser = async (req, res) => {
  */
 const checkUser = async (req, res) => {
     const { mobile } = req.params
-    const user = await User.findOne({mobile: mobile});
-    if(!user){
-        return res.status(404).send({message: "Nobody found with this mobile number."});
+    try {
+        const user = await User.findOne({mobile: mobile});
+        if(!user) {
+            return res.status(404).json({msg: "No data found."});
+        }else{
+            return res.status(200).json({msg: "data found."});
+        }
+    }catch (error) {
+        return res.status(500).json({msg: "Server error."});
     }
-    return res.status(200).json(user);
 }
 
 const checkLocalServer = async (req, res) => {
