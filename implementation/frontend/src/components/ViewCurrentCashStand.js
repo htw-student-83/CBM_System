@@ -24,7 +24,7 @@ function Cash() {
             });
     }, [])
     return (
-        <div className="">
+        <div className="pr-10">
             <span className="font-bold">Stand:</span> <span className="font-mono"> {cash.kassenstand}</span>
         </div>
     )

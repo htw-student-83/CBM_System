@@ -23,7 +23,7 @@ function User() {
             });
     }, [])
     return (
-        <div>
+        <div className= "pl-5">
             <span className="font-bold">Angemeldet:</span> <span>{user.vorname +" "+ user.nachname }</span>
         </div>
     )
