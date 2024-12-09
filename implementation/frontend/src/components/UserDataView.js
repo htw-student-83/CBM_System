@@ -12,7 +12,7 @@ function User() {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/userdetail/`)
+            .get(`http://localhost:4000/api/user/userdetail/`)
             .then((response) => {
                 if (response) {
                     setUser(response.data);

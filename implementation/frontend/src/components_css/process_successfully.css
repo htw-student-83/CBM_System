@@ -6,6 +6,8 @@
     background-color: rgba(0,215,0,0.9);
     padding: 7px;
     border-radius: 10px;
+    bottom: 0px;
+    position: fixed;
 }
 
 .SuccessfullyProcessContainer .logo_Hacken{

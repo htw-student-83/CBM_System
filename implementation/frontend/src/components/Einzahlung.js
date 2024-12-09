@@ -22,7 +22,7 @@ function Einzahlung() {
                                     outline: "none"}}/>
                         </div>
                     </div>
-                    <div className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl">
+                    <div className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl cursor-pointer">
                         <button>einzahlen</button>
                     </div>
                 </div>
