@@ -1,17 +1,18 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function User() {
-    const [user, setUser] = useState({});
+function Cash() {
+    const [cash, setCash] = useState({});
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/user/userdetail/`)
+            .get(`http://localhost:4000/api/cash/`)
             .then((response) => {
-                if (response) {
-                    setUser(response.data);
+                if (response.status === 200 && response.data) {
+                    console.log("Kassenstand enthalten: " , response.data);
+                    setCash(response.data);
                     setLoading(false);
                 } else {
                     return response.statusText;
@@ -23,10 +24,10 @@ function User() {
             });
     }, [])
     return (
-        <div>
-            <span className="font-bold">Angemeldet:</span> <span>{user.vorname +" "+ user.nachname }</span>
+        <div className="">
+            <span className="font-bold">Stand:</span> <span className="font-mono"> {cash.kassenstand}</span>
         </div>
     )
 }
 
-export default User;
+export default Cash;
