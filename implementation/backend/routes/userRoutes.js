@@ -10,7 +10,7 @@ router.post('/newuser', createUser);
 router.get('/', getUsers);
 
 //Route to get an user by the password
-router.get('/user/:password', getUserByPassword);
+router.get('/:password', getUserByPassword);
 
 //Route to get an user by the password
 router.get('/userdetail', getUserDetails);
