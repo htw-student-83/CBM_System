@@ -93,7 +93,7 @@ function Mainmenu({id}) {
                                         value={inputValue}
                                         onChange={handleInputChange}
                                         placeholder={`Bitte ${selectedOption.toLowerCase()} eingeben`}
-                                        style={{padding: '0.5rem', flexGrow: 1}}
+                                        style={{padding: '0.6rem', flexGrow: 1}}
                                     />
 
                                     <button type="submit" style={{padding: '0.5rem 1rem'}}>Absenden</button>
