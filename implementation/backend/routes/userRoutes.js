@@ -10,10 +10,10 @@ router.post('/newuser', createUser);
 router.get('/', getUsers);
 
 //Route to get an user by the password
-router.get('/user/:password', getUserByPassword);
+router.get('/:password', getUserByPassword);
 
 //Route to get an user by the password
-router.get('/userdetail', getUserDetails);
+router.get('/userdetails/profil', getUserDetails);
 
 //Route to change the state of true
 router.patch('/login/changeState/:id', changeUserStateToTrue);

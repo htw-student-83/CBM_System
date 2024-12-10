@@ -69,7 +69,9 @@ const getUserByPassword = async (req, res) => {
  * @returns {Promise<*>}
  */
 const getUserDetails = async (req, res) => {
-    const user = await User.findOne({ logged: true });
+    const user = await User.findOne({ logged: true }).exec();
+    console.log(user);
+
     if(!user){
         return res.status(404).json({msg: "User not found."});
     }

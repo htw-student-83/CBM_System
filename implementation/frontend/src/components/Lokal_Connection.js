@@ -10,7 +10,7 @@ const Lokal_Connection = () => {
 
     const checkLokalerServer = async () => {
         try {
-           await axios.get(`http://localhost:4000/api/localserver/status`)
+           await axios.get(`http://localhost:4000/api/user/localserver/status`)
                .then((response) => {
                    if(response.status === 200){
                        navigate('/cashbox/login');

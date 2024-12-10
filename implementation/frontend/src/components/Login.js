@@ -49,7 +49,7 @@ export default function Login(){
      */
     const makeUserLogged = async (id) =>{
         try {
-            await axios.patch(`http://localhost:4000/api/login/changeState/${id}`)
+            await axios.patch(`http://localhost:4000/api/user/login/changeState/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })

@@ -60,7 +60,7 @@ export default function Registrierung(){
             };
 
             setFormData(updatedFormData);
-            axios.post('http://localhost:4000/api/newuser', updatedFormData,{
+            axios.post('http://localhost:4000/api/user/newuser', updatedFormData,{
                 headers: {
                     'Content-Type': 'application/json',
                 }

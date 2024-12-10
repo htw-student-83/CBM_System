@@ -6,7 +6,7 @@ const Logout = () => {
 
     const logout = async () => {
         try {
-            await axios.patch(`http://localhost:4000/api/logout/changeState`)
+            await axios.patch(`http://localhost:4000/api/user/logout/changeState`)
                 .then(()=>{
                     navigate( '/cashbox/login');
                 })

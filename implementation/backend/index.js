@@ -19,5 +19,5 @@ app.use('/api/cash', cashRoutes);
 
 app.listen(4000, () =>{
     connectDB();
-    console.log(`Server stated on http://localhost:${PORT}/api/`);
+    console.log(`Server stated on http://localhost:${PORT}/api/user`);
 })
