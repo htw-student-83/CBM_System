@@ -9,8 +9,32 @@ import ViewLogged from "./ViewLogged.js";
 import {FaCashRegister} from "react-icons/fa";
 import CashSystem  from "../pictures/cashbox.png";
 import Cash from "./ViewCurrentCashStand";
+import React, {useState} from "react";
 
 function Mainmenu({id}) {
+
+    const [selectedOption, setSelectedOption] = useState('Nachname');
+    const [inputValue, setInputValue] = useState('');
+    const [isFormVisible, setIsFormVisible] = useState(false);
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+        setInputValue(''); // Reset input when changing option
+    };
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert(`Option: ${selectedOption}, Eingabe: ${inputValue}`);
+    };
+
+    const toggleFormVisibility = () => {
+        setIsFormVisible(!isFormVisible);
+    };
+
     return (
         <div className="bg-blue-400 h-screen overflow-hidden" id="mainscreen">
 
@@ -45,15 +69,37 @@ function Mainmenu({id}) {
                                 <div className="mt-1">Auszahlung</div>
                             </div>
                         </Link>
-                        <Link to='/cashbox/userdataview'>
+                        <div>
                             <div
-                                className="flex flex-grow text-xl justify-center mb-7 p-3 w-96 rounded-3xl bg-blue-100 cursor-pointer hover:bg-yellow-300">
+                                onClick={toggleFormVisibility}
+                                className="flex flex-grow text-xl justify-center mb-7 p-3 w-96 rounded-3xl bg-blue-100 cursor-pointer hover:bg-yellow-300"
+                            >
                                 <div className="py-1 px-3">
                                     <MdChangeCircle size={25}/>
                                 </div>
                                 <div className="mt-1">Meine Daten ändern</div>
                             </div>
-                        </Link>
+
+                            {isFormVisible && (
+                                <form onSubmit={handleSubmit}
+                                      style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+                                    <select value={selectedOption} onChange={handleOptionChange} style={{padding: '0.5rem'}}>
+                                        <option value="Nachname">Nachname</option>
+                                        <option value="Mobile">Mobile</option>
+                                    </select>
+
+                                    <input
+                                        type="text"
+                                        value={inputValue}
+                                        onChange={handleInputChange}
+                                        placeholder={`Bitte ${selectedOption.toLowerCase()} eingeben`}
+                                        style={{padding: '0.5rem', flexGrow: 1}}
+                                    />
+
+                                    <button type="submit" style={{padding: '0.5rem 1rem'}}>Absenden</button>
+                                </form>
+                            )}
+                        </div>
                     </div>
                     <div className="flex flex-col items-center">
                         <Link to='/cashbox/userdataview'>
