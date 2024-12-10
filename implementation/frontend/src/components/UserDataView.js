@@ -12,9 +12,10 @@ function User() {
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/user/userdetail/`)
+            .get(`http://localhost:4000/api/user/userdetails/profil`)
             .then((response) => {
                 if (response) {
+                    console.log(response.data)
                     setUser(response.data);
                     setLoading(false);
                 } else {

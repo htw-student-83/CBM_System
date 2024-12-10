@@ -6,7 +6,7 @@ const AccountDelete = () => {
 
     const deleteAccount = async () =>{
         try {
-            await axios.delete(`http://localhost:4000/api/`)
+            await axios.delete(`http://localhost:4000/api/user`)
                 .then(()=>{
                     navigate('/cashbox/login/');
                 })
