@@ -1,0 +1,28 @@
+/* Modal */
+.modal {
+    position: fixed; /* Positioniert das Modal relativ zum Viewport */
+    top: 50%; /* Zentriert es vertikal */
+    left: 50%; /* Zentriert es horizontal */
+    transform: translate(-50%, -50%); /* Sorgt dafür, dass das Modal genau zentriert wird */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100; /* Sehr hoher Z-Index, damit das Modal immer im Vordergrund ist */
+    width: 80%; /* Breite des Modals (kann angepasst werden) */
+    max-width: 600px; /* Maximale Breite des Modals */
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    z-index: 50; /* Overlay wird hinter dem Modal, aber vor dem Rest der Seite angezeigt */
+}
+
+/* Hauptmenü */
+.main-menu {
+    z-index: 10; /* Geringerer Z-Index für das Hauptmenü */
+    position: relative; /* Ermöglicht es, dass der Z-Index funktioniert */
+}

@@ -1,0 +1,31 @@
+/* Modal-Überlagerung */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    z-index: 40; /* Overlay hinter Modal */
+}
+
+/* Hauptmenü im Hintergrund */
+.main-menu {
+    z-index: 10; /* Hintergrund, kleiner als Modal */
+    transition: z-index 0.3s ease; /* Übergang für sanfte Animation */
+}
+
+/* Modal in den Vordergrund */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50; /* Höchster Z-Index */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Weitere mögliche Effekte (optional) */
+.main-menu.dimmed {
+    filter: blur(4px); /* Weichzeichner für den Hintergrund */
+}

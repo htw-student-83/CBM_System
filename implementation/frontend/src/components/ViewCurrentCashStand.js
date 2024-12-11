@@ -11,7 +11,6 @@ function Cash() {
             .get(`http://localhost:4000/api/cash/`)
             .then((response) => {
                 if (response.status === 200 && response.data) {
-                    console.log("Kassenstand enthalten: " , response.data);
                     setCash(response.data);
                     setLoading(false);
                 } else {

@@ -162,19 +162,21 @@ const changeUserStateToFalse = async (req, res)=> {
  * @returns {Promise<*>}
 */
 const updateUserData = async (req, res)=> {
-    const { id } = req.params
-    if(!isValidObjectId(id)){
-        return res.status(400).json({msg: "The User-ID is invalid."});
+    const user = await User.findOne({ logged: true });
+    if(!user){
+        return res.status(404).json({msg: "Not user found for changing data."});
     }
 
-    const user_updated = await User.findOneAndUpdate({_id: id}, {
+    const user_updated = await User.findOneAndUpdate({_id: user._id}, {
         ...req.body
     })
     if(!user_updated){
-        return res.status(404).json({msg: "Not user found for updating."});
+        return res.status(500).json({msg: "Server error."});
     }
     res.status(204).end();
 }
+
+
 
 /**
  * delete an stored user out of the db under the condition logged is true

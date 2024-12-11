@@ -1,0 +1,15 @@
+.large-text {
+    font-size: 30px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+input[type="text"]{
+    width: 300px;
+    margin-left: 20px;
+    padding: 9px;
+    outline: none;
+    text-align: right;
+ }

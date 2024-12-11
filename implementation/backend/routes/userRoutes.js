@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import useController from "../controller/userController.js"
-const {createUser, getUsers, getUserByPassword, getUserDetails,  changeUserStateToTrue,changeUserStateToFalse, checkUser, deleteUser, checkLocalServer } = useController;
+const {createUser, getUsers, getUserByPassword, getUserDetails, updateUserData, changeUserStateToTrue,changeUserStateToFalse, checkUser, deleteUser, checkLocalServer } = useController;
 
 //Route to save a new user
 router.post('/newuser', createUser);
@@ -14,6 +14,9 @@ router.get('/:password', getUserByPassword);
 
 //Route to get an user by the password
 router.get('/userdetails/profil', getUserDetails);
+
+//Route to get an user by the password
+router.patch('/change/profil', updateUserData);
 
 //Route to change the state of true
 router.patch('/login/changeState/:id', changeUserStateToTrue);
