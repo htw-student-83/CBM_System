@@ -23,7 +23,7 @@ const AccountDelete = () => {
 
     return(
         <div className="bg-sky-400 h-dvh w-auto">
-            <div className="py-60">
+            <div className="py-80">
                 <div className="bg-neutral-100 mx-4 border-amber-800 ml-auto mr-auto rounded-2xl p-4 w-fit pl-6 pr-6">
                     <h1 className="text-xl text-center">Wollen Sie wirklich Ihren Account löschen?</h1>
                     <div className="flex flex-grow mx-20">

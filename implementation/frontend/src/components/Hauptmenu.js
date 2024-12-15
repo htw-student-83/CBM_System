@@ -30,7 +30,7 @@ function Mainmenu({id}) {
                     <FaCashRegister size={650} className="text-gray-100"/>
                 </div>
 
-                <div className="flex flex-row gap-16 z-10">
+                <div className="flex flex-row gap-5 z-10">
                     <div className="flex flex-col items-center">
                         <Link to='/cashbox/einzahlung'>
                             <div

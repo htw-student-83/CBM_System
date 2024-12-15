@@ -24,24 +24,49 @@ function DataChange() {
         setInputValue(""); // Reset input when changing option
     };
 
-    const handleInputChange = async (event) => {
-        setInputValue(event.target.value);
-            const { name, value } = event.target;
-            setUpdateData(prevData => ({
-                ...prevData,
-                [name]: value
-            }));
+    const handleInputChange = (event) => {
+        const { value } = event.target;
 
-        setUpdateData(updateData);
+        setInputValue(value); // Aktualisiert den Eingabewert
+
+        // Dynamisches Aktualisieren von `updateData`
+        setUpdateData((prevData) => ({
+            ...prevData,
+            [selectedOption.toLowerCase()]: value, // Aktualisiert entweder "nachname" oder "mobile"
+        }));
+
+        console.log("Updated updateData:", {
+            ...updateData,
+            [selectedOption.toLowerCase()]: value,
+        });
+    };
+
+
+    const handleSubmit = async (event) => {
+
+        event.preventDefault();
+
+        const dataToUpdate = {};
+        // Erstellen eines Objekts mit nur den geänderten Feldern
+
+        if (selectedOption === "Nachname" && updateData.nachname.trim()) {
+            dataToUpdate.nachname = updateData.nachname;
+        } else if (selectedOption === "Mobile" && updateData.mobile.trim()) {
+            dataToUpdate.mobile = updateData.mobile;
+        } else {
+            console.error("Kein gültiger Wert zum Aktualisieren angegeben.");
+            return; // Abbrechen, wenn kein gültiger Wert vorhanden ist
+        }
+
         try {
 
-            await axios.patch(`http://localhost:4000/api/user/change/profil`, updateData,{
+            await axios.patch(`http://localhost:4000/api/user/change/profil`, dataToUpdate,{
                 headers: {
                     'Content-Type': 'application/json',
                 }
             })
                 .then(()=>{
-                    navigate('/cashbox/hauptmenu/');
+                    navigate('/cashbox/hauptmenu');
                 })
                 .catch((error) => {
                     console.log("Not answer from the server." + error)
@@ -49,14 +74,6 @@ function DataChange() {
         } catch (error) {
             console.error('Fehler beim Aktualisieren des Logged-Attributs:', error);
         }
-
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if(!updateData.nachname)
-        handleSubmit(event);
-        //setModalOpen(false); // Formular nach dem Absenden schließen
     };
 
 
@@ -72,12 +89,15 @@ function DataChange() {
                                         <option value="Nachname">Nachname</option>
                                         <option value="Mobile">Mobile</option>
                                     </select>
-                                    <input type="text" value={inputValue} onChange={handleInputChange}
+                                    <input type="text"
+                                           name={selectedOption.toLowerCase()}
+                                           value={inputValue}
+                                           onChange={handleInputChange}
                                            className="border p-2"/>
                                 </div>
                                 <button
                                     type="button"
-                                    onClick={handleInputChange}
+                                    onClick={handleSubmit}
                                     className="bg-gray-400 font-bold p-2 mt-3 cursor-pointer hover:rounded-full">
                                     ändern
                                 </button>

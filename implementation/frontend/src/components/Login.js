@@ -101,17 +101,15 @@ export default function Login(){
     },4000);
 
     return (
-        <div className="bg-sky-300 h-dvh pt-32">
+        <div className="bg-sky-300 h-dvh pt-40">
 
-            <div className="flex flex-col justify-center bg-white w-fit p-10  ml-auto mr-auto rounded-3xl">
+            <div className="flex flex-col justify-center bg-white w-fit p-10 ml-auto mr-auto rounded-3xl">
 
-                <div className="ml-auto mr-auto">
-                    <FaCashRegister size={50}/>
+                <div className="ml-auto mr-auto pt-5">
+                    <FaCashRegister size={80}/>
                 </div>
 
-                <h1 className="text-2xl mb-8 mt-5 italic font-bold text-center">Login</h1>
-
-                <div className="w-full h-fit">
+                <div className="w-full h-fit pt-20">
 
                     <form>
                         <label className="text-base italic">Passwort:</label>

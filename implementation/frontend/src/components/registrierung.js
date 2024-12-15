@@ -163,16 +163,14 @@ export default function Registrierung(){
 
         <div className="bg-sky-200 h-dvh pt-32">
 
-            <div className="flex flex-col justify-center bg-white w-fit p-6  ml-auto mr-auto rounded-3xl border-2 border-sky-300
+            <div className="flex flex-col justify-center bg-white w-fit p-6 pt-10  ml-auto mr-auto rounded-3xl border-2 border-sky-300
             shadow-[0px_6px_3px_rgba(5,0,0,0.3)]">
 
                 <div className="ml-auto mr-auto">
-                    <FaCashRegister size={40}/>
+                    <FaCashRegister size={80}/>
                 </div>
 
-                <h1 className="text-xl mb-4 mt-5 italic font-bold text-center">Registrierung</h1>
-
-                <div className="w-fit h-fit">
+                <div className="w-fit h-fit mt-14">
 
                     <form>
 
