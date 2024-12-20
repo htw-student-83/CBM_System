@@ -16,22 +16,22 @@ function Einzahlung() {
         if (!neuerbetrag) {
             setEinzahlung_error("The input filed doesn't keep empty.");
         }else{
-            console.log("Gespeicherter Wert" , neuerbetrag)
-            setLoading(true);
-            axios.patch(`http://localhost:4000/api/cash/change/`,
-                {kassenstand: neuerbetrag},
-                { headers: {
-                        'Content-Type': 'application/json',
-                     },
-            })
-                .then(data => console.log("übergebener Wert:" , data))
-                .then(() => {
-                    setLoading(false)
-                    navigate('/cashbox/hauptmenu');
-                })
-                .catch((error) => {
-                    setEinzahlung_error("The server connection is failed.");
-                })
+            setTimeout(() =>{
+                setLoading(true);
+                axios.patch(`http://localhost:4000/api/cash/change/`,
+                    {neuerBetrag: neuerbetrag},
+                    { headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(() => {
+                        setLoading(false)
+                        navigate('/cashbox/hauptmenu');
+                    })
+                    .catch((error) => {
+                        setEinzahlung_error("The server connection is failed.");
+                    })
+            },2000)
         }
     }
 

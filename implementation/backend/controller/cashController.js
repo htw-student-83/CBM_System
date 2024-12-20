@@ -17,20 +17,23 @@ const getCurrentStand = async (req, res) => {
  * @returns {Promise<*>}
  */
 const updateCurrentCash = async (req, res)=> {
-    const { kassenstand } = req.body;
-    console.log("erhaltener Wert: ", kassenstand)
+    const { neuerBetrag } = req.body;
+    const gewandelterEinzuzahlenderBetrag = Number.parseFloat(neuerBetrag)
+    const cash = await Cash.findOne({});
+    const savedValue = Number.parseFloat(cash.kassenstand)
+    const calculateNewCashStand = savedValue + gewandelterEinzuzahlenderBetrag;
 
-    if(!kassenstand){
+    if(!neuerBetrag){
         return res.status(404).json({msg: "No cash entry for updating."});
     }
 
-    if (typeof kassenstand !== 'string') {
+    if (typeof neuerBetrag !== 'string') {
         return res.status(400).json({ msg: "Invalid input: 'cash' must be a string." });
     }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse
-        { kassenstand: kassenstand },
+        { kassenstand: calculateNewCashStand },
         { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
     );
 
