@@ -26,7 +26,7 @@ function Einzahlung() {
                     })
                     .then(() => {
                         setLoading(false)
-                        navigate('/cashbox/hauptmenu');
+                        navigate(`/cashbox/einzahlung_erfolgreich`);
                     })
                     .catch((error) => {
                         setEinzahlung_error("The server connection is failed.");
