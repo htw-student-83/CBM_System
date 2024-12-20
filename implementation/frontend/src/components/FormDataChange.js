@@ -34,11 +34,6 @@ function DataChange() {
             ...prevData,
             [selectedOption.toLowerCase()]: value, // Aktualisiert entweder "nachname" oder "mobile"
         }));
-
-        console.log("Updated updateData:", {
-            ...updateData,
-            [selectedOption.toLowerCase()]: value,
-        });
     };
 
 

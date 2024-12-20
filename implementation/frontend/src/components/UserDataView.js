@@ -28,7 +28,7 @@ function User() {
             });
     }, [])
     return (
-        <div className="flex flex-col w-96 ml-auto mr-auto mt-16 bg-blue-100 rounded-2xl h-auto " id="mainscreen">
+        <div className="flex flex-col w-96 ml-auto mr-auto mt-32 bg-blue-100 rounded-2xl h-auto " id="mainscreen">
             <div className="mt-10">
                 <div className="w-96 mt-4 ml-auto mr-auto mb-10">
                     <img src={IconUser} style={{width: '150px', height: '150px', marginLeft: "120px"}}

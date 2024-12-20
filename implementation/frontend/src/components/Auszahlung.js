@@ -4,7 +4,7 @@ import "../components_css/einzahlung.css"
 function Auszahlung() {
     return (
         <div className="flex flex-col bg-blue-600 h-dvh" id="mainscreen">
-            <div className="mt-10">
+            <div className="mt-32">
                 <div className="w-96 mt-28 ml-auto mr-auto mb-10">
                     <img src={IconAuszahlung} style={{width: '150px', height: '150px', marginLeft: "120px"}}
                          alt="Geld einzahlen"/>

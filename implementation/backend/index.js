@@ -6,7 +6,6 @@ import userRoutes from "../backend/routes/userRoutes.js"
 import cashRoutes from "./routes/cashRoutes.js";
 import cors from 'cors';
 
-
 const app = express();
 
 app.use(express.json());
