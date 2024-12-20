@@ -1,9 +1,17 @@
 import IconAuszahlung from "../pictures/auszahlung.webp"
 import "../components_css/einzahlung.css"
+import {useNavigate} from "react-router-dom";
 
 function Auszahlung() {
+
+    const navigate = useNavigate();
+
+    function handelCancle(){
+        navigate(`/cashbox/hauptmenu`);
+    }
+
     return (
-        <div className="flex flex-col bg-blue-600 h-dvh" id="mainscreen">
+        <div className="flex flex-col bg-blue-500 h-dvh" id="mainscreen">
             <div className="mt-32">
                 <div className="w-96 mt-28 ml-auto mr-auto mb-10">
                     <img src={IconAuszahlung} style={{width: '150px', height: '150px', marginLeft: "120px"}}
@@ -19,11 +27,19 @@ function Auszahlung() {
                                     marginLeft: "1px",
                                     padding: "6px",
                                     textAlign: "right",
-                                    outline: "none"}}/>
+                                    outline: "none"
+                                }}/>
                         </div>
                     </div>
-                    <div className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl cursor-pointer">
+                    <div
+                        className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl cursor-pointer">
                         <button>auszahlen</button>
+                    </div>
+                    <div
+                        onClick={handelCancle}
+                        className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-orange-200 mt-5 hover:rounded-3xl cursor-pointer"
+                    >
+                        abbrechen
                     </div>
                 </div>
             </div>

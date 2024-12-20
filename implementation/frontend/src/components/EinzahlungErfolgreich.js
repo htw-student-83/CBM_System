@@ -11,7 +11,7 @@ const EinzahlungErfolgreich = () => {
         const timer = setTimeout(() => {
             setShowMessage(false);
             navigate('/cashbox/hauptmenu');
-        }, 3000 );
+        }, 4000 );
         return () => clearTimeout(timer);
     }, [navigate])
 
