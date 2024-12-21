@@ -3,8 +3,6 @@ import "../components_css/einzahlung.css"
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import EinzahlungNichtErfolgreich from "./EinzahlungNichtErfolgreich";
-import einzahlungNichtErfolgreich from "./EinzahlungNichtErfolgreich";
 
 function Einzahlung() {
     const [neuerbetrag, setneuerBetrag] = useState("");
@@ -24,28 +22,22 @@ function Einzahlung() {
         event.preventDefault();
         if (!neuerbetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-            //setEinzahlungFailed(true);
-            //setEinzahlung_error("Es wurde keine Eingabe getätigt.");
         } else if (!isNumeric(neuerbetrag)) {
             alert("Die Eingabe ist ungültig.")
-            //setEinzahlungFailed(true);
-            //setEinzahlung_error("Es wurde eine ungültige Eingabe getätigt."); // Nicht numerische Eingabe
         } else {
-            setTimeout(()=>{
-                axios.patch(`http://localhost:4000/api/cash/change/`,
-                    { neuerBetrag: neuerbetrag },
-                    {
-                        headers: { 'Content-Type': 'application/json' },
-                    }
-                )
-                    .then(() => {
-                        navigate(`/cashbox/einzahlung_erfolgreich`);
-                    })
-                    .catch((error) => {
-                        setEinzahlungFailed(true);
-                        setEinzahlung_error("Die Verbindung zum Server ist fehlgeschlagen.");
-                    });
-            }, 2000)
+            axios.patch(`http://localhost:4000/api/cash/change/`,
+                { neuerBetrag: neuerbetrag },
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            )
+                .then(() => {
+                    navigate(`/cashbox/einzahlung_laeuft`);
+                })
+                .catch((error) => {
+                    setEinzahlungFailed(true);
+                    setEinzahlung_error("Die Verbindung zum Server ist fehlgeschlagen.");
+                });
         }
     }
 

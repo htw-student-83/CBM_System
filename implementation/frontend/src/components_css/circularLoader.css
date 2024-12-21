@@ -1,0 +1,22 @@
+.circular-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 96px;
+}
+
+circle {
+    fill: none;
+}
+
+.background {
+    stroke: #e6e6e6;
+}
+
+.progress {
+    stroke: #4caf50;
+    transform: rotate(-9deg);
+    transform-origin: center;
+    transition: stroke-dashoffset 0.01s;
+    stroke-width: 5;  /* Stelle sicher, dass die Breite sichtbar ist */
+}
