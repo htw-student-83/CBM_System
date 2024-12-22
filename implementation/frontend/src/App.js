@@ -14,7 +14,7 @@ import Auszahlung from "./components/Auszahlung";
 import User from "./components/UserDataView";
 import AccountDelete from "./components/AccountDelete";
 import Logout from "./components/Logout";
-import EinzahlungErfolgreich from "./components/EinzahlungErfolgreich";
+import ProzessErfolgreich from "./components/ProzessErfolgreich";
 import LadeBalken from "./components/LadeBalken";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
             <Route path = '/cashbox/einzahlung' element = {<Einzahlung/>}/>
             <Route path = '/cashbox/einzahlung_laeuft' element = {<LadeBalken/>}/>
-            <Route path = '/cashbox/einzahlung_erfolgreich' element = {<EinzahlungErfolgreich/>}/>
+            <Route path = '/cashbox/einzahlung_erfolgreich' element = {<ProzessErfolgreich/>}/>
             <Route path = '/cashbox/auszahlung' element = {<Auszahlung/>}/>
             <Route path = '/cashbox/account_loeschung' element = {<AccountDelete/>}/>
             <Route path = '/cashbox/userdataview' element = {<User/>}/>

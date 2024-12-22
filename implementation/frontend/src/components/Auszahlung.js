@@ -29,7 +29,7 @@ function Auszahlung() {
                 }
             )
                 .then(() => {
-                    navigate(`/cashbox/einzahlung_laeuft`);
+                    navigate('/cashbox/einzahlung_laeuft', { state: { message: "Die Auszahlung war erfolgreich" } });
                 })
                 .catch((error) => {
                     alert("Die Verbindung zum Server ist fehlgeschlagen.");

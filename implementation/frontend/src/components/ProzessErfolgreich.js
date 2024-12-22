@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import IconEinzahlungErfolgreich from "../pictures/grünerHaken2.webp";
 import { useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
-const EinzahlungErfolgreich = () => {
+const ProzessErfolgreich = () => {
+    const location = useLocation();
+    const message = location.state?.message  || 'Keine Nachricht verfügbar';
     const [showMessage, setShowMessage] = useState(true);
     const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ const EinzahlungErfolgreich = () => {
                 </div>
                 <div className="text-lg w-fit ml-auto mr-auto mt-30">
                     <div className="p-1 py-2 text-center text-2xl font-bold ml-auto mr-auto mt-5">
-                        Die Einzahlung war erfolgreich.
+                        {message}
                     </div>
                 </div>
             </div>
@@ -37,4 +39,4 @@ const EinzahlungErfolgreich = () => {
     )
 }
 
-export default EinzahlungErfolgreich;
+export default ProzessErfolgreich;

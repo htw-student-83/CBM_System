@@ -30,7 +30,7 @@ function Einzahlung() {
                 }
             )
                 .then(() => {
-                    navigate(`/cashbox/einzahlung_laeuft`);
+                    navigate('/cashbox/einzahlung_laeuft', { state: { message: "Die Einzahlung war erfolgreich" } });
                 })
                 .catch((error) => {
                     alert("Verbindungsproblem mit dem Server.")
