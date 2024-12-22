@@ -38,7 +38,7 @@ function App() {
             <Route path = '/cashbox/userdataview' element = {<User/>}/>
             <Route path = '/cashbox/logout/:id' element = {<Logout/>}/>
             <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
-            <Route path = '/cashbox/user/password_vergessen' element = {<PasswortVergessen/>}/>
+            <Route path = '/cashbox/user/passwordforgot' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
           </Routes>
         </class>

@@ -1,11 +1,10 @@
 import {useEffect, useState} from "react";
 import {FaCashRegister} from "react-icons/fa6";
-import {CiMobile4} from "react-icons/ci";
 import axios from "axios";
 import Services_Success from "../components/process_successfully";
 import Services_Fail from "./Service_failed";
 import {useNavigate} from "react-router-dom";
-import mobilecheck from '../components/mobileCheck'
+import {CiMobile4} from "react-icons/ci";
 
 /**
  * The component about password forgot
@@ -19,45 +18,29 @@ export default function PasswortVergessen(){
     const[content_for_sucessfully_process, setContent_for_sucessfully_process] = useState("");
     const[processSucessfully, setProcessSuccessfully] = useState(false);
     const[processFailed, setprocessFailed] = useState(false);
-    const[loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
 
     /**
      * handle the proces in case when the user forgot his password
      */
     const handlePasswordForgot = () => {
-        if(!mobile) {
-            handleFailedProcess("Please enter your mobile number!");
-        }else if(mobilecheck.validationOfNumber(mobile)) {
-            handleFailedProcess("Your mobile number is invalid");
-        }else if(!mobilecheck.prefixcheck(mobile)) {
-            handleFailedProcess("The prefix of your mobile number is unknown");
-        }else{
-            setLoading(true);
-            setMobile({userNumber: mobile})
-            axios.get(`/cashbox/api/users/data/${mobile}`)
+            axios.get(`http://localhost:4000/api/user/passwordforgot/${mobile}`)
                 .then((response) => {
-                    handleSuccessllyProcess("Password was sending successfully.")
-                    setLoading(false);
+                    handleServerResponse(response.data.password)
                 })
                 .catch((error) => {
-                    setLoading(false);
                     handleFailedProcess()
                 })
-        }
     }
 
     /**
-     *  print a message if the process was successfully
+     *  print the stored password
      */
-    const handleSuccessllyProcess = (content) =>{
-        setProcessSuccessfully(true)
-        setContent_for_sucessfully_process(content);
-        setTimeout(() => {
-            setProcessSuccessfully(false);
-            navigate('/cashbox/login');
-        }, 4000)
+    const handleServerResponse = (content) =>{
+       alert("Gespeichertes Passwort: " + content);
+       navigate(`/cashbox/login`)
     }
 
 
@@ -72,21 +55,15 @@ export default function PasswortVergessen(){
             setprocessFailed(false);
         }, 3000)
     }
-/*
-    useEffect(() => {
-        document.getElementById("mainscreen").style.display="none";
-    }, []);
 
- */
     return(
         <div className="bg-sky-300 h-dvh pt-40">
 
-            <div className="flex flex-col justify-center bg-white w-fit p-10  ml-auto mr-auto rounded-3xl">
+            <div className="flex flex-col justify-center bg-white w-fit p-10 mt-20 ml-auto mr-auto rounded-3xl">
 
                 <div className="ml-auto mr-auto">
-                    <FaCashRegister size={50}/>
+                    <FaCashRegister size={80}/>
                 </div>
-
                 <h1 className="text-xl mb-8 mt-5 italic font-bold text-center">Passwort vergessen</h1>
 
                 <div className="w-fit h-fit">
@@ -109,28 +86,26 @@ export default function PasswortVergessen(){
                         className="w-full h-fit bg-gray-300 p-2 mt-3 text-base font-bold hover:rounded-3xl hover:bg-green-300"
                         onClick={handlePasswordForgot}>Senden
                     </button>
+                </div>
 
                 </div>
 
+                <div>
+                    {processFailed && (
+                        <div className="componentFromLeftToRight">
+                            <Services_Fail error={error}/>
+                        </div>
+                    )}
+                </div>
+
+                <div>
+                    {processSucessfully && (
+                        <div className="componentFromLeftToRight">
+                            <Services_Success content={content_for_sucessfully_process}/>
+                        </div>
+                    )}
+                </div>
+
             </div>
-
-            <div>
-                {processFailed && (
-                    <div className="componentFromLeftToRight">
-                        <Services_Fail error={error}/>
-                    </div>
-                )}
-            </div>
-
-            <div>
-                {processSucessfully && (
-                    <div className="componentFromLeftToRight">
-                        <Services_Success content={content_for_sucessfully_process}/>
-                    </div>
-                )}
-            </div>
-
-        </div>
-    )
-
+            )
 }

@@ -145,7 +145,7 @@ export default function Login(){
                         </Link>
                     </p>
                     <p className="text-sm mt-2">Passwort vergessen?
-                        <Link to='/cashbox/user/password_vergessen'>
+                        <Link to='/cashbox/user/passwordforgot/'>
                             <span className="font-mono underline-offset-2 hover: cursor-pointer"> vergessen</span>
                         </Link>
                     </p>

@@ -10,7 +10,7 @@ import Registration_Failed from "../components/registration_failed";
 import mobilecheck from '../components/mobileCheck'
 import namecheck from '../components/nameCheck'
 
-export default function Registrierung(){
+export default function Registrierung(message){
 
     const[contentforsuccess, setContentforSuccess] = useState("");
     const[registrierungSucessfully, setRegistrierungSuccessfully] = useState(false);
@@ -58,8 +58,8 @@ export default function Registrierung(){
                 ...formData,
                 password: password
             };
-
             setFormData(updatedFormData);
+            alert("Passwort: " + password);
             axios.post('http://localhost:4000/api/user/newuser', updatedFormData,{
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,7 +118,6 @@ export default function Registrierung(){
      */
     function createPasswort (){
         const pattern = "10000";
-        //Intervall von 10000 - 99999
         var randomnumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
         var newPassword = pattern + randomnumber;
         return newPassword;
@@ -137,7 +136,6 @@ export default function Registrierung(){
      * print the message if the registration was sucessfully
      */
     const handleSuccessfullyRegistration = () => {
-        console.log("Function handleSuccessfullyRegistration() aufgerufen. ")
         setRegistrierungSuccessfully(true);
         setContentforSuccess("The registration was successfully");
         setTimeout(() => {
@@ -160,9 +158,7 @@ export default function Registrierung(){
 
 
     return(
-
         <div className="bg-sky-200 h-dvh pt-32">
-
             <div className="flex flex-col justify-center bg-white w-fit p-6 pt-10  ml-auto mr-auto rounded-3xl border-2 border-sky-300
             shadow-[0px_6px_3px_rgba(5,0,0,0.3)]">
 
@@ -255,7 +251,6 @@ export default function Registrierung(){
                     </div>
                 )}
             </div>
-
         </div>
     )
 }
