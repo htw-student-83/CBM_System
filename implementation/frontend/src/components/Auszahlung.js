@@ -2,7 +2,7 @@ import IconAuszahlung from "../pictures/auszahlung.webp"
 import "../components_css/einzahlung.css"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import axios from "axios";
+import axios, {responseEncoding} from "axios";
 
 function Auszahlung() {
 
@@ -28,11 +28,11 @@ function Auszahlung() {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-                .then(() => {
-                    navigate('/cashbox/einzahlung_laeuft', { state: { message: "Die Auszahlung war erfolgreich" } });
+                .then((response) => {
+                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
                 })
                 .catch((error) => {
-                    alert("Die Verbindung zum Server ist fehlgeschlagen.");
+                    navigate(`/cashbox/prozess_laeuft` , {state: {message: error.message } })
                 });
         }
     }

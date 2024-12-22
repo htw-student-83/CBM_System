@@ -9,12 +9,12 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
     const location = useLocation();
 
     //auf alle Zustandsdaten, die beim Navigieren übergeben wurden, zugreifen.
-    const message = location.state?.message  || 'Keine Nachricht verfügbar';
-
+    const fullMessage = location.state?.message;
+    //const message = location.state?.message.match(/\d+/)  || 'Keine Nachricht verfügbar';
     useEffect(() => {
         // setTimeout im useEffect, um den Timeout nur einmal zu setzen
         const timeoutId = setTimeout(() => {
-            navigate('/cashbox/einzahlung_erfolgreich', { state: { message: message } });
+            navigate('/cashbox/prozess_erfolgreich', { state: { message: fullMessage }});
         }, 5000);
 
         // Bereinigung des Timeout, falls die Komponente vorher entfernt wird
@@ -26,7 +26,7 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
         const circle = document.querySelector('.progress');
         let rotation = 0;
         const interval = setInterval(() => {
-            rotation += 10;
+            rotation += 15;
             circle.style.transform = `rotate(${rotation}deg)`;
         }, 30);
 
@@ -61,5 +61,5 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
             </div>
         </div>
     );
-};
+}
 export default CircularLoader;

@@ -29,8 +29,8 @@ function Einzahlung() {
                     headers: { 'Content-Type': 'application/json' },
                 }
             )
-                .then(() => {
-                    navigate('/cashbox/einzahlung_laeuft', { state: { message: "Die Einzahlung war erfolgreich" } });
+                .then((response) => {
+                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
                 })
                 .catch((error) => {
                     alert("Verbindungsproblem mit dem Server.")
