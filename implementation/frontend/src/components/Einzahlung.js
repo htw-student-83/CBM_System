@@ -6,8 +6,6 @@ import {useNavigate} from "react-router-dom";
 
 function Einzahlung() {
     const [neuerbetrag, setneuerBetrag] = useState("");
-    const [einzahlungFailed, setEinzahlungFailed] = useState(false);
-    const [einzahlung_error, setEinzahlung_error] = useState("");
     const navigate = useNavigate();
 
     function isNumeric(str) {
@@ -25,7 +23,7 @@ function Einzahlung() {
         } else if (!isNumeric(neuerbetrag)) {
             alert("Die Eingabe ist ungültig.")
         } else {
-            axios.patch(`http://localhost:4000/api/cash/change/`,
+            axios.patch(`http://localhost:4000/api/cash/payment/`,
                 { neuerBetrag: neuerbetrag },
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -35,8 +33,7 @@ function Einzahlung() {
                     navigate(`/cashbox/einzahlung_laeuft`);
                 })
                 .catch((error) => {
-                    setEinzahlungFailed(true);
-                    setEinzahlung_error("Die Verbindung zum Server ist fehlgeschlagen.");
+                    alert("Verbindungsproblem mit dem Server.")
                 });
         }
     }

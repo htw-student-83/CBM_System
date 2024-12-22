@@ -16,7 +16,7 @@ const getCurrentStand = async (req, res) => {
  * @param req new cash
  * @returns {Promise<*>}
  */
-const updateCurrentCash = async (req, res)=> {
+const payment = async (req, res)=> {
     const { neuerBetrag } = req.body;
     const gewandelterEinzuzahlenderBetrag = Number.parseFloat(neuerBetrag)
     const cash = await Cash.findOne({});
@@ -40,10 +40,51 @@ const updateCurrentCash = async (req, res)=> {
     if(!cashStandUpdated){
         return res.status(500).json({msg: "Server error."});
     }
-    res.status(200).json({ msg: "Cash updated successfully."});
+    res.status(200).json({ msg: "Payment was successfully."});
+}
+
+
+/**
+ * makes the differenz between the current stand and an amount
+ * @param req new cash
+ * @param res
+ * @returns {Promise<*>}
+ */
+const payout = async (req, res)=> {
+
+    const { neuerAuszahlungsbetrag } = req.body;
+
+    //change the type of variable, which was revieved
+    const gewandelterAuszahlungsbetrag = Number.parseFloat(neuerAuszahlungsbetrag);
+
+    //change the type of variable, which was loade from the db
+    const cash = await Cash.findOne({});
+    const savedValue = Number.parseFloat(cash.kassenstand);
+
+    if(savedValue === 0 || savedValue < 0){
+        return res.status(400).send({msg: "There's actually no cash in the box."});
+    }
+
+    const calculateNewCashStand = savedValue - gewandelterAuszahlungsbetrag;
+
+    if(calculateNewCashStand === 0 || calculateNewCashStand < 0){
+        return res.status(400).send({msg: "Warning! Actually there's not enough cash in the box for a next payout."});
+    }
+
+    const cashStandUpdated = await Cash.findOneAndUpdate(
+        {}, // Suche die erste passende Kasse
+        { kassenstand: calculateNewCashStand },
+        { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
+    );
+
+    if(!cashStandUpdated){
+        return res.status(500).send({msg: "Server error."});
+    }
+    res.status(200).send({ msg: "Payout was successfully."});
 }
 
 export default {
     getCurrentStand,
-    updateCurrentCash,
+    payment,
+    payout
 }
