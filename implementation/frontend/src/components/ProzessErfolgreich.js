@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import IconEinzahlungErfolgreich from "../pictures/grünerHaken2.webp";
 import { useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import IconProzessErfolgreich from "./IconProzessErfolgreich";
 
 const ProzessErfolgreich = () => {
     const location = useLocation();
@@ -24,10 +24,7 @@ const ProzessErfolgreich = () => {
     return (
         <div className="flex flex-col bg-blue-400 h-dvh" id="mainscreen">
             <div className="mt-44">
-                <div className="w-96 mt-28 ml-auto mr-auto mb-10">
-                    <img src={IconEinzahlungErfolgreich} style={{width: '150px', height: '150px', marginLeft: "130px"}}
-                         alt="Geld einzahlen"/>
-                </div>
+                <IconProzessErfolgreich/>
                 <div className="text-lg w-fit ml-auto mr-auto mt-30">
                     <div className="p-1 py-2 text-center text-2xl font-bold ml-auto mr-auto mt-5">
                         {message}

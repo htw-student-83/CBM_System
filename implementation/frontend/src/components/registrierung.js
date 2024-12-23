@@ -94,25 +94,6 @@ export default function Registrierung(message){
 
 
     /**
-     * handle the process of a successful registration
-     * @param mobile
-     */
-    /*
-    const sendingWelcomeMessage = (mobile) =>{
-        axios.get(`http://localhost:4000/api/users/registration/welcomemessage/${mobile}`)
-            .then(() =>{
-                setFormData({vorname: "",  nachname: "", mobile: ""});
-                handleSuccessfullyRegistration();
-            })
-            .catch((error) => {
-                setError("The registration was failed.")
-                console.log("Ich bin hier5")
-                handleFailRegistration();
-            })
-    }
-     */
-
-    /**
      * create a new password
      * @returns {string} a new password
      */
@@ -123,13 +104,13 @@ export default function Registrierung(message){
         return newPassword;
     }
 
+    
     function makeFieldsEmpty(){
         const inputs = document.querySelectorAll('input');
         // Den Inhalt jedes Input-Feldes auf leer setzen
         inputs.forEach(input => {
             input.value = '';
         });
-       // sendingWelcomeMessage(updatedFormData.mobile);
     }
 
     /**

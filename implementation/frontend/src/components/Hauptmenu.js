@@ -4,7 +4,7 @@ import Wasserzeichen from "./Wasserzeichen";
 import Uebersicht_AngemeldeterUser_AktuellerKassenstand from "./Uebersicht_AngemeldeterUser_AktuellerKassenstand";
 import Hauptmenupunkte from "./Hauptmenupunkte";
 
-function Mainmenu({id}) {
+function Mainmenu() {
     return (
         <div className="bg-blue-400 h-screen overflow-hidden" id="mainscreen">
             <Uebersicht_AngemeldeterUser_AktuellerKassenstand/>

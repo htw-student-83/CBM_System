@@ -1,10 +1,12 @@
 import { FaCashRegister } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useState } from "react";
 import LoginNegativ from "./Service_failed";
 import '../components_css/animationToRight.css'
 import axios from "axios";
+import NavigierenZuPasswortVergessen from "./NavigierenZuPasswortVergessen";
+import NavigiereZurRegistrierung from "./NavigiereZurRegistrierung";
 
 /**
  * Represent the Login of the system
@@ -138,16 +140,10 @@ export default function Login(){
 
                 <div className="mt-5 italic">
                     <p className="text-sm">Du hast noch keinen Account?
-                        <Link to='/cashbox/user/registrierung'>
-                                <span
-                                    className="font-mono underline-offset-2 hover: cursor-pointer"> Registrierung
-                                </span>
-                        </Link>
+                        <NavigiereZurRegistrierung/>
                     </p>
                     <p className="text-sm mt-2">Passwort vergessen?
-                        <Link to='/cashbox/user/passwordforgot/'>
-                            <span className="font-mono underline-offset-2 hover: cursor-pointer"> vergessen</span>
-                        </Link>
+                        <NavigierenZuPasswortVergessen/>
                     </p>
                 </div>
 
