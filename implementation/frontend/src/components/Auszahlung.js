@@ -2,42 +2,39 @@ import IconAuszahlung from "../pictures/auszahlung.webp"
 import "../components_css/einzahlung.css"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import axios, {responseEncoding} from "axios";
 
 function Auszahlung() {
 
     const [neuerAuszahlungsBetrag, setNeuerAuszahlungsBetrag] = useState("");
-
     const navigate = useNavigate();
 
+    /**
+     * check, is the message only about numbers
+     * @param str übergebener Wert
+     * @returns true, if the value is only part from numbers
+     */
     function isNumeric(str) {
-        return /^[0-9]+$/.test(str); // Prüft, ob der String nur aus Ziffern besteht
+        return /^[0-9]+$/.test(str);
     }
 
-    function handelAuszahlung(event) {
+    /**
+     * checks the input from a logged user
+     * @param event
+     */
+    function checkInput(event) {
         event.preventDefault();
-
         if (!neuerAuszahlungsBetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-        } else if (!isNumeric(neuerAuszahlungsBetrag)) {
+        }else if (!isNumeric(neuerAuszahlungsBetrag)) {
             alert("Die Eingabe ist ungültig.")
-        } else {
-            axios.patch(`http://localhost:4000/api/cash/payout/`,
-                { neuerAuszahlungsbetrag: neuerAuszahlungsBetrag },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-                .then((response) => {
-                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
-                })
-                .catch((error) => {
-                    navigate(`/cashbox/prozess_laeuft` , {state: {message: error.message } })
-                });
+        }else{
+            navigate('/cashbox/auszahlung/abfrage', { state: { message: neuerAuszahlungsBetrag } });
         }
     }
 
-
+    /**
+     * go back to the hauptmenu
+     */
     function handelCancle(){
         navigate(`/cashbox/hauptmenu`);
     }
@@ -64,7 +61,7 @@ function Auszahlung() {
                                 }}/>
                         </div>
                     </div>
-                    <div onClick={(e) => handelAuszahlung(e)}
+                    <div onClick={(e) => checkInput(e)}
                         className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl cursor-pointer">
                         <button>auszahlen</button>
                     </div>
@@ -76,7 +73,6 @@ function Auszahlung() {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

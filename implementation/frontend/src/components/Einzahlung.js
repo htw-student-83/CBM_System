@@ -1,40 +1,41 @@
 import IconEinzahlung from "../pictures/einzahlung.png"
 import "../components_css/einzahlung.css"
 import {useState} from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
 function Einzahlung() {
     const [neuerbetrag, setneuerBetrag] = useState("");
     const navigate = useNavigate();
 
+    /**
+     * check, is the message only about numbers
+     * @param str übergebener Wert
+     * @returns true, if the value is only part from numbers
+     */
     function isNumeric(str) {
-        return /^[0-9]+$/.test(str); // Prüft, ob der String nur aus Ziffern besteht
+        return /^[0-9]+$/.test(str);
     }
 
+    /**
+     * go back to the hauptmenu
+     */
     function handelCancle(){
         navigate(`/cashbox/hauptmenu`);
     }
 
-    function handelEinzahlung(event) {
+    /**
+     * checks the input from a logged user
+     * @param event
+     */
+    function checkInput(event) {
         event.preventDefault();
+
         if (!neuerbetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-        } else if (!isNumeric(neuerbetrag)) {
+        }else if (!isNumeric(neuerbetrag)) {
             alert("Die Eingabe ist ungültig.")
-        } else {
-            axios.patch(`http://localhost:4000/api/cash/payment/`,
-                { neuerBetrag: neuerbetrag },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-                .then((response) => {
-                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
-                })
-                .catch((error) => {
-                    alert("Verbindungsproblem mit dem Server.")
-                });
+        }else{
+            navigate('/cashbox/einzahlung/abfrage', { state: { message: neuerbetrag } });
         }
     }
 
@@ -66,7 +67,7 @@ function Einzahlung() {
                         />
                     </div>
                     <div
-                        onClick={handelEinzahlung}
+                        onClick={checkInput}
                         className="p-1 py-2 text-center font-bold ml-auto mr-auto bg-green-200 mt-5 hover:rounded-3xl cursor-pointer"
                     >
                         einzahlen

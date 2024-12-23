@@ -23,12 +23,8 @@ const payment = async (req, res)=> {
     const savedValue = Number.parseFloat(cash.kassenstand)
     const calculateNewCashStand = savedValue + gewandelterEinzuzahlenderBetrag;
 
-    if(!neuerBetrag){
-        return res.status(404).json({msg: "No cash entry for updating."});
-    }
-
     if (typeof neuerBetrag !== 'string') {
-        return res.status(400).json({ msg: "Invalid input: 'cash' must be a string." });
+        return res.status(400).json({ msg: "Deine Eingabe ist gültig." });
     }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
@@ -62,13 +58,13 @@ const payout = async (req, res)=> {
     const savedValue = Number.parseFloat(cash.kassenstand);
 
     if(savedValue === 0 || savedValue < 0){
-        return res.status(400).json({msg: "There's no cash in the box."});
+        return res.status(400).json({msg: "In der Kasse ist kein Geld mehr."});
     }
 
     const calculateNewCashStand = savedValue - gewandelterAuszahlungsbetrag;
 
     if(calculateNewCashStand === 0 || calculateNewCashStand < 0){
-        return res.status(400).json({msg: "Warning! There's not enough cash in the box for a next payout."});
+        return res.status(400).json({msg: "Achtung: Für die nächste Auszahlung ist nicht mehr genug Geld in der Kasse."});
     }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
@@ -81,7 +77,7 @@ const payout = async (req, res)=> {
         return res.status(500).json({msg: "Server error."});
     }
 
-    res.status(200).json({ msg: "Auszahlung war erfolgreich."});
+    res.status(200).json({ msg: "Die Auszahlung war erfolgreich."});
 }
 
 export default {
