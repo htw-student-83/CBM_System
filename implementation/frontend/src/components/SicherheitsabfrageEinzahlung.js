@@ -8,8 +8,8 @@ const SicherheitsabfrageEinzahlung = () => {
     const location = useLocation();
     const message = location.state?.message  || 'Keine Nachricht verfügbar';
 
-    const goToHauptmenu = async () => {
-        navigate(`/cashbox/hauptmenu`);
+    const goToPayment = async () => {
+        navigate(`/cashbox/einzahlung`);
     }
 
     function handelEinzahlung() {
@@ -42,9 +42,7 @@ const SicherheitsabfrageEinzahlung = () => {
                         </button>
                         <button
                             className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-3/5 hover:bg-neutral-200 border-b-emerald-200"
-                            onClick={() => {
-                                goToHauptmenu();
-                            }}
+                            onClick={() => {goToPayment();}}
                         >abbrechen
                         </button>
                     </div>
