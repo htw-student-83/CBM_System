@@ -1,6 +1,7 @@
 import { User } from "../modell/userModell.js";
 import { isValidObjectId} from "mongoose";
 
+
 /**
  * Save an new user into the db
  * @param req the data of an new user
@@ -231,15 +232,7 @@ const checkUser = async (req, res) => {
     }
 }
 
-/**
- *
- * @param req
- * @param res
- * @returns {Promise<*>}
- */
-const checkLocalServer = async (req, res) => {
-    return res.sendStatus(200);
-}
+
 
 
 export default {
@@ -254,5 +247,4 @@ export default {
     deleteUser,
     checkUser,
     getUserByID,
-    checkLocalServer,
 }

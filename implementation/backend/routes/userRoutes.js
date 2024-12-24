@@ -3,7 +3,7 @@ import useController from "../controller/userController.js"
 
 const router = express.Router();
 const {createUser, getUsers, getUserByPassword, getUserDetails, getUserPassword, updateUserData,
-    changeUserStateToTrue,changeUserStateToFalse, checkUser, deleteUser, checkLocalServer } = useController;
+    changeUserStateToTrue,changeUserStateToFalse, checkUser, deleteUser, checkLocalServer, checkTCPServer } = useController;
 
 //Route to save a new user
 router.post('/newuser', createUser);
@@ -32,12 +32,10 @@ router.patch('/logout/changeState', changeUserStateToFalse);
 //Route to check a stored user
 router.get('/check/:mobile', checkUser);
 
-//Route to check the status of the lokal server
-router.get('/localserver/status', checkLocalServer);
-
 //Route to delete an user
 router.delete('/', deleteUser);
 
+/*
 
 router.get('/', async (req, res) => {
     const { mobile } = req.params
@@ -58,6 +56,8 @@ router.get('/', async (req, res) => {
         })
         .catch(error => console.error("Twilioerror: " + error));
 })
+
+ */
 
 export default router
 

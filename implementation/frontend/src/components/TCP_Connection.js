@@ -8,9 +8,9 @@ const TCP_Connection = () => {
         navigate('/cashbox/serverArt/');
     }
 
-    const checkTCPServer = async () => {
-        try {
-            await axios.get(``)
+    const connectToTCPServer = async () => {
+         try {
+            await axios.get(`http://localhost:4000/api/server/tcpserver/status`)
                 .then((response) => {
                     if(response.status === 200){
                         navigate('/cashbox/login');
@@ -22,6 +22,7 @@ const TCP_Connection = () => {
         } catch (error) {
             console.error(error);
         }
+
     }
 
     return(
@@ -31,7 +32,7 @@ const TCP_Connection = () => {
                     <h1 className="text-2xl text-center">Starten Sie bitte den Server auf dem anderen Rechner...</h1>
                     <div className="flex flex-grow mx-20">
                         <button id='ok' className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-2/6 hover:bg-emerald-200 border-b-emerald-200"
-                            onClick={checkTCPServer}
+                            onClick={connectToTCPServer}
                         >ok
                         </button>
                         <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-3/5 hover:bg-neutral-200 border-b-emerald-200"
@@ -46,4 +47,4 @@ const TCP_Connection = () => {
     )
 }
 
-export default TCP_Connection
+export default TCP_Connection;
