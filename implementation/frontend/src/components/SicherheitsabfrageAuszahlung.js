@@ -23,7 +23,10 @@ const SicherheitsabfrageAuszahlung = () => {
                     navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
                 })
                 .catch((error) => {
-                    navigate(`/cashbox/prozess_laeuft` , {state: {message: error.message } })
+                    if (error.response) {
+                        const serverMessage = error.response.data?.msg;
+                        navigate('/cashbox/prozess_laeuft', { state: { message: serverMessage } });
+                    }
                 });
     }
 

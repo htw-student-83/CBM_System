@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
-import IconAuszahlungNichtErfolgreich from "../pictures/rotesKreuz.webp";
+import { PiWarningOctagonFill } from "react-icons/pi";
 
 const ProzessNichtErfolgreich = () => {
 
@@ -12,8 +12,8 @@ const ProzessNichtErfolgreich = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowMessage(false);
-            navigate('/cashbox/hauptmenu');
-        } );
+            navigate('/cashbox/auszahlung');
+        } , 4000);
         return () => clearTimeout(timer);
     }, [navigate])
 
@@ -25,7 +25,7 @@ const ProzessNichtErfolgreich = () => {
         <div className="flex flex-col bg-blue-400 h-dvh" id="mainscreen">
             <div className="mt-44">
                 <div className="w-96 mt-28 ml-auto mr-auto mb-10">
-                    <img src={IconAuszahlungNichtErfolgreich} style={{width: '150px', height: '150px', marginLeft: "130px"}}
+                    <PiWarningOctagonFill style={{color: "rgba(184,43,17,0.93)", width: '150px', height: '150px', marginLeft: "130px"}}
                          alt="Geld einzahlen"/>
                 </div>
                 <div className="text-lg w-fit ml-auto mr-auto mt-30">

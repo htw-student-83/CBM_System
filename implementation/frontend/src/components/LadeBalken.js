@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../components_css/circularLoader.css';
 import {useLocation, useNavigate} from "react-router-dom";
 
@@ -9,12 +9,16 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
     const location = useLocation();
 
     //auf alle Zustandsdaten, die beim Navigieren übergeben wurden, zugreifen.
-    const fullMessage = location.state?.message;
-    //const message = location.state?.message.match(/\d+/)  || 'Keine Nachricht verfügbar';
+    const messageFromServer = location.state?.message;
+    const ersteZweiWoerter = messageFromServer.split(" ").slice(0, 2).join(" ");
+
     useEffect(() => {
-        // setTimeout im useEffect, um den Timeout nur einmal zu setzen
         const timeoutId = setTimeout(() => {
-            navigate('/cashbox/prozess_erfolgreich', { state: { message: fullMessage }});
+            if(ersteZweiWoerter !== "Dieser Betrag"){
+                navigate(`/cashbox/prozess_erfolgreich`, { state: { message: messageFromServer }});
+            }else{
+                navigate(`/cashbox/prozess_nicht_erfolgreich`, { state: { message: messageFromServer }});
+            }
         }, 5000);
 
         // Bereinigung des Timeout, falls die Komponente vorher entfernt wird

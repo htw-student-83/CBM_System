@@ -49,22 +49,27 @@ const payment = async (req, res)=> {
 const payout = async (req, res)=> {
 
     const { neuerAuszahlungsbetrag } = req.body;
+    console.log("Server bekommt folgenden Wert übergeben: " + neuerAuszahlungsbetrag)
 
     //change the type of variable, which was revieved
-    const gewandelterAuszahlungsbetrag = Number.parseFloat(neuerAuszahlungsbetrag);
+    const gewandelterAuszahlungsbetrag = Number.parseInt(neuerAuszahlungsbetrag);
 
     //change the type of variable, which was loade from the db
     const cash = await Cash.findOne({});
     const savedValue = Number.parseFloat(cash.kassenstand);
 
+    if(gewandelterAuszahlungsbetrag > savedValue){
+        return res.status(200).json({msg: "Dieser Betrag ist nicht in der Kasse vorhanden."});
+    }
+
     if(savedValue === 0 || savedValue < 0){
-        return res.status(400).json({msg: "In der Kasse ist kein Geld mehr."});
+        return res.status(200).json({msg: "Die Kasse ist leer."});
     }
 
     const calculateNewCashStand = savedValue - gewandelterAuszahlungsbetrag;
 
     if(calculateNewCashStand === 0 || calculateNewCashStand < 0){
-        return res.status(400).json({msg: "Achtung: Für die nächste Auszahlung ist nicht mehr genug Geld in der Kasse."});
+        return res.status(200).json({msg: "Achtung: Für die nächste Auszahlung ist nicht mehr genug Geld in der Kasse."});
     }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
