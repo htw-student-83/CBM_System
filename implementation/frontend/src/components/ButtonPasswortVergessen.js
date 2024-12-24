@@ -52,7 +52,7 @@ const ButtonPasswortVergessen = ({ mobile }) => {
             <button
                 className="w-full h-fit bg-gray-300 p-2 mt-5 text-base font-bold hover:rounded-3xl hover:bg-green-300"
                 onClick={handlePasswordForgot}>
-                Senden
+                senden
             </button>
 
             <div>

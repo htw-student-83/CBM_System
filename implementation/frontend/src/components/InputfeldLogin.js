@@ -109,8 +109,7 @@ const InputfeldLogin = () => {
             </form>
 
             <button
-                className="w-full h-fit bg-orange-300 p-2 text-lg mt-3 font-bold hover:rounded-3xl hover:bg-orange-300"
-
+                className="w-full h-fit bg-orange-300 p-2 text-base mt-3 font-bold hover:rounded-3xl hover:bg-orange-300"
                 onClick={(e) => handelInputLogin(e)}>Login
             </button>
 

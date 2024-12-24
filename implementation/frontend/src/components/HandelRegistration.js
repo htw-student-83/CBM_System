@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { FaCashRegister } from "react-icons/fa6";
-import Registration_Success from "../components/registration_successfully";
+import Registration_Success from "./Registration_successfully";
 import '../components_css/animationToRight.css'
 import axios from 'axios'
-import Registration_Failed from "../components/registration_failed";
-import mobilecheck from '../components/mobileCheck'
-import namecheck from '../components/nameCheck'
+import Registration_failed from "./Registration_failed";
+import mobilecheck from './MobileCheck'
+import namecheck from './NameCheck'
 import LabelNameRegistration from "./LabelNameRegistration";
 import LabelVornameRegistration from "./LabelVornameRegistration";
 import LabelMobileRegistration from "./LabelMobileRegistration";
@@ -221,7 +220,7 @@ export default function HandelRegistrierung(){
             <div>
                 {registrierungFailed && (
                     <div className="componentFromLeftToRight">
-                        <Registration_Failed error={error}/>
+                        <Registration_failed error={error}/>
                     </div>
                 )}
             </div>
