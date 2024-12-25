@@ -21,6 +21,10 @@ app.use('/api/user', userRoutes);
 //API for cash routes
 app.use('/api/cash', cashRoutes);
 
+app.get('/', (req, res) => {
+    res.send('Server läuft!');
+});
+
 app.listen(4000, () =>{
     connectDB();
     console.log(`Server stated on http://localhost:${PORT}/api`);
