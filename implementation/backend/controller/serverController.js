@@ -27,25 +27,27 @@ const checkTCPServer = async (req, res) => {
 
     const socket = new net.Socket();
 
-    socket.setTimeout(5000); // Timeout von 5 Sekunden für den Verbindungsaufbau
+    socket.setTimeout(5000);
 
     socket.connect(port, host, () => {
-        return res.sendStatus(200);
+        console.log('Verbindung erfolgreich');
+        res.sendStatus(200);
     });
-
-    // Fehlerbehandlung
+    /*
     socket.on('error', (err) => {
         console.error('Fehler bei der Verbindung:', err);
-        res.status(500).json({ message: 'Verbindungsfehler' });  // Fehlerantwort an den Client
-        socket.destroy();  // Verbindungsfehler, also Verbindung schließen
+        res.status(500).json({ message: 'Verbindungsfehler' });
+        socket.destroy();
     });
 
-    // Timeout-Fehlerbehandlung
     socket.on('timeout', () => {
         console.error('Verbindung timeout');
-        res.status(408).json({ message: 'Verbindung timed out' });  // Timeout-Antwort an den Client
-        socket.destroy();  // Timeout, also Verbindung schließen
+        res.status(408).json({ message: 'Verbindung timed out' });
+        socket.destroy();
     });
+
+
+     */
 };
 
 export default {
