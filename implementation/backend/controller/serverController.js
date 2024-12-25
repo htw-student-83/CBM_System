@@ -1,6 +1,6 @@
 import net from "net";
 
-const host = '192.168.137.1';
+const host = '192.168.178.23';
 const port = 4000;// Ersetze dies mit der Adresse des Servers // Ersetze dies mit dem Port, den du überprüfen möchtest
 
 
@@ -39,7 +39,7 @@ const checkTCPServer = async (req, res) => {
             console.error('Verbindung timeout');
             res.status(408).json({message: 'Verbindung timed out'}); // Timeout-Antwort an den Client
         });
-
+        socket.end()
     });
 }
 
