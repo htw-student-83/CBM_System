@@ -30,8 +30,7 @@ const checkTCPServer = async (req, res) => {
     socket.setTimeout(5000); // Timeout von 5 Sekunden für den Verbindungsaufbau
 
     socket.connect(port, host, () => {
-        console.log('Verbindung erfolgreich hergestellt');
-        // Hier kannst du zusätzliche Logik einfügen, wenn die Verbindung erfolgreich ist.
+        return res.sendStatus(200);
     });
 
     // Fehlerbehandlung
@@ -46,12 +45,6 @@ const checkTCPServer = async (req, res) => {
         console.error('Verbindung timeout');
         res.status(408).json({ message: 'Verbindung timed out' });  // Timeout-Antwort an den Client
         socket.destroy();  // Timeout, also Verbindung schließen
-    });
-
-    // Nachdem du die Verbindung geprüft hast, solltest du sie schließen
-    socket.on('end', () => {
-        console.log('Verbindung geschlossen');
-        socket.destroy();  // Schließe den Socket
     });
 };
 
