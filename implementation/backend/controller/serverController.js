@@ -15,42 +15,13 @@ const checkLocalServer = async (req, res) => {
 }
 
 
-/**
- *
- * @param req
- * @param res
- * @returns {Promise<void>}
- */
-
-const checkTCPServer = async (req, res) => {
-    console.log('Funktion aufgerufen');
-
-    const socket = new net.Socket();
-
-    socket.setTimeout(5000);
-
-    socket.connect(port, host, () => {
-        console.log('Verbindung erfolgreich');
-        res.sendStatus(200);
+const checkTCPConnection = async (req, res) => {
+    net.createConnection({ port, host}, () => {
+        return res.sendStatus(200);
     });
-    /*
-    socket.on('error', (err) => {
-        console.error('Fehler bei der Verbindung:', err);
-        res.status(500).json({ message: 'Verbindungsfehler' });
-        socket.destroy();
-    });
-
-    socket.on('timeout', () => {
-        console.error('Verbindung timeout');
-        res.status(408).json({ message: 'Verbindung timed out' });
-        socket.destroy();
-    });
-
-
-     */
 };
 
 export default {
     checkLocalServer,
-    checkTCPServer,
+    checkTCPConnection,
 }
