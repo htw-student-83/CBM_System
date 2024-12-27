@@ -1,7 +1,10 @@
-import { useNavigate } from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import axios from "axios";
 
 const Lokal_Connection = () => {
+
+    const location = useLocation();
+    const localAddress = location.state?.message;
 
     const navigate = useNavigate();
     const goToServer_Connection = () =>{
@@ -10,10 +13,10 @@ const Lokal_Connection = () => {
 
     const checkLokalerServer = async () => {
         try {
-           await axios.get(`http://localhost:4000/api/server/localserver`)
+           await axios.get(`http://${localAddress}:4000/api/server/localserver`)
                .then((response) => {
                    if(response.status === 200){
-                       navigate('/cashbox/login');
+                       navigate('/cashbox/login',{ state: { message: localAddress }});
                    }
                })
                .catch((error) => {

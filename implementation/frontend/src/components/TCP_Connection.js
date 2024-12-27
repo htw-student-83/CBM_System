@@ -1,8 +1,9 @@
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const TCP_Connection = () => {
 
+    const location = useLocation();
     const ipServer = location.state?.message;
 
     const navigate = useNavigate();

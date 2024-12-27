@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import LoginNegativ from "./Service_failed";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import IconInnerhalbDesInputfeldesLogin from "./IconInnerhalbDesInputfeldesLogin";
 
 const InputfeldLogin = () => {
@@ -12,7 +12,10 @@ const InputfeldLogin = () => {
     const[loginFailed, setLoginFailed] = useState(false);
     const[content_error, setContentError] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+
     const verbindungstyp = location.state?.message;
+
     /**
      * handle the input of an user after a click
      * @param e
@@ -20,7 +23,7 @@ const InputfeldLogin = () => {
     const handelInputLogin = () => {
         if (!password) {
             setContentError("The input filed doesn't keep empty.");
-            setLoginFailed(true);me
+            setLoginFailed(true);
         }else{
             setLoading(true);
             axios.get(`http://${verbindungstyp}:4000/api/user/${password}`)
