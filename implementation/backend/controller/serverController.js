@@ -1,5 +1,6 @@
 import express from 'express';
 import net from 'net';
+import {connectDB} from "../db.js";
 
 const app = express();
 const HOST = '192.168.178.23';
@@ -22,10 +23,8 @@ const checkLocalServer = async (req, res) => {
  * @param res
  */
 const startTCPServer = (req, res) => {
-    // Versuchen, eine Verbindung zum TCP-Server herzustellen
-    const socket = net.createConnection({ port: PORT, host: HOST }, () => {
-        res.status(200).send('TCP-Verbindung erfolgreich!');
-        socket.end();  // Verbindung schließen
+      const socket = net.createConnection({ port: PORT, host: HOST }, () => {
+        return res.sendStatus(200);
     });
 
     // Wenn ein Fehler auftritt, sende Status 500 (Fehler) zurück
@@ -36,7 +35,8 @@ const startTCPServer = (req, res) => {
 };
 
 app.listen(PORT, () => {
-    console.log(`HTTP-Server läuft auf http://localhost:${PORT}`);
+    connectDB();
+    console.log(`HTTP-Server läuft auf http://${HOST}:${PORT}`);
 });
 
 export default {

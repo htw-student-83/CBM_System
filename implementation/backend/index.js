@@ -13,31 +13,10 @@ app.use(express.json());
 app.use(cors());
 
 // TCP API-Rout for server connection
-app.use('http://192.168.178.23:4000/api/server', serverRoutes);
-
-// TCP API-Rout for user methods
-app.use('http://192.168.178.23:4000/api/user', userRoutes);
-
-// TCP API-Rout for cash methods
-app.use('http://192.168.178.23:4000/api/cash', cashRoutes);
+app.use('/api/server', serverRoutes);
 
 // local API-Rout for user
 app.use('/api/user', userRoutes);
 
 // API-Rout for cash
 app.use('/api/cash', cashRoutes);
-
-// Server für lokale und externe Verbindungen starten
-const startServer = (port, host) => {
-    app.listen(port, host, () => {
-        console.log(`🚀 Server läuft auf http://${host}:${port}`);
-        connectDB();
-    }).on('error', (err) => {
-        console.error(`❌ Fehler beim Start auf ${host}:${port} - ${err.message}`);
-    });
-};
-
-// Starte Server auf localhost und im Netzwerk
-const port = PORT || 4000;
-//startServer(port, 'localhost');  // Lokal
-//startServer(port, '0.0.0.0');    // Netzwerk (externe IP)
