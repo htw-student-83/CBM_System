@@ -10,11 +10,17 @@ const TCP_Connection = () => {
 
     const connectToTCPServer = async () => {
          try {
-            const response = await axios.get(`http://192.168.178.23:4000/api/server/tcpserver`);
-            if(response.status === 200){
-                console.log('Verbindung erfolgreich');
-                navigate('/cashbox/login');
-            }
+            await axios.get(`http://192.168.178.23:5000/api/server/tcpserver`)
+                .then((response) => {
+                    if(response.status === 200){
+                        navigate('/cashbox/login');
+                    }
+             }).catch((err) => {
+                    setTimeout(() => {
+                        navigate('/cashbox/serverFail');
+                    }, 3000)
+
+                })
         } catch (error) {
             console.error(error);
         }
