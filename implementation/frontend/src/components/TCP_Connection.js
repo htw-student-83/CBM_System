@@ -3,6 +3,8 @@ import axios from "axios";
 
 const TCP_Connection = () => {
 
+    const ipServer = location.state?.message;
+
     const navigate = useNavigate();
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
@@ -10,10 +12,10 @@ const TCP_Connection = () => {
 
     const connectToTCPServer = async () => {
          try {
-            await axios.get(`http://192.168.178.23:5000/api/server/tcpserver`)
+            await axios.get(`http://${ipServer}:4000/api/server/tcpserver`)
                 .then((response) => {
                     if(response.status === 200){
-                        navigate('/cashbox/login');
+                        navigate('/cashbox/login',{ state: { message: ipServer }});
                     }
              }).catch((err) => {
                     setTimeout(() => {

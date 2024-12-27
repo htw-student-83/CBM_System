@@ -12,18 +12,18 @@ const InputfeldLogin = () => {
     const[loginFailed, setLoginFailed] = useState(false);
     const[content_error, setContentError] = useState("");
     const navigate = useNavigate();
-
+    const verbindungstyp = location.state?.message;
     /**
      * handle the input of an user after a click
      * @param e
      */
-    const handelInputLogin = (e) => {
+    const handelInputLogin = () => {
         if (!password) {
             setContentError("The input filed doesn't keep empty.");
-            setLoginFailed(true);
+            setLoginFailed(true);me
         }else{
             setLoading(true);
-            axios.get(`http://localhost:4000/api/user/${password}`)
+            axios.get(`http://${verbindungstyp}:4000/api/user/${password}`)
                 .then((response) => {
                     setUser(response.data);
                     makeUserLogged(response.data._id);

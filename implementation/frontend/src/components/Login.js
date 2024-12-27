@@ -11,6 +11,8 @@ import FragePasswortVergessen from "./FragePasswortVergessen";
  */
 export default function Login(){
 
+    const verbindungsart = location.state?.message;
+
     return (
 
         <div className="bg-sky-300 h-dvh pt-40">
@@ -21,7 +23,7 @@ export default function Login(){
 
                 <div className="w-full h-fit pt-20">
                     <TopicLogin/>
-                    <InputfeldLogin/>
+                    <InputfeldLogin message ={verbindungsart}/>
                 </div>
 
                 <div className="mt-5 italic">

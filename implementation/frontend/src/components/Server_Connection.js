@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 
 const Server_Connection = () => {
+    const ip_address = "192.168.178.23"
     const navigate = useNavigate();
 
     const goToTCPServer = () =>{
-        navigate('/cashbox/serverArt/tcp');
+        console.log("Übertragene IP: " + ip_address)
+        navigate('/cashbox/serverArt/tcp', { state: { message: ip_address }});
     }
 
     const goToLocalServer = () =>{
