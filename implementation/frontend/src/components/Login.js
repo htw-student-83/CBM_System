@@ -4,6 +4,7 @@ import TopicLogin from "./TopicLogin";
 import InputfeldLogin from "./InputfeldLogin";
 import FrageNochKeinAccount from "./FrageNochKeinAccount";
 import FragePasswortVergessen from "./FragePasswortVergessen";
+import {useLocation} from "react-router-dom";
 
 /**
  * Represent the Login of the system
@@ -11,6 +12,7 @@ import FragePasswortVergessen from "./FragePasswortVergessen";
  */
 export default function Login(){
 
+    const location = useLocation();
     const verbindungsart = location.state?.message;
 
     return (

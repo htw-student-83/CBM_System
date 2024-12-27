@@ -17,10 +17,14 @@ const checkLocalServer = async (req, res) => {
  * @param res
  */
 const startTCPServer = (req, res) => {
-    const HOST = '192.168.178.23';
-    const PORT = 5000;
+//'192.168.178.23'
+    //4000
+
+    const HOST = req.socket.remoteAddress;
+    const PORT = req.socket.remotePort;
 
     const socket = net.createConnection({ port: PORT, host: HOST }, () => {
+        console.log("-Verbindung steht-")
         return res.status(200).send({msg: "TCP hat geklappt"});
     });
 
