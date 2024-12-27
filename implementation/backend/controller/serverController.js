@@ -16,8 +16,12 @@ const checkLocalServer = async (req, res) => {
 
 
 const checkTCPConnection = async (req, res) => {
-    net.createConnection({ port, host}, () => {
+    const socket = net.createConnection({ port, host}, () => {
         return res.sendStatus(200);
+    });
+
+    socket.on('error', (err) => {
+        res.sendStatus(500);  // Fehlerbehandlung
     });
 };
 
