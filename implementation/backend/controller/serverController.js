@@ -34,11 +34,6 @@ const startTCPServer = (req, res) => {
     });
 };
 
-app.listen(PORT, () => {
-    connectDB();
-    console.log(`HTTP-Server läuft auf http://${HOST}:${PORT}`);
-});
-
 export default {
     checkLocalServer,
     startTCPServer
