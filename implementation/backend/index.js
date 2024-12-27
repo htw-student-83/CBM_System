@@ -12,15 +12,20 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// API-Routen
-app.use('/api/server', serverRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/cash', cashRoutes);
+// TCP API-Rout for server connection
+app.use('192.168.178.23:4000/api/server', serverRoutes);
 
-// Testroute
-app.get('/', (req, res) => {
-    res.send('Server läuft!');
-});
+// TCP API-Rout for user methods
+app.use('192.168.178.23:4000/api/user', userRoutes);
+
+// TCP API-Rout for cash methods
+app.use('192.168.178.23:4000/api/cash', cashRoutes);
+
+// local API-Rout for user
+app.use('/api/user', userRoutes);
+
+// API-Rout for cash
+app.use('/api/cash', cashRoutes);
 
 // Server für lokale und externe Verbindungen starten
 const startServer = (port, host) => {
@@ -34,5 +39,5 @@ const startServer = (port, host) => {
 
 // Starte Server auf localhost und im Netzwerk
 const port = PORT || 4000;
-startServer(port, 'localhost');  // Lokal
-startServer(port, '0.0.0.0');    // Netzwerk (externe IP)
+//startServer(port, 'localhost');  // Lokal
+//startServer(port, '0.0.0.0');    // Netzwerk (externe IP)
