@@ -1,8 +1,5 @@
-import express from 'express';
 import net from 'net';
-import {connectDB} from "../db.js";
 
-const app = express();
 const HOST = '192.168.178.23';
 const PORT = 4000;
 
@@ -13,7 +10,7 @@ const PORT = 4000;
  * @returns {Promise<*>}
  */
 const checkLocalServer = async (req, res) => {
-    return res.sendStatus(200);
+    return res.status(200).send({msg:"hat geklappt"});
 }
 
 
@@ -24,7 +21,7 @@ const checkLocalServer = async (req, res) => {
  */
 const startTCPServer = (req, res) => {
       const socket = net.createConnection({ port: PORT, host: HOST }, () => {
-        return res.sendStatus(200);
+        return res.status(200).send({msg: "TCP hat geklappt"});
     });
 
     // Wenn ein Fehler auftritt, sende Status 500 (Fehler) zurück
