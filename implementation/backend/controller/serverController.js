@@ -39,7 +39,6 @@ app.listen(PORT, () => {
     console.log(`HTTP-Server läuft auf http://localhost:${PORT}`);
 });
 
-
 export default {
     checkLocalServer,
     startTCPServer

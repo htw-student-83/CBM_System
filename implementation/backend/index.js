@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(cors());
 
 // TCP API-Rout for server connection
-app.use('192.168.178.23:4000/api/server', serverRoutes);
+app.use('http://192.168.178.23:4000/api/server', serverRoutes);
 
 // TCP API-Rout for user methods
-app.use('192.168.178.23:4000/api/user', userRoutes);
+app.use('http://192.168.178.23:4000/api/user', userRoutes);
 
 // TCP API-Rout for cash methods
-app.use('192.168.178.23:4000/api/cash', cashRoutes);
+app.use('http://192.168.178.23:4000/api/cash', cashRoutes);
 
 // local API-Rout for user
 app.use('/api/user', userRoutes);
