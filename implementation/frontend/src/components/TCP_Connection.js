@@ -10,7 +10,7 @@ const TCP_Connection = () => {
 
     const connectToTCPServer = async () => {
          try {
-            const response = await axios.get(`http://localhost:4000/api/server/tcpserver/status`);
+            const response = await axios.get(`http://192.168.178.23:4000/api/server/tcpserver/status`);
             if(response.status === 200){
                 navigate('/cashbox/login');
             }
