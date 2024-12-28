@@ -1,29 +1,25 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import CrySmily from "../pictures/saidEmoji.jpg";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {connectToTCPServer} from "./Frontend_RemoteServerVerbindung";
 
 const ServerDown = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-
     // State für IP-Adresse
-    const [ip, setIp] = useState("");
-
-    useEffect(() => {
-        const ipServer = location.state?.message;
-        if (ipServer) {
-            setIp(ipServer);
-        }
-    }, [location.state]);
+    const [server, setServer] = useState(location.state?.message);
 
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
     }
 
     const connectToRemoteServer = () =>{
-        connectToTCPServer(ip, navigate);
+        if(server === "localhost"){
+            console.log("Der locale Server wird angesprochen.");
+        }else{
+            connectToTCPServer(server, navigate);
+        }
     }
 
     return(
