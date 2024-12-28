@@ -17,6 +17,7 @@ const ServerDown = () => {
 
     const connectToRemoteServer = () =>{
         if(server === "localhost"){
+            console.log("localhost wurde erkannt.")
             connectToLocalhost(server, navigate);
         }else{
             connectToTCPServer(server, navigate);
