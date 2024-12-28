@@ -2,13 +2,16 @@ import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const TCP_Connection = () => {
-
     const location = useLocation();
     const ipServer = location.state?.message;
-
     const navigate = useNavigate();
+
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
+    }
+
+    const handleRemoteServer = () => {
+        connectToTCPServer(ipServer, navigate);
     }
 
     const connectToTCPServer = async () => {
@@ -20,7 +23,7 @@ const TCP_Connection = () => {
                     }
              }).catch((err) => {
                     setTimeout(() => {
-                        navigate('/cashbox/serverFail');
+                        navigate('/cashbox/serverFail',{ state: { message: ipServer }});
                     }, 3000)
 
                 })
@@ -37,7 +40,7 @@ const TCP_Connection = () => {
                     <h1 className="text-xl text-center">Starten Sie bitte den Server auf dem anderen Rechner...</h1>
                     <div className="flex flex-grow mx-20">
                         <button id='ok' className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-2/6 hover:bg-emerald-200 border-b-emerald-200"
-                            onClick={connectToTCPServer}
+                            onClick={handleRemoteServer}
                         >ok
                         </button>
                         <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-3/5 hover:bg-neutral-200 border-b-emerald-200"
