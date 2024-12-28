@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from 'react-router-dom'
-import axios from "axios";
+import {connectToLocalhost} from "./Frontend_localServer";
 
 const Lokal_Connection = () => {
 
@@ -11,20 +11,8 @@ const Lokal_Connection = () => {
         navigate('/cashbox/serverArt/');
     }
 
-    const checkLokalerServer = async () => {
-        try {
-           await axios.get(`http://${localAddress}:4000/api/server/localserver`)
-               .then((response) => {
-                   if(response.status === 200){
-                       navigate('/cashbox/login',{ state: { message: localAddress }});
-                   }
-               })
-               .catch((error) => {
-                   navigate('/cashbox/serverFail',{ state: { message: localAddress }});
-               });
-        } catch (error) {
-            console.error(error);
-        }
+    const handleLocalhost = () => {
+        connectToLocalhost(localAddress, navigate);
     }
 
     return(
@@ -34,7 +22,7 @@ const Lokal_Connection = () => {
                     <h1 className="text-xl text-center">Starte bitte den Server.</h1>
                     <div className="flex flex-grow mx-20">
                         <button id='ok' className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-36 hover:bg-emerald-200 border-b-emerald-200"
-                           onClick={checkLokalerServer}
+                           onClick={handleLocalhost}
                         >ok
                         </button>
                         <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-36 hover:bg-neutral-200 border-b-emerald-200"

@@ -2,6 +2,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import CrySmily from "../pictures/saidEmoji.jpg";
 import React, {useState} from "react";
 import {connectToTCPServer} from "./Frontend_RemoteServerVerbindung";
+import {connectToLocalhost} from "./Frontend_localServer";
 
 const ServerDown = () => {
 
@@ -16,7 +17,7 @@ const ServerDown = () => {
 
     const connectToRemoteServer = () =>{
         if(server === "localhost"){
-            console.log("Der locale Server wird angesprochen.");
+            connectToLocalhost(server, navigate);
         }else{
             connectToTCPServer(server, navigate);
         }
