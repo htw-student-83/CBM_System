@@ -16,7 +16,10 @@ const ButtonPasswortVergessen = ({ mobile, message }) => {
         if(!mobile){
             alert("Du hast keine Eingabe getätigt.")
             navigate(`/cashbox/user/passwordforgot`)
-        }else{
+        }else if(!mobile_contains_only_numbers(mobile)){
+            alert("Deine Eingabe ist ungültig.")
+            navigate(`/cashbox/user/passwordforgot`)
+        }else {
             axios.get(`http://${message}:4000/api/user/passwordforgot/${mobile}`)
                 .then((response) => {
                     handleServerResponse(response.data.password)
@@ -25,6 +28,15 @@ const ButtonPasswortVergessen = ({ mobile, message }) => {
                     handleFailedProcess(error)
                 })
         }
+    }
+
+    /**
+     * check a password has only numbers
+     * @param password
+     * @returns true if the password is only about numbers otherwise false
+     */
+    const mobile_contains_only_numbers = (mobile) => {
+        return !isNaN(mobile);
     }
 
     /**
