@@ -12,6 +12,7 @@ const Lokal_Connection = () => {
     }
 
     const handleLocalhost = () => {
+        console.log("Wert Lokal_Connection: " + localAddress)
         connectToLocalhost(localAddress, navigate);
     }
 

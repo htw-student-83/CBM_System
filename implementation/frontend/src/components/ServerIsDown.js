@@ -9,7 +9,7 @@ const ServerDown = () => {
     const navigate = useNavigate();
     const location = useLocation();
     // State für IP-Adresse
-    const [server, setServer] = useState(location.state?.message);
+    const server = location.state?.message;
 
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');

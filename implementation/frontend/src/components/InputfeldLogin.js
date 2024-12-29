@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import LoginNegativ from "./Service_failed";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -13,8 +13,16 @@ const InputfeldLogin = () => {
     const[content_error, setContentError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
 
-    const verbindungstyp = location.state?.message;
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
 
     /**
      * handle the input of an user after a click

@@ -14,7 +14,6 @@ export default function Login(){
 
     const location = useLocation();
     const verbindungsart = location.state?.message;
-
     return (
 
         <div className="bg-sky-300 h-dvh pt-40">
