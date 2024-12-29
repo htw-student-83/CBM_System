@@ -16,10 +16,12 @@ const ServerDown = () => {
     }
 
     const connectToRemoteServer = () =>{
+        console.log("Wert beim Aufruf der Funktion: " + server)
         if(server === "localhost"){
-            console.log("localhost wurde erkannt.")
+            console.log("Wert: " + server)
             connectToLocalhost(server, navigate);
         }else{
+            console.log("Wert: " + server)
             connectToTCPServer(server, navigate);
         }
     }

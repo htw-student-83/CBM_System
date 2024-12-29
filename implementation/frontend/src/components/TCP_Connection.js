@@ -1,5 +1,4 @@
 import {useLocation, useNavigate} from "react-router-dom";
-
 import {connectToTCPServer} from "./Frontend_RemoteServerVerbindung";
 
 const TCP_Connection = () => {

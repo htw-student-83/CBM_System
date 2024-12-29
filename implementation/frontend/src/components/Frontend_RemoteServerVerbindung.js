@@ -10,7 +10,7 @@ export const connectToTCPServer = async (ipServer, navigate) => {
                 }
             }).catch((err) => {
                 setTimeout(() => {
-                    navigate('/cashbox/serverFail');}, 3000)
+                    navigate('/cashbox/serverFail',{ state: { message: ipServer }});}, 3000)
             })
     }catch (error) {
         console.error("Error connecting to server:", error);
