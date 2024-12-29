@@ -29,7 +29,7 @@ export default function Login(){
 
                 <div className="mt-5 italic">
                     <FrageNochKeinAccount/>
-                    <FragePasswortVergessen/>
+                    <FragePasswortVergessen message={verbindungsart}/>
                 </div>
 
             </div>

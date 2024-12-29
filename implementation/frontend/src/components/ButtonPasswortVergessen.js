@@ -3,7 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Services_Fail from "./Service_failed";
 
-const ButtonPasswortVergessen = ({ mobile }) => {
+const ButtonPasswortVergessen = ({ mobile, message }) => {
 
     const[processFailed, setprocessFailed] = useState(false);
     const[error, setError] = useState("");
@@ -17,7 +17,7 @@ const ButtonPasswortVergessen = ({ mobile }) => {
             alert("Du hast keine Eingabe getätigt.")
             navigate(`/cashbox/user/passwordforgot`)
         }else{
-            axios.get(`http://localhost:4000/api/user/passwordforgot/${mobile}`)
+            axios.get(`http://${message}:4000/api/user/passwordforgot/${mobile}`)
                 .then((response) => {
                     handleServerResponse(response.data.password)
                 })
