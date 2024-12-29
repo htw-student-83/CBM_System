@@ -1,5 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
+
+import {connectToTCPServer} from "./Frontend_RemoteServerVerbindung";
 
 const TCP_Connection = () => {
     const location = useLocation();
@@ -12,25 +13,6 @@ const TCP_Connection = () => {
 
     const handleRemoteServer = () => {
         connectToTCPServer(ipServer, navigate);
-    }
-
-    const connectToTCPServer = async () => {
-         try {
-            await axios.get(`http://${ipServer}:4000/api/server/tcpserver`)
-                .then((response) => {
-                    if(response.status === 200){
-                        navigate('/cashbox/login',{ state: { message: ipServer }});
-                    }
-             }).catch((err) => {
-                    setTimeout(() => {
-                        navigate('/cashbox/serverFail',{ state: { message: ipServer }});
-                    }, 3000)
-
-                })
-        } catch (error) {
-            console.error(error);
-        }
-
     }
 
     return(
