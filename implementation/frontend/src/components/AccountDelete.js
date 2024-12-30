@@ -1,11 +1,26 @@
-import { useNavigate } from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import axios from "axios";
+import {useEffect, useState} from "react";
 
 const AccountDelete = () => {
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
+
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
+
     const deleteAccount = async() =>{
         try {
-            await axios.delete(`http://localhost:4000/api/user`)
+            await axios.delete(`http://${verbindungstyp}:4000/api/user`)
                 .then(()=>{
                     navigate('/cashbox/login/');
                 })

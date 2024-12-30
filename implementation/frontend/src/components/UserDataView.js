@@ -1,6 +1,6 @@
 import IconUser from "../pictures/user2.png"
 import "../components_css/einzahlung.css"
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -9,10 +9,21 @@ function User() {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
 
+    const location = useLocation();
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
+
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
+
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/user/userdetails/profil`)
+            .get(`http://${verbindungstyp}:4000/api/user/userdetails/profil`)
             .then((response) => {
                 if (response) {
                     console.log(response.data)
