@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 
@@ -8,12 +8,23 @@ const SicherheitsabfrageAuszahlung = () => {
     const location = useLocation();
     const message = location.state?.message  || 'Keine Nachricht verfügbar';
 
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
+
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
+
     const goToPayout = async () => {
         navigate(`/cashbox/auszahlung`);
     }
 
     function handelAuszahlung() {
-            axios.patch(`http://localhost:4000/api/cash/payout/`,
+            axios.patch(`http://${verbindungstyp}:4000/api/cash/payout/`,
                 { neuerAuszahlungsbetrag: message },
                 {
                     headers: { 'Content-Type': 'application/json' },

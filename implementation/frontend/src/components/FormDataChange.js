@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../components_css/datachange.css"
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 function DataChange() {
+
+    const navigate = useNavigate();
+    const [isModalOpen, setModalOpen] = useState(true);
+    const [selectedOption, setSelectedOption] = useState("Nachname");
+    const [inputValue, setInputValue] = useState("");
+
+    const location = useLocation();
+
     const [updateData, setUpdateData] = useState({
         nachname: '',
         mobile: '',
     });
 
-    const [isModalOpen, setModalOpen] = useState(true);
-    const [selectedOption, setSelectedOption] = useState("Nachname");
-    const [inputValue, setInputValue] = useState("");
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
 
     const handleCancel = () => {
         setModalOpen(false); // Formular nach dem Abbrechen schließen
@@ -55,7 +68,7 @@ function DataChange() {
 
         try {
 
-            await axios.patch(`http://localhost:4000/api/user/change/profil`, dataToUpdate,{
+            await axios.patch(`http://${verbindungstyp}:4000/api/user/change/profil`, dataToUpdate,{
                 headers: {
                     'Content-Type': 'application/json',
                 }

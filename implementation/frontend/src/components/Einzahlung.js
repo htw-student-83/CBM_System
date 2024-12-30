@@ -1,11 +1,12 @@
 import IconEinzahlung from "../pictures/einzahlung.png"
 import "../components_css/einzahlung.css"
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 
 function Einzahlung() {
     const [neuerbetrag, setneuerBetrag] = useState("");
     const navigate = useNavigate();
+
 
     /**
      * check, is the message only about numbers
