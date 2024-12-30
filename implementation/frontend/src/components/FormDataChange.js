@@ -51,18 +51,16 @@ function DataChange() {
 
 
     const handleSubmit = async (event) => {
-
         event.preventDefault();
-
         const dataToUpdate = {};
         // Erstellen eines Objekts mit nur den geänderten Feldern
-
-        if (selectedOption === "Nachname" && updateData.nachname.trim()) {
+        if(!inputValue){
+            alert("Du hast keine Eingabe gemacht.")
+        }else if (selectedOption === "Nachname" && updateData.nachname.trim()) {
             dataToUpdate.nachname = updateData.nachname;
-        } else if (selectedOption === "Mobile" && updateData.mobile.trim()) {
+        }else if (selectedOption === "Mobile" && updateData.mobile.trim()) {
             dataToUpdate.mobile = updateData.mobile;
-        } else {
-            console.error("Kein gültiger Wert zum Aktualisieren angegeben.");
+        }else {
             return; // Abbrechen, wenn kein gültiger Wert vorhanden ist
         }
 
@@ -74,6 +72,7 @@ function DataChange() {
                 }
             })
                 .then(()=>{
+                    setModalOpen(false);
                     navigate('/cashbox/hauptmenu');
                 })
                 .catch((error) => {

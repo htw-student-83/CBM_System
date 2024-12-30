@@ -49,7 +49,6 @@ const payment = async (req, res)=> {
 const payout = async (req, res)=> {
 
     const { neuerAuszahlungsbetrag } = req.body;
-    console.log("Server bekommt folgenden Wert übergeben: " + neuerAuszahlungsbetrag)
 
     //change the type of variable, which was revieved
     const gewandelterAuszahlungsbetrag = Number.parseInt(neuerAuszahlungsbetrag);
