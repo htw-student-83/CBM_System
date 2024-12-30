@@ -1,5 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {connectToTCPServer} from "./Frontend_RemoteServerVerbindung";
+import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
 
 const TCP_Connection = () => {
     const location = useLocation();
@@ -11,7 +11,7 @@ const TCP_Connection = () => {
     }
 
     const handleRemoteServer = () => {
-        connectToTCPServer(ipServer, navigate);
+        connectToRemoteServer(ipServer, navigate);
     }
 
     return(

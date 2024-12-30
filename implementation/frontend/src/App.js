@@ -28,7 +28,7 @@ function App() {
           <Routes>
             <Route path = '/' element = {<Mainpage/>}/>
             <Route path = '/cashbox/serverArt' element = {<Server_Connection/>}/>
-            <Route path = '/cashbox/serverArt/tcp' element= {<TCP_Connection/>}/>
+            <Route path = '/cashbox/serverArt/remote' element= {<TCP_Connection/>}/>
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>
             <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
             <Route path = '/cashbox/user/passwordforgot' element = {<PasswortVergessen/>}/>

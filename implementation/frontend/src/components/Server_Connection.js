@@ -5,8 +5,8 @@ const Server_Connection = () => {
     const local_address = "localhost"
     const navigate = useNavigate();
 
-    const goToTCPServer = () =>{
-        navigate('/cashbox/serverArt/tcp', { state: { message: ip_address }});
+    const goToRemoteServer = () =>{
+        navigate('/cashbox/serverArt/remote', { state: { message: ip_address }});
     }
 
     const goToLocalServer = () =>{
@@ -26,7 +26,7 @@ const Server_Connection = () => {
                         >Ja</button>
                          <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-2/6  hover:bg-amber-200 border-amber-600"
                              onClick={() => {
-                                 goToTCPServer();
+                                 goToRemoteServer();
                              }}
                         >Nein</button>
                     </div>

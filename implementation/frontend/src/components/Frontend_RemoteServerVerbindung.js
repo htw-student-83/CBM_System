@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const connectToTCPServer = async (ipServer, navigate) => {
+export const connectToRemoteServer = async (ipServer, navigate) => {
 
     try {
         await axios.get(`http://${ipServer}:4000/api/server/tcpserver`)

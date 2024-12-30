@@ -50,16 +50,32 @@ function DataChange() {
     };
 
 
+    //Für regulären Ausdruck aus min. 2. Buchstaben
+    const nameRegex = /^[A-Za-zÄÖÜäöüß]{2,}$/;
+
+    // Regex: Erlaubt + am Anfang, danach nur Zahlen, Leerzeichen oder Bindestriche
+    const phoneRegex = /^(\+?[0-9\- ]+)$/
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const dataToUpdate = {};
-        // Erstellen eines Objekts mit nur den geänderten Feldern
+        // prüft, ob überhaupt eine Eingabe getätigt wurde
         if(!inputValue){
-            alert("Du hast keine Eingabe gemacht.")
+            alert("Du hast keine Eingabe gemacht.");
         }else if (selectedOption === "Nachname" && updateData.nachname.trim()) {
-            dataToUpdate.nachname = updateData.nachname;
+            // prüft, ob es sich um einen gültigen Namen handelt
+            if (!nameRegex.test(updateData.nachname)) {
+                alert("Deine Eingabe ist ungültig.");
+            }else{
+                dataToUpdate.nachname = updateData.nachname;
+            }
         }else if (selectedOption === "Mobile" && updateData.mobile.trim()) {
-            dataToUpdate.mobile = updateData.mobile;
+            // prüft, ob überhaupt eine gültige Nummer eingegeben wurde
+            if (!phoneRegex.test(updateData.mobile)) {
+                alert("Deine Eingabe ist ungültig.");
+            }else{
+                dataToUpdate.mobile = updateData.mobile;
+            }
         }else {
             return; // Abbrechen, wenn kein gültiger Wert vorhanden ist
         }
