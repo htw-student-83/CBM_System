@@ -223,7 +223,7 @@ const checkUser = async (req, res) => {
     try {
         const user = await User.findOne({mobile: mobile});
         if(!user) {
-            return res.status(404).json({msg: "No data found."});
+            return res.status(404).send();
         }else{
             return res.status(200).json({msg: "data found."});
         }

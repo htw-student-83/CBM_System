@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Registration_Success from "./Registration_successfully";
 import '../components_css/animationToRight.css'
 import axios from 'axios'
@@ -11,7 +11,7 @@ import LabelMobileRegistration from "./LabelMobileRegistration";
 import IconNameInputfeldRegistration from "./IconNameInputfeldRegistration";
 import IconMobileInputfeldRegistration from "./IconMoibileInputfeldRegistration";
 import FrageBereitsRegistriert from "./FrageBereitsRegistriert";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import MainIcon from "./MainIcon";
 
 export default function HandelRegistrierung(){
@@ -21,6 +21,18 @@ export default function HandelRegistrierung(){
     const[registrierungFailed, setRegistrierungFailed] = useState(false);
     const[error, setError] = useState("");
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
+
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
 
     const [formData, setFormData] = useState({
         vorname: '',
@@ -64,7 +76,7 @@ export default function HandelRegistrierung(){
             };
             setFormData(updatedFormData);
             alert("Passwort: " + password);
-            axios.post('http://localhost:4000/api/user/newuser', updatedFormData,{
+            axios.post(`http://${verbindungstyp}:4000/api/user/newuser`, updatedFormData,{
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -88,7 +100,7 @@ export default function HandelRegistrierung(){
      */
     const alreadyRegistered = async (mobile) => {
         try {
-            const response = await axios.get(`http://localhost:4000/api/check/${mobile}`);
+            const response = await axios.get(`http://${verbindungstyp}:4000/api/user/check/${mobile}`);
             return response.status === 200;
         }catch (error) {
             console.log("Das ist die Antwort: ", error.response);
