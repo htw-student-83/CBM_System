@@ -20,8 +20,8 @@ const Uebersicht_AngemeldeterUser_AktuellerKassenstand = () => {
 
     return (
         <div className="flex flex-grow justify-between p-5 font-mono">
-            <ViewLogged/>
-            <Cash/>
+            <ViewLogged message={verbindungstyp}/>
+            <Cash message={verbindungstyp}/>
         </div>
     )
 }

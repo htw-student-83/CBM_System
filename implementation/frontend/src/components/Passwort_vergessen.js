@@ -14,7 +14,6 @@ export default function PasswortVergessen(){
     const location = useLocation();
 
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
 
@@ -23,8 +22,6 @@ export default function PasswortVergessen(){
             sessionStorage.setItem("verbindungstyp", verbindungstyp);
         }
     }, [verbindungstyp]);
-
-    console.log("Übertragener Wert in PasswortVergessen: " + verbindungstyp)
 
     return(
         <div className="bg-sky-300 h-dvh pt-40">

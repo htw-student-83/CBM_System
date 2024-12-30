@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 
 const NavigierenZuPasswortVergessen = ({serververbindung}) => {
-    console.log("Übertragener Wert in NavigierenZuPasswortVergessen: " + serververbindung)
+
     return (
         <Link
             to='/cashbox/user/passwordforgot/'

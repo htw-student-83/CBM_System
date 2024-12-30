@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import NavigierenZuPasswortVergessen from "./NavigierenZuPasswortVergessen";
 import {useLocation} from "react-router-dom";
 
-const FragePasswortVergessen = ({message}) => {
+const FragePasswortVergessen = () => {
 
     const location = useLocation();
 
@@ -17,8 +17,6 @@ const FragePasswortVergessen = ({message}) => {
         }
     }, [verbindungstyp]);
 
-
-    console.log("Übertragener Wert in FragePasswortVergessen: " + message)
     return (
         <p className="text-sm mt-2">
             Passwort vergessen?

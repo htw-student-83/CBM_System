@@ -1,14 +1,27 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useLocation} from "react-router-dom";
 
 function User() {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
 
+    const location = useLocation();
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        //TODO recherchieren, was sessionStorage genau ist und tut!
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
+
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
+    }, [verbindungstyp]);
+
     useEffect(() => {
         setLoading(true);
         axios
-            .get(`http://localhost:4000/api/user/userdetails/profil`)
+            .get(`http://${verbindungstyp}:4000/api/user/userdetails/profil`)
             .then((response) => {
                 if (response) {
                     setUser(response.data);
