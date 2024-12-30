@@ -26,7 +26,6 @@ const InputfeldLogin = () => {
 
     /**
      * handle the input of an user after a click
-     * @param e
      */
     const handelInputLogin = () => {
         if (!password) {
@@ -79,7 +78,7 @@ const InputfeldLogin = () => {
      *
      */
     const handleSuccessfullyLogin = () =>{
-        navigate(`/cashbox/hauptmenu`);
+        navigate(`/cashbox/hauptmenu`, {state: {message: {verbindungstyp}}});
     }
 
     /**
@@ -88,7 +87,7 @@ const InputfeldLogin = () => {
      */
     const makeUserLogged = async (id) =>{
         try {
-            await axios.patch(`http://localhost:4000/api/user/login/changeState/${id}`)
+            await axios.patch(`http://${verbindungstyp}:4000/api/user/login/changeState/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })
