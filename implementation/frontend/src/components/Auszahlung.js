@@ -9,13 +9,16 @@ function Auszahlung() {
     const navigate = useNavigate();
 
     /**
-     * check, is the message only about numbers
-     * @param str übergebener Wert
-     * @returns true, if the value is only part from numbers
+     *
+     * @param str
+     * @returns {boolean}
      */
-    function isNumeric(str) {
-        return /^[0-9]+$/.test(str);
+    function validAmoundWithAcomma(str){
+        const trimmedStr = str.trim();
+        const regex = /^[0-9]+,[0-9]+$/;
+        return regex.test(trimmedStr);
     }
+
 
     /**
      * checks the input from a logged user
@@ -25,7 +28,7 @@ function Auszahlung() {
         event.preventDefault();
         if (!neuerAuszahlungsBetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-        }else if (!isNumeric(neuerAuszahlungsBetrag)) {
+        }else if (!validAmoundWithAcomma(neuerAuszahlungsBetrag)) {
             alert("Die Eingabe ist ungültig.")
         }else{
             navigate('/cashbox/auszahlung/abfrage', { state: { message: neuerAuszahlungsBetrag } });

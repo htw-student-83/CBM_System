@@ -3,12 +3,11 @@ import axios from "axios";
 import {useLocation} from "react-router-dom";
 
 function Cash() {
-    const [cash, setCash] = useState({});
+    const [currentCash, setCurrentCash] = useState({});
     const [loading, setLoading] = useState(false);
 
     const location = useLocation();
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
 
@@ -24,7 +23,7 @@ function Cash() {
             .get(`http://${verbindungstyp}:4000/api/cash/`)
             .then((response) => {
                 if (response.status === 200 && response.data) {
-                    setCash(response.data);
+                    setCurrentCash({kassenstand: response.data});
                     setLoading(false);
                 } else {
                     return response.statusText;
@@ -37,7 +36,7 @@ function Cash() {
     }, [])
     return (
         <div className="pr-10">
-            <span className="font-bold">Stand:</span> <span className="font-mono"> {cash.kassenstand}</span>
+            <span className="font-bold">Stand:</span> <span className="font-mono"> {currentCash.kassenstand} €</span>
         </div>
     )
 }

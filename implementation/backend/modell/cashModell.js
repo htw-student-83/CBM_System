@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, {Types} from 'mongoose';
 const Schema = mongoose.Schema
 
 const cashSchema = new Schema({
     kassenstand:{
-            type: String,
+            type: Types.Decimal128,
             required: true,
     },
 })

@@ -7,6 +7,7 @@ const SicherheitsabfrageEinzahlung = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const message = location.state?.message  || 'Keine Nachricht verfügbar';
+    console.log("In der Sicherheitsabfrage: " + message);
 
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
         //TODO recherchieren, was sessionStorage genau ist und tut!

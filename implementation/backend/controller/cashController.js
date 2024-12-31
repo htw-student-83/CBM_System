@@ -1,4 +1,6 @@
 import { Cash } from "../modell/cashModell.js";
+import mongoose from "mongoose";
+import { Decimal } from "decimal.js";
 
 /**
  * Get all users from the db
@@ -8,20 +10,26 @@ import { Cash } from "../modell/cashModell.js";
  */
 const getCurrentStand = async (req, res) => {
     const cash = await Cash.findOne({});
-    res.status(200).json(cash);
+    const transformedResult = cash.kassenstand.toString();
+    res.status(200).json(transformedResult);
 }
+
+const convertToDecimal128 = (betrag) => {
+    const formattedBetrag = betrag.replace(",", "."); // Ersetze Komma durch Punkt für Dezimalzahlen
+    return mongoose.Types.Decimal128.fromString(formattedBetrag);
+};
 
 /**
  * Change the current stand of cash
  * @param req new cash
+ * @param res
  * @returns {Promise<*>}
  */
 const payment = async (req, res)=> {
-    const { neuerBetrag } = req.body;
-    const gewandelterEinzuzahlenderBetrag = Number.parseFloat(neuerBetrag)
     const cash = await Cash.findOne({});
-    const savedValue = Number.parseFloat(cash.kassenstand)
-    const calculateNewCashStand = savedValue + gewandelterEinzuzahlenderBetrag;
+    const gewandelterEinzuzahlenderBetrag = Number.parseFloat(cash.kassenstand);
+    const { neuerBetrag } = req.body;
+    let sum = new Decimal(neuerBetrag.replace(",", ".")).plus(gewandelterEinzuzahlenderBetrag);
 
     if (typeof neuerBetrag !== 'string') {
         return res.status(400).json({ msg: "Deine Eingabe ist gültig." });
@@ -29,7 +37,7 @@ const payment = async (req, res)=> {
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse
-        { kassenstand: calculateNewCashStand },
+        { kassenstand: sum },
         { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
     );
 
@@ -48,32 +56,29 @@ const payment = async (req, res)=> {
  */
 const payout = async (req, res)=> {
 
-    const { neuerAuszahlungsbetrag } = req.body;
-
-    //change the type of variable, which was revieved
-    const gewandelterAuszahlungsbetrag = Number.parseInt(neuerAuszahlungsbetrag);
-
-    //change the type of variable, which was loade from the db
+    //Value from the db
     const cash = await Cash.findOne({});
-    const savedValue = Number.parseFloat(cash.kassenstand);
+    const savedValue = new Decimal(cash.kassenstand.toString());
 
-    if(gewandelterAuszahlungsbetrag > savedValue){
+    //input
+    const { neuerAuszahlungsbetrag } = req.body;
+    const pruefBetrag = new Decimal(neuerAuszahlungsbetrag.replace(",", "."));
+
+    //Operation minus
+    const differenz = savedValue.minus(new Decimal(neuerAuszahlungsbetrag.replace(",", ".")));
+
+    //Sicherheitsprüfung
+    if(pruefBetrag.greaterThan(savedValue)){
         return res.status(200).json({msg: "Dieser Betrag ist nicht in der Kasse vorhanden."});
     }
 
-    if(savedValue === 0 || savedValue < 0){
+    if(savedValue === 0){
         return res.status(200).json({msg: "Die Kasse ist leer."});
-    }
-
-    const calculateNewCashStand = savedValue - gewandelterAuszahlungsbetrag;
-
-    if(calculateNewCashStand === 0 || calculateNewCashStand < 0){
-        return res.status(200).json({msg: "Achtung: Für die nächste Auszahlung ist nicht mehr genug Geld in der Kasse."});
     }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse
-        { kassenstand: calculateNewCashStand },
+        { kassenstand: differenz },
         { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
     );
 
