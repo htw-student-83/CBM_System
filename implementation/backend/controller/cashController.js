@@ -19,6 +19,7 @@ const convertToDecimal128 = (betrag) => {
     return mongoose.Types.Decimal128.fromString(formattedBetrag);
 };
 
+
 /**
  * Change the current stand of cash
  * @param req new cash
@@ -37,7 +38,7 @@ const payment = async (req, res)=> {
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse
-        { kassenstand: sum },
+        { kassenstand: sum.toFixed(2) },
         { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
     );
 
@@ -78,7 +79,7 @@ const payout = async (req, res)=> {
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse
-        { kassenstand: differenz },
+        { kassenstand: differenz.toFixed(2)},
         { new: true, runValidators: true } // Rückgabe der aktualisierten Daten, Validierung aktivieren
     );
 
