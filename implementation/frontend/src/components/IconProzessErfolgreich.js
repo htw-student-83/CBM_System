@@ -1,5 +1,5 @@
 import React from 'react';
-import IconEinzahlungErfolgreich from "../pictures/grünerHaken2.webp";
+import IconEinzahlungErfolgreich from "../pictures/grünesHäkchen2.webp";
 
 const IconProzessErfolgreich = () => {
     return (
