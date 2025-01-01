@@ -2,22 +2,12 @@ import IconAuszahlung from "../pictures/auszahlung.webp"
 import "../components_css/einzahlung.css"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import { inputcheck } from "./Inputcheck";
 
 function Auszahlung() {
 
     const [neuerAuszahlungsBetrag, setNeuerAuszahlungsBetrag] = useState("");
     const navigate = useNavigate();
-
-    /**
-     *
-     * @param str
-     * @returns {boolean}
-     */
-    function validAmoundWithAcomma(str){
-        const trimmedStr = str.trim();
-        const regex = /^[0-9]+,[0-9]+$/;
-        return regex.test(trimmedStr);
-    }
 
 
     /**
@@ -28,7 +18,7 @@ function Auszahlung() {
         event.preventDefault();
         if (!neuerAuszahlungsBetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-        }else if (!validAmoundWithAcomma(neuerAuszahlungsBetrag)) {
+        }else if (!inputcheck(neuerAuszahlungsBetrag)) {
             alert("Die Eingabe ist ungültig.")
         }else{
             navigate('/cashbox/auszahlung/abfrage', { state: { message: neuerAuszahlungsBetrag } });

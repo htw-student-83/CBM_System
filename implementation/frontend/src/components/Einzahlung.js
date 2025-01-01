@@ -2,23 +2,12 @@ import IconEinzahlung from "../pictures/einzahlung.png"
 import "../components_css/einzahlung.css"
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { inputcheck } from "./Inputcheck";
 
 function Einzahlung() {
 
     const [neuerbetrag, setneuerBetrag] = useState("");
     const navigate = useNavigate();
-
-
-    /**
-     *
-     * @param str
-     * @returns {boolean}
-     */
-    function validAmoundWithAcomma(str){
-        const trimmedStr = str.trim();
-        const regex = /^[0-9]+,[0-9]+$/;
-        return regex.test(trimmedStr);
-    }
 
 
     /**
@@ -34,11 +23,10 @@ function Einzahlung() {
      */
     function checkInput(event) {
         event.preventDefault();
-
         if (!neuerbetrag) {
             alert("Es wurde keine Eingabe getätigt.")
-        }else if(!validAmoundWithAcomma(neuerbetrag)){
-            alert("Die Eingabe ist ungültig.")
+        }else if(!inputcheck(neuerbetrag)){
+            alert("Die Eingabe ist ungütlig.")
         }else{
             navigate('/cashbox/einzahlung/abfrage', { state: { message: neuerbetrag } });
         }
