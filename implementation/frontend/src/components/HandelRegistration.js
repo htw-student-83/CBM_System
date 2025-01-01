@@ -1,10 +1,7 @@
 import {useEffect, useState} from "react";
-import Registration_Success from "./Registration_successfully";
 import '../components_css/animationToRight.css'
 import axios from 'axios'
-import Registration_failed from "./Registration_failed";
-import mobilecheck from './MobileCheck'
-import namecheck from './NameCheck'
+import mobileInputCheck from './CheckInputForLogin'
 import LabelNameRegistration from "./LabelNameRegistration";
 import LabelVornameRegistration from "./LabelVornameRegistration";
 import LabelMobileRegistration from "./LabelMobileRegistration";
@@ -13,18 +10,13 @@ import IconMobileInputfeldRegistration from "./IconMoibileInputfeldRegistration"
 import FrageBereitsRegistriert from "./FrageBereitsRegistriert";
 import {useLocation, useNavigate} from "react-router-dom";
 import MainIcon from "./MainIcon";
+import { startsWithUpperCaseAndMinLength } from "./CheckInputForRegistration";
 
 export default function HandelRegistrierung(){
 
-    const[contentforsuccess, setContentforSuccess] = useState("");
-    const[registrierungSucessfully, setRegistrierungSuccessfully] = useState(false);
-    const[registrierungFailed, setRegistrierungFailed] = useState(false);
-    const[error, setError] = useState("");
     const navigate = useNavigate();
-
     const location = useLocation();
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
 
@@ -61,13 +53,16 @@ export default function HandelRegistrierung(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!formData.vorname || !formData.nachname || !formData.mobile){
-            setError("One or more fields are empty.")
-            console.log("Ich bin hier1")
-            handleFailRegistration();
+            alert("Du hast nicht alle Felder ausgefüllt.");
+            navigate('/cashbox/user/registrierung')
+        }else if(!startsWithUpperCaseAndMinLength(formData.vorname) || !startsWithUpperCaseAndMinLength(formData.nachname)) {
+            alert("Entweder kein Großbuchstaben verwendet oder dein Name ist zu kurz.");
+            navigate('/cashbox/user/registrierung')
+        }else if(!mobileInputCheck.validationOfNumber(formData.mobile)) {
+            alert("Die eigetragene Handynummer ist ungültig.");
+            navigate('/cashbox/user/registrierung')
         }else if(await alreadyRegistered(formData.mobile)) {
-            setError("You already registered.");
-            console.log("Ich bin hier2")
-            handleFailRegistration();
+            alert(" Du bist bereits registiert.");
         }else{
             const password = createPasswort();
             const updatedFormData = {
@@ -88,8 +83,7 @@ export default function HandelRegistrierung(){
                     }
                 })
                 .catch(error => {
-                    setError(error.message);
-                    handleFailRegistration();
+                    console.log(error.message);
                 })
         }
     };
@@ -114,11 +108,13 @@ export default function HandelRegistrierung(){
     function createPasswort (){
         const pattern = "10000";
         var randomnumber = (Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000).toString();
-        var newPassword = pattern + randomnumber;
-        return newPassword;
+        return pattern + randomnumber;
     }
 
 
+    /**
+     * makes the input fields empty
+     */
     function makeFieldsEmpty(){
         const inputs = document.querySelectorAll('input');
         // Den Inhalt jedes Input-Feldes auf leer setzen
@@ -131,22 +127,8 @@ export default function HandelRegistrierung(){
      * print the message if the registration was sucessfully
      */
     const handleSuccessfullyRegistration = () => {
-        setRegistrierungSuccessfully(true);
-        setContentforSuccess("The registration was successfully");
-        setTimeout(() => {
-            setRegistrierungSuccessfully(false);
-            navigate('/cashbox/login');
-        }, 3000)
-    }
-
-    /**
-     * print the message if the registration was failed
-     */
-    const handleFailRegistration = () =>{
-        setRegistrierungFailed(true);
-        setTimeout(() => {
-            setRegistrierungFailed(false);
-        }, 3000)
+        alert("Die Registrierung war erfolgreich.")
+        navigate('/cashbox/login')
     }
 
 
@@ -221,21 +203,6 @@ export default function HandelRegistrierung(){
 
             </div>
 
-            <div>
-                {registrierungSucessfully && (
-                    <div className="componentFromLeftToRight">
-                        <Registration_Success content={contentforsuccess}/>
-                    </div>
-                )}
-            </div>
-
-            <div>
-                {registrierungFailed && (
-                    <div className="componentFromLeftToRight">
-                        <Registration_failed error={error}/>
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

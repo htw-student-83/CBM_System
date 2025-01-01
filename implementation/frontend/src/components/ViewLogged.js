@@ -4,10 +4,8 @@ import {useLocation} from "react-router-dom";
 
 function User() {
     const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(false);
-
     const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+    const [verbindungstyp] =  useState(() => {
         //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
@@ -19,22 +17,19 @@ function User() {
     }, [verbindungstyp]);
 
     useEffect(() => {
-        setLoading(true);
         axios
             .get(`http://${verbindungstyp}:4000/api/user/userdetails/profil`)
             .then((response) => {
                 if (response) {
                     setUser(response.data);
-                    setLoading(false);
                 } else {
                     return response.statusText;
                 }
             })
             .catch((error) => {
                 console.log("Data couldn't loaded: " + error.message);
-                setLoading(false);
             });
-    }, [])
+    }, [verbindungstyp])
     return (
         <div className= "pl-5">
             <span className="font-bold">Angemeldet:</span> <span>{user.vorname +" "+ user.nachname }</span>

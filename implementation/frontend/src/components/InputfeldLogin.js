@@ -1,19 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import LoginNegativ from "./Service_failed";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import IconInnerhalbDesInputfeldesLogin from "./IconInnerhalbDesInputfeldesLogin";
+import { validationOfNumber, validationOfLength } from "./CheckInputForLogin"
 
 const InputfeldLogin = () => {
 
-    const [user, setUser] = useState([]);
     const[password, setPassword] = useState("");
-    const[loading, setLoading] = useState(false);
-    const[loginFailed, setLoginFailed] = useState(false);
-    const[content_error, setContentError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+    const [verbindungstyp] =  useState(() => {
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
 
@@ -23,58 +19,30 @@ const InputfeldLogin = () => {
         }
     }, [verbindungstyp]);
 
+
     /**
      * handle the input of an user after a click
      */
     const handelInputLogin = () => {
         if (!password) {
-            setContentError("The input filed doesn't keep empty.");
-            setLoginFailed(true);
-        }else{
-            setLoading(true);
+            alert("Du hast kein Passwort eingegeben.");
+        }else if(!validationOfNumber(password)){
+            alert("Die Eingabe ist ungültig.");
+        }else if(validationOfLength(password)){
+            alert("Die Eingabe ist zu kurz oder zu lang.");
+        }else {
             axios.get(`http://${verbindungstyp}:4000/api/user/${password}`)
                 .then((response) => {
-                    setUser(response.data);
                     makeUserLogged(response.data._id);
-                    setLoading(false)
                 })
                 .catch((error) => {
-                    setContentError("The password is unknown.");
-                    setLoginFailed(true);
+                    console.log(error);
                 })
         }
     }
 
     /**
-     * Check the length of the entered password
-     * @param password
-     * @returns true if the lenght of the key is enough otherwise false
-     */
-    const validation_password_length = (password) => {
-        return password.toString().length < 10 || password.toString().length > 10
-    }
-
-    /**
-     * check the first 5 characters of a password
-     * @param password
-     * @returns true if a password starts with 10000 otherwise false
-     */
-    const password_contains_a_pattern = (password) => {
-        const pattern_10000 = password.substring(0,5);
-        return pattern_10000 === "10000";
-    }
-
-    /**
-     * check a password has only numbers
-     * @param password
-     * @returns true if the password is only about numbers otherwise false
-     */
-    const password_contains_only_numbers = (password) => {
-        return !isNaN(password);
-    }
-
-    /**
-     *
+     * navigate to the hauptmenu with the message of the art of the server connection
      */
     const handleSuccessfullyLogin = () =>{
         navigate(`/cashbox/hauptmenu`, {state: {message: {verbindungstyp}}});
@@ -98,10 +66,6 @@ const InputfeldLogin = () => {
         }
     }
 
-    setTimeout(() => {
-        setLoginFailed(false);
-    },4000);
-
     return (
         <div>
             <form>
@@ -122,13 +86,6 @@ const InputfeldLogin = () => {
                 onClick={(e) => handelInputLogin(e)}>Login
             </button>
 
-            <div>
-                {loginFailed && (
-                    <div className="componentFromLeftToRight">
-                        <LoginNegativ error={content_error}/>
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

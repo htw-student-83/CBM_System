@@ -8,10 +8,6 @@ In dieser Zeit soll ein "Spinner" laufen bis diese besteht
 . wenn die Verbindung steht, dann soll zum Login weitergeleitet werden (automatisch)
 
 
-Login-Seite
-. eine Meldung erscheint auf dem Bildschirm und gibt aus, das die TCP-Verbindung steht
-
-
 Login-erfolgreich
 . Nur registrierten Usern darf der Zugang zum Kassensystem gewährt werden
 . das jeweilige gültige Passwort eines Users ist notwendig
@@ -30,9 +26,9 @@ Login nicht erfolgreich (Gründe)
 
 
 Registrierung - erfolgreich
-. Eingabe aller relavanten Daten (Vorname, Nachname, eMail, Mobile) mittels Felder
+. Eingabe aller wichtigen Daten (Vorname, Nachname, Mobile) mittels Felder
 . Eingabeprozess wird mit dem Button "senden" oder ähnliches beendet
-. an die hinterlegte Handynummer wid automatisch ein neues Passwort geschickt
+. auf dem Bildschirm wid automatisch das erstellte Passwort angezeigt
 
 
 Registierung nicht erfolgreich
@@ -53,7 +49,7 @@ Passwortgenerierung
 
 
 Daten ändern erfolgreich
-. der eingeloggte User soll seine Daten (Nachname, eMail, Mobile) ändern können mittels Formular
+. der eingeloggte User soll seine Daten (Nachname, Mobile) ändern können mittels Formular
 . Bestätigung der Änderung mittels Button
 . nach der Bestäting durch den User soll eine kurze Meldung erscheinen
 . automatischer Screenwechsel zurück ins Hauptmenu soll dann erfolgen
@@ -72,7 +68,7 @@ Daten ändern nicht erfolgreich (Gründe)
 Passwort vergessen erfolgreich
 . Eingabe der Handynummer des betroffenen Users
 . Bestätigung erfolgt durch einen Klick auf einen Button
-. automatisch wird das gespeicherte Passwort an die angegebene Handynummer verschickt
+. automatisch wird das gespeicherte Passwort auf dem Bildschirm angezeigt
 . ein automatischer Screenwechsel zum Login erfolgt dann
 
 
@@ -81,7 +77,7 @@ Passwort vergessen nicht erfolgreich
 . der Screen wechselt dann nicht
 
 
-Passwort vergessen erfolgreich (Gründe)
+Passwort vergessen nicht erfolgreich (Gründe)
 . wenn die angegebene Handynummer unbekannt ist
 . wenn die Eingabe ungültig  ist
 . wenn das Feld nicht ausgefüllt wurde
@@ -90,7 +86,7 @@ Passwort vergessen erfolgreich (Gründe)
 Einzahlung erfolgreich
 . ein Betrag wird mittels eines Feldes eingegeben
 . es soll dann für einen Moment eine Meldung (Prozess erfolgeich erfolgt) auf dem Bildschirm erscheinen
-. der User entscheidet, ob er zum Hauptmenu zurück kehren möchte
+. nach dem Prozess kehrt man automatisch zum Hauptmenu zurück
 
 
 Einzahlung nicht erfolgreich
@@ -104,7 +100,7 @@ Einzahlung nicht erfolgreich (Gründe)
 
 
 Auszahlung erfolgreich
-. solange der Kassenbestand größer als 0 ist
+. solange der Kassenbestand nicht 0 ist
 . für einen Moment soll eine Meldung erscheinen, mit der Info, dass es geklappt hat
 . automatischer Screenwechsel zurück ins Hauptmenu soll es dann geben
 . Der Kassenbestand soll dann im Hintergrund automatisch angepasst werden
@@ -129,31 +125,17 @@ Account löschen erfolgreich
 
 Meine Daten
 . nach einem Klick wird auf eine separate Seite geführt
-. auf dieser werden tabellarisch alle Daten (Vorname, Nachname, Mobile, Account seit, Letzte Änderung)
+. auf dieser werden tabellarisch alle Daten (Vorname, Nachname, Mobile, Account seit)
 gelistet
 . ein Button soll zum Hauptmenu zurück führen
 
 
 Hauptmenü
-. Dort sollen übersichtlich alle Dienste (Einzahlung, Auszahlung, Daten ändern und Logout) angezeigt werden
+. Dort sollen übersichtlich alle Dienste (Einzahlung, Auszahlung, Daten ändern,
+Meine Daten, Logout und Account löschen) angezeigt werden
 . Mit einem Klick auf einen Dienst öffnet sich ein Fenster, wo alle notwendigen Daten eingetragen werden können
 . Oben links soll der Name des User stehen (Vorname und Nachname), der aktuell eingeloggt ist
 . Oben rechts der aktuelle Kassenbestand mit der Währung
-
-
-Warnsignal
-. Wenn der Kassenbestand 0.00 € erreicht hat bzw. die Eingabe bei einer Auszahlung > Kassenbestand,
-so wird automatisch eine SMS an den Betreiber verschickt
-. mit dem Hinweis, das nichdt genug Geld in der Kasse ist.
-. Diese Meldung soll allerdings erst nach einer bestimmten Zeit (1 Stunde oder 30 Minuten) verschickt werden
-
-
-Rotes X
-. nach einen Klick soll das vordere Fenster geschlossen werden
-. ging es beim Fenster um die Registierung oder das Vergessen des Passwortes,
-so soll automatisch zum Login weiter geleitet werden
-. ging es beim Fenster ums Einzahlen, Auszahlen oder um die Accountdaten,
-soll automatisch zum Hauptmenü weiter geleitet werden
 
 
 Backend
