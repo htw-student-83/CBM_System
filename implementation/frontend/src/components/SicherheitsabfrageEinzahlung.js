@@ -1,24 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useSessionStorage} from "./UseSessionStorage";
 
 const SicherheitsabfrageEinzahlung = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
     const message = location.state?.message  || 'Keine Nachricht verfügbar';
-    console.log("In der Sicherheitsabfrage: " + message);
 
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
+    const [verbindungstyp, setVerbindungstyp] = useSessionStorage(
+        "verbindungstyp",
+        location.state?.message
+    );
 
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
+
+
+    /*
+        //TODO Versuchen auszulagern
+        const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+            //TODO recherchieren, was sessionStorage genau ist und tut!
+            return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+        });
+
+        useEffect(() => {
+            if (verbindungstyp) {
+                sessionStorage.setItem("verbindungstyp", verbindungstyp);
+            }
+        }, [verbindungstyp]);
+
+     */
+
 
     const goToPayment = async () => {
         navigate(`/cashbox/einzahlung`);
