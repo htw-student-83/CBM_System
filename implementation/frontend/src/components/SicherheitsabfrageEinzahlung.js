@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {useSessionStorage} from "./UseSessionStorage";
+//import useSessionStorage from "./UseSessionStorage";
 
 const SicherheitsabfrageEinzahlung = () => {
 
@@ -9,27 +9,17 @@ const SicherheitsabfrageEinzahlung = () => {
     const location = useLocation();
     const message = location.state?.message  || 'Keine Nachricht verfügbar';
 
-    const [verbindungstyp, setVerbindungstyp] = useSessionStorage(
-        "verbindungstyp",
-        location.state?.message
-    );
+    //TODO Versuchen auszulagern
+    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
+        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
+    });
 
-
-
-    /*
-        //TODO Versuchen auszulagern
-        const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-            //TODO recherchieren, was sessionStorage genau ist und tut!
-            return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-        });
-
-        useEffect(() => {
-            if (verbindungstyp) {
-                sessionStorage.setItem("verbindungstyp", verbindungstyp);
-            }
+    useEffect(() => {
+        if (verbindungstyp) {
+            sessionStorage.setItem("verbindungstyp", verbindungstyp);
+        }
         }, [verbindungstyp]);
 
-     */
 
 
     const goToPayment = async () => {

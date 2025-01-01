@@ -14,7 +14,6 @@ const InputfeldLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
 

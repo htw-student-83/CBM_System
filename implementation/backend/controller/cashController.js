@@ -45,7 +45,7 @@ const payment = async (req, res)=> {
     if(!cashStandUpdated){
         return res.status(500).json({msg: "Server error."});
     }
-    res.status(200).json({ msg: "Die Einzahlung war erfolgreich."});
+    res.status(200).json({ msg: "Du kannst nun den Betrag in die Kasse legen."});
 }
 
 
@@ -87,7 +87,7 @@ const payout = async (req, res)=> {
         return res.status(500).json({msg: "Server error."});
     }
 
-    res.status(200).json({ msg: "Die Auszahlung war erfolgreich."});
+    res.status(200).json({ msg: "Du kannst nun den gewünschten Betrag aus der Kasse nehmen."});
 }
 
 export default {
