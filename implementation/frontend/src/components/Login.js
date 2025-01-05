@@ -5,6 +5,7 @@ import InputfeldLogin from "./InputfeldLogin";
 import FrageNochKeinAccount from "./FrageNochKeinAccount";
 import FragePasswortVergessen from "./FragePasswortVergessen";
 import {useLocation} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 /**
  * Represent the Login of the system
@@ -14,6 +15,7 @@ export default function Login(){
 
     const location = useLocation();
     const verbindungsart = location.state?.message;
+
     return (
 
         <div className="bg-sky-300 h-dvh pt-40">

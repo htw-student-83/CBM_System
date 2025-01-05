@@ -1,15 +1,31 @@
 import {useLocation, useNavigate} from 'react-router-dom'
 import {connectToLocalhost} from "./Frontend_localServer";
+import {useEffect, useState} from "react";
 
 const Lokal_Connection = () => {
 
     const location = useLocation();
-    const localAddress = location.state?.message;
+    const [localAddress, setLocalAddress] = useState('');
+    //const localAddress = location.state?.message;
     const navigate = useNavigate();
 
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
     }
+
+    useEffect(() => {
+        const storedAddress = sessionStorage.getItem('localAddress');
+        console.log("Geladener Wert: " + storedAddress)
+        const newAddress = location.state?.message;
+        console.log("Übertragener Wert: " + newAddress)
+
+        if (newAddress) {
+            setLocalAddress(newAddress);
+            sessionStorage.setItem('localAddress', newAddress);
+        } else if (storedAddress) {
+            setLocalAddress(storedAddress);
+        }
+    }, [location.state?.message]);
 
     const handleLocalhost = () => {
         console.log("Wert Lokal_Connection: " + localAddress)

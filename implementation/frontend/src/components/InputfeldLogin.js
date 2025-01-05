@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import IconInnerhalbDesInputfeldesLogin from "./IconInnerhalbDesInputfeldesLogin";
@@ -8,17 +8,12 @@ const InputfeldLogin = () => {
 
     const[password, setPassword] = useState("");
     const navigate = useNavigate();
-    const location = useLocation();
-    const [verbindungstyp] =  useState(() => {
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
+    //const location = useLocation();
 
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
 
+    let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     /**
      * handle the input of an user after a click
@@ -31,7 +26,7 @@ const InputfeldLogin = () => {
         }else if(validationOfLength(password)){
             alert("Die Eingabe ist zu kurz oder zu lang.");
         }else {
-            axios.get(`http://${verbindungstyp}:4000/api/user/${password}`)
+            axios.get(`http://${verbindungsart}:4000/api/user/${password}`)
                 .then((response) => {
                     makeUserLogged(response.data._id);
                 })
@@ -45,7 +40,7 @@ const InputfeldLogin = () => {
      * navigate to the hauptmenu with the message of the art of the server connection
      */
     const handleSuccessfullyLogin = () =>{
-        navigate(`/cashbox/hauptmenu`, {state: {message: {verbindungstyp}}});
+        navigate(`/cashbox/hauptmenu`, {state: {message: {verbindungsart}}});
     }
 
     /**
@@ -54,7 +49,7 @@ const InputfeldLogin = () => {
      */
     const makeUserLogged = async (id) =>{
         try {
-            await axios.patch(`http://${verbindungstyp}:4000/api/user/login/changeState/${id}`)
+            await axios.patch(`http://${verbindungsart}:4000/api/user/login/changeState/${id}`)
                 .then(()=>{
                     handleSuccessfullyLogin();
                 })
