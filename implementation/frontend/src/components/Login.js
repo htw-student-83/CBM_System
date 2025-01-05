@@ -5,7 +5,6 @@ import InputfeldLogin from "./InputfeldLogin";
 import FrageNochKeinAccount from "./FrageNochKeinAccount";
 import FragePasswortVergessen from "./FragePasswortVergessen";
 import {useLocation} from "react-router-dom";
-import {useEffect, useState} from "react";
 
 /**
  * Represent the Login of the system

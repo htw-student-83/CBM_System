@@ -1,9 +1,11 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
+import {useEffect, useState} from "react";
 
 const TCP_Connection = () => {
+
     const location = useLocation();
-    const ipServer = location.state?.message;
+    const [ipServer, setipServer] = useState('');
     const navigate = useNavigate();
 
     const goToServer_Connection = () =>{
@@ -13,6 +15,17 @@ const TCP_Connection = () => {
     const handleRemoteServer = () => {
         connectToRemoteServer(ipServer, navigate);
     }
+
+    useEffect(() => {
+        const storedAddress = sessionStorage.getItem('ipServer');
+        const newAddress = location.state?.message;
+        if (newAddress) {
+            setipServer(newAddress);
+            sessionStorage.setItem('ipServer', newAddress);
+        } else if (storedAddress) {
+            setipServer(storedAddress);
+        }
+    }, [location.state?.message]);
 
     return(
         <div className="bg-sky-400 h-dvh w-auto">

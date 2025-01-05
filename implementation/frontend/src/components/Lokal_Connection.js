@@ -6,7 +6,6 @@ const Lokal_Connection = () => {
 
     const location = useLocation();
     const [localAddress, setLocalAddress] = useState('');
-    //const localAddress = location.state?.message;
     const navigate = useNavigate();
 
     const goToServer_Connection = () =>{
