@@ -1,29 +1,17 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import CrySmily from "../pictures/saidEmoji.jpg";
-import React, {useState} from "react";
-import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
-import {connectToLocalhost} from "./Frontend_localServer";
+import React from "react";
 
 const ServerDown = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
-    // State für IP-Adresse
-    const server = location.state?.message;
 
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
     }
 
-    const connectToRemoteServer = () =>{
-        console.log("Wert beim Aufruf der Funktion: " + server)
-        if(server === "localhost"){
-            console.log("Wert: " + server)
-            connectToLocalhost(server, navigate);
-        }else{
-            console.log("Wert: " + server)
-            connectToRemoteServer(server, navigate);
-        }
+    const handleUserEvent = () =>{
+        navigate('/cashbox/prozess_laeuft');
     }
 
     return(
@@ -37,7 +25,7 @@ const ServerDown = () => {
                     </div>
                     <div
                         className="bg-sky-100 w-full flex justify-center p-3 0mt-5 mr-auto ml-auto cursor-pointer font-bold rounded-xl hover:bg-green-300"
-                        onClick={connectToRemoteServer}>
+                        onClick={handleUserEvent}>
                         verbinden
                     </div>
                     <div
