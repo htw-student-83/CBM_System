@@ -12,7 +12,7 @@ const TCP_Connection = () => {
     }
 
     const handleRemoteServer = () => {
-        sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
+        sessionStorage.setItem("message_evaluation_is_working", "Die Verbindung zum remote Server wird aufgebaut...");
         navigate('/cashbox/prozess_laeuft');
     }
 
@@ -31,13 +31,13 @@ const TCP_Connection = () => {
         <div className="bg-sky-400 h-dvh w-auto">
             <div className="py-72">
                 <div className="bg-neutral-100 mx-4 border-amber-800 ml-auto mr-auto rounded-2xl py-5 w-fit pl-10 pr-10">
-                    <h1 className="text-xl text-center py-3">Starten Sie bitte den Server auf dem anderen Rechner.</h1>
+                    <h1 className="text-xl text-center py-3">Starte bitte den Server auf dem anderen Rechner.</h1>
                     <div className="flex flex-grow px-2">
                         <button id='ok' className="bg-white w-52 text-lg rounded-2xl p-2 mx-10 my-4 h-14 hover:bg-emerald-200 border-b-emerald-200"
                             onClick={handleRemoteServer}
                         >ok
                         </button>
-                        <button className="bg-white w-52 text-lg rounded-2xl p-2 mx-10 my-4 h-14 hover:bg-neutral-200 border-b-emerald-200"
+                        <button className="bg-white w-52 text-lg rounded-2xl p-2 mx-10 my-4 h-14 hover:bg-amber-200 border-b-emerald-200"
                             onClick={() => {
                               goToServer_Connection();
                             }}

@@ -8,7 +8,7 @@ const Lokal_Connection = () => {
     }
 
     const handleLocalhost = () => {
-        sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
+        sessionStorage.setItem("message_evaluation_is_working", "Die Verbindung zum localen Server wird aufgebaut...");
         navigate('/cashbox/prozess_laeuft');
     }
 
@@ -22,7 +22,7 @@ const Lokal_Connection = () => {
                            onClick={handleLocalhost}
                         >ok
                         </button>
-                        <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-36 hover:bg-neutral-200 border-b-emerald-200"
+                        <button className="bg-white text-lg rounded-2xl p-2 mx-10 my-6 h-14 w-36 hover:bg-amber-200 border-b-emerald-200"
                             onClick={() => {
                                goToServer_Connection();
                             }}
