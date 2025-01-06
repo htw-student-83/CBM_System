@@ -1,17 +1,12 @@
 import axios from "axios";
 
-export const connectToLocalhost = async (serveradress, navigate) => {
+export const connectToLocalhost = async (serveradress) => {
     try {
-        await axios.get(`http://${serveradress}:4000/api/server/localserver`)
-            .then((response) => {
-                if(response.status === 200){
-                    navigate('/cashbox/login',{ state: { message: serveradress }});
-                }
-            })
-            .catch((error) => {
-                navigate('/cashbox/serverFail',{ state: { message: serveradress }});
-            });
+        const responseFromLocalServer =  await axios.get(`http://${serveradress}:4000/api/server/localserver`);
+        if(responseFromLocalServer.status === 200){
+            return 200;
+        }
     } catch (error) {
-        console.error(error);
+        return 500;
     }
 }

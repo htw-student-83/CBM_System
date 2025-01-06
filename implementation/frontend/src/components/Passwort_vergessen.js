@@ -10,7 +10,7 @@ import {useLocation} from "react-router-dom";
  * @constructor
  */
 export default function PasswortVergessen(){
-
+/*
     const location = useLocation();
 
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
@@ -23,12 +23,14 @@ export default function PasswortVergessen(){
         }
     }, [verbindungstyp]);
 
+ */
+
     return(
         <div className="bg-sky-300 h-dvh pt-40">
             <div className="flex flex-col justify-center bg-white w-fit p-10 mt-10 ml-auto mr-auto rounded-3xl">
                 <MainIcon/>
                 <TopicPasswortVergessen/>
-                <InputfeldPasswortVergessen message={verbindungstyp}/>
+                <InputfeldPasswortVergessen/>
             </div>
         </div>
     )

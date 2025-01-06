@@ -4,6 +4,7 @@ import {useLocation} from "react-router-dom";
 
 const FragePasswortVergessen = () => {
 
+    /*
     const location = useLocation();
 
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
@@ -16,11 +17,13 @@ const FragePasswortVergessen = () => {
             sessionStorage.setItem("verbindungstyp", verbindungstyp);
         }
     }, [verbindungstyp]);
+     */
+
 
     return (
         <p className="text-sm mt-2">
             Passwort vergessen?
-            <NavigierenZuPasswortVergessen serververbindung={verbindungstyp}/>
+            <NavigierenZuPasswortVergessen/>
         </p>
     )
 }

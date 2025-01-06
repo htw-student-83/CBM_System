@@ -1,27 +1,17 @@
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
-import {useEffect, useState} from "react";
 
 const Logout = () => {
 
     const navigate = useNavigate();
-
-    const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
+    let verbindungsart = storedLocalAdress ? storedLocalAdress: storedIpAdress;
 
 
     const logout = async () => {
         try {
-            await axios.patch(`http://${verbindungstyp}:4000/api/user/logout/changeState`)
+            await axios.patch(`http://${verbindungsart}:4000/api/user/logout/changeState`)
                 .then(()=>{
                     navigate( '/cashbox/login');
                 })

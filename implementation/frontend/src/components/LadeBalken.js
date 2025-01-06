@@ -1,29 +1,71 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import '../components_css/circularLoader.css';
-import {useLocation, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import {connectToLocalhost} from "./Frontend_localServer";
+import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
 
 const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
+
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
     const navigate = useNavigate();
-    const location = useLocation();
+    const message_evaluation_is_working = sessionStorage.getItem('message_evaluation_is_working');
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
 
-    //auf alle Zustandsdaten, die beim Navigieren übergeben wurden, zugreifen.
-    const messageFromServer = location.state?.message;
-    const ersteZweiWoerter = messageFromServer.split(" ").slice(0, 2).join(" ");
+    let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
+
+   //const ersteZweiWoerter = messageFromServer.split(" ").slice(0, 2).join(" ");
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if(ersteZweiWoerter !== "Dieser Betrag"){
-                navigate(`/cashbox/prozess_erfolgreich`, { state: { message: messageFromServer }});
-            }else{
-                navigate(`/cashbox/prozess_nicht_erfolgreich`, { state: { message: messageFromServer }});
+        console.log("ich bin hier");
+        const checkServer = async () => {
+            console.log("checkServer() wird aufgerufen");
+            if (verbindungsart === "localhost") {
+                const server_response = await connectToLocalhost(verbindungsart);
+                if (server_response === 200) {
+                    sessionStorage.setItem('server_response_for_connection_successfully', "Verbindung ist aufgebaut");
+                    navigate(`/cashbox/prozess_erfolgreich`, {
+                        state: {
+                            message_art_server_connection: verbindungsart,
+                        }
+                    });
+                } else {
+                    sessionStorage.setItem('server_response_for_connection_failed', "Verbindungsaufbau ist fehlgeschlagen");
+                    navigate(`/cashbox/serverFail`, {
+                        state: {
+                            message_art_server_connection: verbindungsart,
+                        }
+                    });
+                }
+            } else if (verbindungsart === "192.168.178.23") {
+                const server_response = await connectToRemoteServer(verbindungsart);
+                if (server_response === 200) {
+                    navigate(`/cashbox/prozess_erfolgreich`, {
+                        state: {
+                            server_response: "Verbindung ist aufgebaut",
+                            message_art_server_connection: verbindungsart,
+                        }
+                    });
+                } else {
+                    navigate(`/cashbox/serverFail`, {
+                        state: {
+                            server_response: "Verbindungsaufbau fehlgeschlagen",
+                            message_art_server_connection: verbindungsart,
+                        }
+                    });
+                }
             }
-        }, 5000);
+        };
 
-        // Bereinigung des Timeout, falls die Komponente vorher entfernt wird
-        return () => clearTimeout(timeoutId);
-    }, [navigate]); // Der Effekt wird nur einmal ausgeführt, wenn die Komponente geladen wird
+        const timeoutId = setTimeout(() => {
+            checkServer();
+        },5000);
+
+    // Bereinigung des Timeouts
+    return () => clearTimeout(timeoutId);
+}, [verbindungsart, navigate]);
+
 
     useEffect(() => {
         // Rotation des Kreises
@@ -37,6 +79,7 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
         // Aufräumlogik für den Intervall
         return () => clearInterval(interval);
     }, []);
+
 
     return (
         <div className="mt-72">
@@ -60,7 +103,7 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
                     />
                 </svg>
                 <div className="mt-11 text-2xl font-bold">
-                    Eingabe wird geprüft...
+                    {message_evaluation_is_working}
                 </div>
             </div>
         </div>

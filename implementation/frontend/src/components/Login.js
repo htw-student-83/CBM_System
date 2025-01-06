@@ -4,7 +4,6 @@ import TopicLogin from "./TopicLogin";
 import InputfeldLogin from "./InputfeldLogin";
 import FrageNochKeinAccount from "./FrageNochKeinAccount";
 import FragePasswortVergessen from "./FragePasswortVergessen";
-import {useLocation} from "react-router-dom";
 
 /**
  * Represent the Login of the system
@@ -12,8 +11,9 @@ import {useLocation} from "react-router-dom";
  */
 export default function Login(){
 
-    const location = useLocation();
-    const verbindungsart = location.state?.message;
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
+    let verbindungsart = storedLocalAdress ? storedLocalAdress: storedIpAdress;
 
     return (
 
@@ -25,7 +25,7 @@ export default function Login(){
 
                 <div className="w-full h-fit pt-20">
                     <TopicLogin/>
-                    <InputfeldLogin message ={verbindungsart}/>
+                    <InputfeldLogin/>
                 </div>
 
                 <div className="mt-5 italic">

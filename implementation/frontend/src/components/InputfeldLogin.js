@@ -8,12 +8,9 @@ const InputfeldLogin = () => {
 
     const[password, setPassword] = useState("");
     const navigate = useNavigate();
-
     const storedLocalAdress = sessionStorage.getItem('localAddress');
     const storedIpAdress = sessionStorage.getItem('ipServer');
-
     let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
-    console.log("Geladener Wert im Login: " + verbindungsart)
 
     /**
      * handle the input of an user after a click

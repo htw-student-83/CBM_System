@@ -3,11 +3,15 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Services_Fail from "./Service_failed";
 
-const ButtonPasswortVergessen = ({ mobile, message }) => {
+const ButtonPasswortVergessen = ({ mobile }) => {
 
     const[processFailed, setprocessFailed] = useState(false);
     const[error, setError] = useState("");
     const navigate = useNavigate();
+
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
+    let verbindungsart = storedLocalAdress ? storedLocalAdress: storedIpAdress;
 
     /**
      * handle the proces in case when the user forgot his password
@@ -20,7 +24,7 @@ const ButtonPasswortVergessen = ({ mobile, message }) => {
             alert("Deine Eingabe ist ungültig.")
             navigate(`/cashbox/user/passwordforgot`)
         }else {
-            axios.get(`http://${message}:4000/api/user/passwordforgot/${mobile}`)
+            axios.get(`http://${verbindungsart}:4000/api/user/passwordforgot/${mobile}`)
                 .then((response) => {
                     handleServerResponse(response.data.password)
                 })

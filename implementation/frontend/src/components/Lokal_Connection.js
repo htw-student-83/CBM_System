@@ -1,5 +1,4 @@
 import {useLocation, useNavigate} from 'react-router-dom'
-import {connectToLocalhost} from "./Frontend_localServer";
 import {useEffect, useState} from "react";
 
 const Lokal_Connection = () => {
@@ -14,9 +13,7 @@ const Lokal_Connection = () => {
 
     useEffect(() => {
         const storedAddress = sessionStorage.getItem('localAddress');
-        console.log("Geladener Wert: " + storedAddress)
         const newAddress = location.state?.message;
-        console.log("Übertragener Wert: " + newAddress)
 
         if (newAddress) {
             setLocalAddress(newAddress);
@@ -27,8 +24,9 @@ const Lokal_Connection = () => {
     }, [location.state?.message]);
 
     const handleLocalhost = () => {
-        console.log("Wert Lokal_Connection: " + localAddress)
-        connectToLocalhost(localAddress, navigate);
+        sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
+        navigate('/cashbox/prozess_laeuft', {
+        });
     }
 
     return(
