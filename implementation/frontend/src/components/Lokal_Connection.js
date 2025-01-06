@@ -1,32 +1,15 @@
-import {useLocation, useNavigate} from 'react-router-dom'
-import {useEffect, useState} from "react";
+import {useNavigate} from 'react-router-dom'
 
 const Lokal_Connection = () => {
-
-    const location = useLocation();
-    const [localAddress, setLocalAddress] = useState('');
     const navigate = useNavigate();
 
     const goToServer_Connection = () =>{
         navigate('/cashbox/serverArt/');
     }
 
-    useEffect(() => {
-        const storedAddress = sessionStorage.getItem('localAddress');
-        const newAddress = location.state?.message;
-
-        if (newAddress) {
-            setLocalAddress(newAddress);
-            sessionStorage.setItem('localAddress', newAddress);
-        } else if (storedAddress) {
-            setLocalAddress(storedAddress);
-        }
-    }, [location.state?.message]);
-
     const handleLocalhost = () => {
         sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
-        navigate('/cashbox/prozess_laeuft', {
-        });
+        navigate('/cashbox/prozess_laeuft');
     }
 
     return(

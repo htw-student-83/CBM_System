@@ -13,8 +13,7 @@ const TCP_Connection = () => {
 
     const handleRemoteServer = () => {
         sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
-        navigate('/cashbox/prozess_laeuft', {
-        });
+        navigate('/cashbox/prozess_laeuft');
     }
 
     useEffect(() => {

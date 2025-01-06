@@ -8,6 +8,7 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
 
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
+
     const navigate = useNavigate();
     const message_evaluation_is_working = sessionStorage.getItem('message_evaluation_is_working');
     const storedLocalAdress = sessionStorage.getItem('localAddress');
@@ -18,35 +19,20 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
    //const ersteZweiWoerter = messageFromServer.split(" ").slice(0, 2).join(" ");
 
     useEffect(() => {
-        console.log("ich bin hier");
         const checkServer = async () => {
-            console.log("checkServer() wird aufgerufen");
             if (verbindungsart === "localhost") {
                 const server_response = await connectToLocalhost(verbindungsart);
                 if (server_response === 200) {
                     sessionStorage.setItem('server_response_for_connection_successfully', "Verbindung ist aufgebaut");
-                    navigate(`/cashbox/prozess_erfolgreich`, {
-                        state: {
-                            message_art_server_connection: verbindungsart,
-                        }
-                    });
+                    navigate(`/cashbox/prozess_erfolgreich`);
                 } else {
-                    sessionStorage.setItem('server_response_for_connection_failed', "Verbindungsaufbau ist fehlgeschlagen");
-                    navigate(`/cashbox/serverFail`, {
-                        state: {
-                            message_art_server_connection: verbindungsart,
-                        }
-                    });
+                    navigate(`/cashbox/serverFail`);
                 }
             } else if (verbindungsart === "192.168.178.23") {
                 const server_response = await connectToRemoteServer(verbindungsart);
                 if (server_response === 200) {
-                    navigate(`/cashbox/prozess_erfolgreich`, {
-                        state: {
-                            server_response: "Verbindung ist aufgebaut",
-                            message_art_server_connection: verbindungsart,
-                        }
-                    });
+                    sessionStorage.setItem('server_response_for_connection_successfully', "Verbindung ist aufgebaut");
+                    navigate(`/cashbox/prozess_erfolgreich`);
                 } else {
                     navigate(`/cashbox/serverFail`);
                 }

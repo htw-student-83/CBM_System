@@ -6,11 +6,13 @@ const Server_Connection = () => {
     const navigate = useNavigate();
 
     const goToRemoteServer = () =>{
-        navigate('/cashbox/serverArt/remote', { state: { message: ip_address }});
+        sessionStorage.setItem("ipServer", ip_address);
+        navigate('/cashbox/serverArt/remote');
     }
 
     const goToLocalServer = () =>{
-        navigate('/cashbox/serverArt/lokal', { state: { message: local_address }});
+        sessionStorage.setItem("localAddress", local_address);
+        navigate('/cashbox/serverArt/lokal');
     }
 
     return(
