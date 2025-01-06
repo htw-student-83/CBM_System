@@ -18,6 +18,7 @@ import LadeBalken from "./components/LadeBalken";
 import ProzessNichtErfolgreich from "./components/ProzessNichtErfolgreich";
 import SicherheitsabfrageEinzahlung from "./components/SicherheitsabfrageEinzahlung";
 import SicherheitsabfrageAuszahlung from "./components/SicherheitsabfrageAuszahlung";
+import ServerIsDown from "./components/ServerIsDown";
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
             <Route path = '/cashbox/serverArt' element = {<Server_Connection/>}/>
             <Route path = '/cashbox/serverArt/remote' element= {<TCP_Connection/>}/>
             <Route path = '/cashbox/serverArt/lokal' element = {<Lokal_Connection/>}/>
-            <Route path = '/cashbox/serverFail' element = {<ServerDown/>}/>
+            <Route path = '/cashbox/serverFail' element = {<ServerIsDown/>}/>
             <Route path = '/cashbox/user/passwordforgot' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
             <Route path = '/cashbox/login' element = {<Login/>}/>

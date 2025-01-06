@@ -48,12 +48,7 @@ const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
                         }
                     });
                 } else {
-                    navigate(`/cashbox/serverFail`, {
-                        state: {
-                            server_response: "Verbindungsaufbau fehlgeschlagen",
-                            message_art_server_connection: verbindungsart,
-                        }
-                    });
+                    navigate(`/cashbox/serverFail`);
                 }
             }
         };

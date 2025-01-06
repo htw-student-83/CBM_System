@@ -1,5 +1,4 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
 import {useEffect, useState} from "react";
 
 const TCP_Connection = () => {
@@ -13,7 +12,9 @@ const TCP_Connection = () => {
     }
 
     const handleRemoteServer = () => {
-        connectToRemoteServer(ipServer, navigate);
+        sessionStorage.setItem("message_evaluation_is_working", "Verbindung wird aufgebaut...");
+        navigate('/cashbox/prozess_laeuft', {
+        });
     }
 
     useEffect(() => {
