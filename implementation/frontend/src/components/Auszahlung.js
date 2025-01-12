@@ -21,8 +21,7 @@ function Auszahlung() {
         }else if (!inputcheck(neuerAuszahlungsBetrag)) {
             alert("Die Eingabe ist ungültig.")
         }else{
-            sessionStorage.setItem("AuszahlenderBetrag", neuerAuszahlungsBetrag);
-            navigate('/cashbox/auszahlung/abfrage');
+            navigate('/cashbox/auszahlung/abfrage', {state: {message: neuerAuszahlungsBetrag}});
         }
     }
 

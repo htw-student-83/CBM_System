@@ -11,7 +11,7 @@ const ServerDown = () => {
     }
 
     const handleUserEvent = () =>{
-        navigate('/cashbox/prozess_laeuft');
+        navigate('/cashbox/prozess_server_connection_laeuft');
     }
 
     return(

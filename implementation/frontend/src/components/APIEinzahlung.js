@@ -7,8 +7,7 @@ export const startPayment = async (verbindungstyp) => {
             {neuerBetrag: sessionStorage.getItem("einzahlenderBetrag")},
             {headers: {'Content-Type': 'application/json'},}
         );
-        sessionStorage.setItem("Server_Response_Payment",response.data.msg);
-        return response.status;
+        return response.data.msg;
     }catch (error) {
         return 500;
     }

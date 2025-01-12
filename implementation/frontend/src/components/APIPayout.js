@@ -1,13 +1,12 @@
 import axios from "axios";
-export const startPayout = async (verbindungstyp) => {
+export const startPayout = async (verbindungstyp, betrag) => {
 
     try {
         const response = await axios.patch(`http://${verbindungstyp}:4000/api/cash/payout/`,
-            {neuerAuszahlungsbetrag: sessionStorage.getItem("einzahlenderBetrag")},
+            {neuerAuszahlungsbetrag: betrag},
             {headers: {'Content-Type': 'application/json'},}
         );
-        sessionStorage.setItem("Server_Response_Payout",response.data.msg);
-        return response.status;
+        return response.data.msg;
     }catch (error) {
         return 500;
     }

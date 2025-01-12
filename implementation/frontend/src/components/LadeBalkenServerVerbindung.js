@@ -3,8 +3,6 @@ import '../components_css/circularLoader.css';
 import { useNavigate} from "react-router-dom";
 import {connectToLocalhost} from "./Frontend_localServer";
 import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
-import {startPayment} from "./APIEinzahlung";
-import {startPayout} from "./APIPayout";
 
 const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
 

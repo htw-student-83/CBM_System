@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import IconProzessErfolgreich from "./IconProzessErfolgreich";
 
 const ProzessErfolgreich = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     let message_server = "";
 
@@ -16,16 +17,28 @@ const ProzessErfolgreich = () => {
     const local_server = sessionStorage.getItem('server_response_for_local_connection_successfully');
     const ip_server = sessionStorage.getItem('server_response_for_remote_connection_successfully');
 
-    message_server = local_server ? local_server : ip_server;
+    //process successful
+    const payment_successful = location.state?.message || 'Keine Nachricht verfügbar';
+    const payout_successful = location.state?.message || 'Keine Nachricht verfügbar';
 
-    //Process successful
-    const payment_succesfll = sessionStorage.getItem('server_response_for_successful_payment');
-    const payout_succesfll = sessionStorage.getItem('server_response_for_successful_payout');
+    if (payment_successful) {
+        message_server = payment_successful;
+        // Nachricht für erfolgreichen Einzahlungsprozess
+    } else if (payout_successful) {
+        message_server = payout_successful; // Nachricht für erfolgreichen Auszahlungsprozess
+    } else if(local_server) {
+        // Nachricht für erfolgreiche Serververbindung
+        message_server = local_server
+    }else{
+        message_server = ip_server
+    }
 
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if(storedLocalAddress){
+            if(payment_successful || payout_successful){
+                navigate('/cashbox/hauptmenu' , { replace: true, state: null });
+            }else if(storedLocalAddress){
                 navigate('/cashbox/login');
             }else if(storedIpAdress){
                 navigate('/cashbox/login');

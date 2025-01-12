@@ -1,35 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
-import {startPayment} from "./APIEinzahlung";
-//import {useCustomJiti} from "tailwindcss/src/lib/load-config";
-//import useSessionStorage from "./UseSessionStorage";
+import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 const SicherheitsabfrageEinzahlung = () => {
 
-    let verbindungstyp = "";
     const navigate = useNavigate();
-    const location = useLocation();
-    //const message = location.state?.message  || 'Keine Nachricht verfügbar';
-
-    const storedLocalAdress = sessionStorage.getItem('localAddress');
-    const storedIpAdress = sessionStorage.getItem('ipServer');
-
-    /*
-    //TODO Versuchen auszulagern
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-     */
 
     const goToPayment = async () => {
         navigate(`/cashbox/einzahlung`);
     }
 
-
     function handelEinzahlung() {
-        sessionStorage.setItem("Einzahlungsprozess", "Der Einzahlungsprozess läuft...");
-        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
+        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft', {state: {message: "Der Einzahlungsprozess läuft..."}});
     }
 
     return (
