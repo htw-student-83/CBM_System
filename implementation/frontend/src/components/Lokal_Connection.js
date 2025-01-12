@@ -8,8 +8,8 @@ const Lokal_Connection = () => {
     }
 
     const handleLocalhost = () => {
-        sessionStorage.setItem("message_evaluation_is_working", "Die Verbindung zum localen Server wird aufgebaut...");
-        navigate('/cashbox/prozess_laeuft');
+        sessionStorage.setItem("Verbindung_local_im_Aufbau", "Die Verbindung zum localen Server wird aufgebaut...");
+        navigate('/cashbox/prozess_server_connection_laeuft');
     }
 
     return(

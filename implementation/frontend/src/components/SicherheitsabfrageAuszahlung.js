@@ -5,9 +5,9 @@ import axios from "axios";
 const SicherheitsabfrageAuszahlung = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const message = location.state?.message  || 'Keine Nachricht verfügbar';
-
+    //const location = useLocation();
+    //const message = location.state?.message  || 'Keine Nachricht verfügbar';
+/*
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
         //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
@@ -19,26 +19,15 @@ const SicherheitsabfrageAuszahlung = () => {
         }
     }, [verbindungstyp]);
 
+ */
+
     const goToPayout = async () => {
         navigate(`/cashbox/auszahlung`);
     }
 
     function handelAuszahlung() {
-            axios.patch(`http://${verbindungstyp}:4000/api/cash/payout/`,
-                { neuerAuszahlungsbetrag: message },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-                .then((response) => {
-                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        const serverMessage = error.response.data?.msg;
-                        navigate('/cashbox/prozess_laeuft', { state: { message: serverMessage } });
-                    }
-                });
+        sessionStorage.setItem("Auszahlungsprozess", "Der Auszahlungsprozess läuft...");
+        navigate('/cashbox/prozess_server_connection_laeuft');
     }
 
 
@@ -46,7 +35,7 @@ const SicherheitsabfrageAuszahlung = () => {
         <div className="bg-sky-400 h-dvh w-auto">
             <div className="py-60">
                 <div className="bg-neutral-100 mx-4 mt-11 border-amber-800 ml-auto mr-auto rounded-2xl p-4 w-fit pl-6 pr-6">
-                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{ message }</span> € der Kasse entnehmen?</h1>
+                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{ sessionStorage.getItem("AuszahlenderBetrag") }</span> € der Kasse entnehmen?</h1>
                     <div className="flex flex-grow mx-20">
                         <button
                             id='ok'

@@ -14,11 +14,13 @@ import User from "./components/UserDataView";
 import AccountDelete from "./components/AccountDelete";
 import Logout from "./components/Logout";
 import ProzessErfolgreich from "./components/ProzessErfolgreich";
-import LadeBalken from "./components/LadeBalken";
+import LadeBalken from "./components/LadeBalkenServerVerbindung";
 import ProzessNichtErfolgreich from "./components/ProzessNichtErfolgreich";
 import SicherheitsabfrageEinzahlung from "./components/SicherheitsabfrageEinzahlung";
 import SicherheitsabfrageAuszahlung from "./components/SicherheitsabfrageAuszahlung";
 import ServerIsDown from "./components/ServerIsDown";
+import LadeBalkenServerVerbindung from "./components/LadeBalkenServerVerbindung";
+import LadeBalkenEinzahlungAuszahlung from "./components/LadeBalkenEinzahlungAuszahlung";
 
 function App() {
 
@@ -41,7 +43,8 @@ function App() {
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
             <Route path = '/cashbox/einzahlung' element = {<Einzahlung/>}/>
             <Route path = '/cashbox/einzahlung/abfrage' element = {<SicherheitsabfrageEinzahlung/>}/>
-            <Route path = '/cashbox/prozess_laeuft' element = {<LadeBalken/>}/>
+            <Route path = '/cashbox/prozess_server_connection_laeuft' element = {<LadeBalkenServerVerbindung/>}/>
+            <Route path = '/cashbox/prozess_einzahlung_auszahlung_laeuft' element = {<LadeBalkenEinzahlungAuszahlung/>}/>
             <Route path = '/cashbox/prozess_erfolgreich' element = {<ProzessErfolgreich/>}/>
             <Route path = '/cashbox/auszahlung' element = {<Auszahlung/>}/>
             <Route path = '/cashbox/auszahlung/abfrage' element = {<SicherheitsabfrageAuszahlung/>}/>

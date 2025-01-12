@@ -28,7 +28,8 @@ function Einzahlung() {
         }else if(!inputcheck(neuerbetrag)){
             alert("Die Eingabe ist ungütlig.")
         }else{
-            navigate('/cashbox/einzahlung/abfrage', { state: { message: neuerbetrag } });
+            sessionStorage.setItem("einzahlenderBetrag", neuerbetrag);
+            navigate('/cashbox/einzahlung/abfrage');
         }
     }
 

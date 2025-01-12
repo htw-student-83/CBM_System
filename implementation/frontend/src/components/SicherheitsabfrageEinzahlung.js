@@ -1,52 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {startPayment} from "./APIEinzahlung";
+//import {useCustomJiti} from "tailwindcss/src/lib/load-config";
 //import useSessionStorage from "./UseSessionStorage";
 
 const SicherheitsabfrageEinzahlung = () => {
 
+    let verbindungstyp = "";
     const navigate = useNavigate();
     const location = useLocation();
-    const message = location.state?.message  || 'Keine Nachricht verfügbar';
+    //const message = location.state?.message  || 'Keine Nachricht verfügbar';
 
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
+
+    /*
     //TODO Versuchen auszulagern
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
     });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-        }, [verbindungstyp]);
-
-
+     */
 
     const goToPayment = async () => {
         navigate(`/cashbox/einzahlung`);
     }
 
-    function handelEinzahlung() {
-            axios.patch(`http://${verbindungstyp}:4000/api/cash/payment/`,
-                { neuerBetrag: message },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-            )
-                .then((response) => {
-                    navigate('/cashbox/prozess_laeuft', { state: { message: response.data.msg } });
-                })
-                .catch(() => {
-                    alert("Verbindungsproblem mit dem Server.")
-                });
-    }
 
+    function handelEinzahlung() {
+        sessionStorage.setItem("Einzahlungsprozess", "Der Einzahlungsprozess läuft...");
+        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
+    }
 
     return (
         <div className="bg-sky-400 h-dvh w-auto">
             <div className="py-60">
                 <div className="bg-neutral-100 mx-4 mt-11 border-amber-800 ml-auto mr-auto rounded-2xl p-4 w-fit pl-6 pr-6">
-                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{ message }</span> € einzahlen?</h1>
+                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{sessionStorage.getItem("einzahlenderBetrag")}</span> € einzahlen?</h1>
                     <div className="flex flex-grow mx-20">
                         <button
                             id='ok'
