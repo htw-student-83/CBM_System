@@ -87,7 +87,7 @@ const getUserPassword = async (req, res) => {
     const { mobile } = req.params;
     const user = await User.findOne({ mobile: mobile }).exec();
     if(!user){
-        return res.status(404).json({msg: "Usersssss not found."});
+        return res.status(404).send();
     }
     res.status(200).json(user);
 }

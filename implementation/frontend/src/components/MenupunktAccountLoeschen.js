@@ -1,21 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useLocation} from "react-router-dom";
-import {MdDelete} from "react-icons/md";
+import React from 'react';
+import {Link} from "react-router-dom";
 import IconAccountLoeschen from "./IconAccountLoeschen";
 
 const MenupunktAccountLoeschen = () => {
-
-    const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
 
     return (
         <Link to={`/cashbox/account_loeschung/`}>
@@ -28,6 +15,7 @@ const MenupunktAccountLoeschen = () => {
             </div>
         </Link>
     )
+
 }
 
 export default MenupunktAccountLoeschen;

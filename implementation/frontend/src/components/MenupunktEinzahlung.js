@@ -1,20 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {PiHandDeposit} from "react-icons/pi";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const MenupunktEinzahlung = () => {
-
-    const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
 
     return (
         <Link to='/cashbox/einzahlung'>
@@ -28,6 +16,7 @@ const MenupunktEinzahlung = () => {
             </div>
         </Link>
     )
+
 }
 
 export default MenupunktEinzahlung;

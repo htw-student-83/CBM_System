@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import '../components_css/animationToRight.css'
 import axios from 'axios'
 import mobileInputCheck from './CheckInputForLogin'
@@ -8,23 +8,18 @@ import LabelMobileRegistration from "./LabelMobileRegistration";
 import IconNameInputfeldRegistration from "./IconNameInputfeldRegistration";
 import IconMobileInputfeldRegistration from "./IconMoibileInputfeldRegistration";
 import FrageBereitsRegistriert from "./FrageBereitsRegistriert";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import MainIcon from "./MainIcon";
 import { startsWithUpperCaseAndMinLength } from "./CheckInputForRegistration";
 
 export default function HandelRegistrierung(){
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
+    //Message for payment and payout is working
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
 
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
+    let verbindungstyp = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     const [formData, setFormData] = useState({
         vorname: '',
@@ -78,6 +73,7 @@ export default function HandelRegistrierung(){
             })
                 .then(response =>{
                     if (response.status === 201) {  // Check for successful status code
+                        sessionStorage.setItem("Registrierung erfolgreich","Die Registrierung war erfolgreich")
                         handleSuccessfullyRegistration();
                         makeFieldsEmpty();
                     }
@@ -127,8 +123,8 @@ export default function HandelRegistrierung(){
      * print the message if the registration was sucessfully
      */
     const handleSuccessfullyRegistration = () => {
-        alert("Die Registrierung war erfolgreich.")
-        navigate('/cashbox/login')
+        console.log("handleSuccessfullyRegistration aufgerufen")
+        navigate('/cashbox/user/registrierung_erfolgreich')
     }
 
 

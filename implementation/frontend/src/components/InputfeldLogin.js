@@ -10,6 +10,7 @@ const InputfeldLogin = () => {
     const navigate = useNavigate();
     const storedLocalAdress = sessionStorage.getItem('localAddress');
     const storedIpAdress = sessionStorage.getItem('ipServer');
+
     let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     /**

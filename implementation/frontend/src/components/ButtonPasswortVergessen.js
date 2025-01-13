@@ -5,12 +5,10 @@ import Services_Fail from "./Service_failed";
 
 const ButtonPasswortVergessen = ({ mobile }) => {
 
-    const[processFailed, setprocessFailed] = useState(false);
-    const[error, setError] = useState("");
     const navigate = useNavigate();
-
     const storedLocalAdress = sessionStorage.getItem('localAddress');
     const storedIpAdress = sessionStorage.getItem('ipServer');
+
     let verbindungsart = storedLocalAdress ? storedLocalAdress: storedIpAdress;
 
     /**
@@ -23,24 +21,26 @@ const ButtonPasswortVergessen = ({ mobile }) => {
         }else if(!mobile_contains_only_numbers(mobile)){
             alert("Deine Eingabe ist ungültig.")
             navigate(`/cashbox/user/passwordforgot`)
-        }else {
+        }else{
             axios.get(`http://${verbindungsart}:4000/api/user/passwordforgot/${mobile}`)
                 .then((response) => {
                     handleServerResponse(response.data.password)
                 })
-                .catch((error) => {
-                    handleFailedProcess(error)
+                .catch((response) => {
+                    if(response.status === 404){
+                        alert("Die angegebene Handynummer ist unbekannt.")
+                    }
                 })
         }
     }
 
     /**
      * check a password has only numbers
-     * @param password
+     * @param mobile
      * @returns true if the password is only about numbers otherwise false
      */
     const mobile_contains_only_numbers = (mobile) => {
-        return !isNaN(mobile);
+        return /^[0-9]+$/.test(mobile);
     }
 
     /**
@@ -51,18 +51,6 @@ const ButtonPasswortVergessen = ({ mobile }) => {
         navigate(`/cashbox/login`)
     }
 
-    /**
-     * print a message if the process was failed
-     * @param content the message
-     */
-    const handleFailedProcess = (content) =>{
-        setprocessFailed(true);
-        setError(content)
-        setTimeout(() => {
-            setprocessFailed(false);
-        }, 3000)
-    }
-
     return (
         <div>
             <button
@@ -70,14 +58,6 @@ const ButtonPasswortVergessen = ({ mobile }) => {
                 onClick={handlePasswordForgot}>
                 senden
             </button>
-
-            <div>
-                {processFailed && (
-                    <div className="componentFromLeftToRight">
-                        <Services_Fail error={error}/>
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

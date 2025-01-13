@@ -1,8 +1,7 @@
 import MainIcon from "./MainIcon";
 import TopicPasswortVergessen from "./TopicPasswortVergessen";
 import InputfeldPasswortVergessen from "./InputfeldPasswortVergessen";
-import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import React from "react";
 
 /**
  * The component about password forgot
@@ -10,20 +9,6 @@ import {useLocation} from "react-router-dom";
  * @constructor
  */
 export default function PasswortVergessen(){
-/*
-    const location = useLocation();
-
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
-
- */
 
     return(
         <div className="bg-sky-300 h-dvh pt-40">
@@ -34,4 +19,5 @@ export default function PasswortVergessen(){
             </div>
         </div>
     )
+
 }

@@ -14,28 +14,12 @@ function DataChange() {
     const storedLocalAdress = sessionStorage.getItem('localAddress');
     const storedIpAdress = sessionStorage.getItem('ipServer');
 
-
     let verbindungstyp = storedLocalAdress ? storedLocalAdress : storedIpAdress;
-
-   // const location = useLocation();
 
     const [updateData, setUpdateData] = useState({
         nachname: '',
         mobile: '',
     });
-/*
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
-
- */
 
     const handleCancel = () => {
         setModalOpen(false); // Formular nach dem Abbrechen schließen

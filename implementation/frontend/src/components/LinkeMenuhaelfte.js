@@ -3,27 +3,15 @@ import MenupunktEinzahlung from "./MenupunktEinzahlung";
 import MenupunktAuszahlung from "./MenupunktAuszahlung";
 import DataChange from "./FormDataChange";
 import IconDatenaenderung from "./IconDatenaenderung";
-import {useLocation} from "react-router-dom";
 
 const Linkemenuhaelfte = () => {
 
-    const location = useLocation();
     const [isModalOpen, setModalOpen] = useState(false);
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
 
     return (
         <div className="flex flex-col items-center">
-            <MenupunktEinzahlung message={verbindungstyp}/>
-            <MenupunktAuszahlung message={verbindungstyp}/>
+            <MenupunktEinzahlung/>
+            <MenupunktAuszahlung/>
             <div>
                 {isModalOpen ? (
                     <DataChange/>

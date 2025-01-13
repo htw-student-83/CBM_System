@@ -1,6 +1,7 @@
-import {useState} from "react";
-import Hacken from "../pictures/haeckchen.png";
+import React, {useEffect, useState} from "react";
 import '../components_css/process_successfully.css'
+import IconProzessRegistrationErfolgreich from "../pictures/registration_erfolgreich.jpg";
+import {useNavigate} from "react-router-dom";
 
 
 /**
@@ -9,26 +10,31 @@ import '../components_css/process_successfully.css'
  */
 export default function Registration_Success() {
 
-    const [isOpen, setIsOpen] = useState(true);
+    const result_registratrierung = sessionStorage.getItem("Registrierung erfolgreich");
+    const navigate = useNavigate();
 
-    return  (
 
-        <div>
+    useEffect(() => {
+        setTimeout(() => {
+            navigate('/cashbox/login')
+        },4000 )
+    });
 
-            {isOpen && (
+    return (
 
-                <div className="SuccessfullyProcessContainer" id="process_successfully">
-
-                    <div className="logo_Hacken">
-                        <img src={Hacken} alt="hacken"/>
+        <div className="flex flex-col bg-white h-dvh" id="mainscreen">
+            <div className="flex flex-col mt-44">
+                <img
+                    src={IconProzessRegistrationErfolgreich}
+                    alt="Erfolgreiche Registrierung"
+                    className="ml-auto mr-auto  size-80 "
+                />
+                <div className="text-lg w-fit ml-auto mr-auto mt-30">
+                    <div className="p-1 py-2 text-center text-2xl font-bold ml-auto mr-auto mt-5">
+                        <h1>{result_registratrierung}</h1>
                     </div>
-
-                    <div className="SuccessfullyProcess_Content">
-                        <p>Registration was successfully</p>
-                    </div>
-
                 </div>
-            )}
+            </div>
 
         </div>
 
