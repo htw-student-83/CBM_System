@@ -14,7 +14,8 @@ const AccountDelete = () => {
         try {
             await axios.delete(`http://${verbindungstyp}:4000/api/user`)
                 .then(()=>{
-                    navigate('/cashbox/login/');
+                    sessionStorage.setItem("Account_Loeschung","Der Account wurde erfolgreich gelöscht.")
+                    navigate('/cashbox/account_loeschung_erfolgreich');
                 })
                 .catch((error) => {
                     console.log("Not answer from the server." + error)
