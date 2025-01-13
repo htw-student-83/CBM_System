@@ -1,22 +1,14 @@
-import {useLocation, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
-import {useEffect, useState} from "react";
 
 const AccountDelete = () => {
     const navigate = useNavigate();
 
-    const location = useLocation();
+    //Message for server connection is completed
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
 
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
+    let verbindungstyp = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     const deleteAccount = async() =>{
         try {

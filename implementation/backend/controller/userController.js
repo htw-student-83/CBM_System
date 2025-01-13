@@ -92,8 +92,6 @@ const getUserPassword = async (req, res) => {
     res.status(200).json(user);
 }
 
-
-
 /**
  * Change the data of an stored user
  * @param req new new data
@@ -142,6 +140,7 @@ const changeUserStateToTrue = async (req, res)=> {
         res.status(500).json({ msg: "Internal server error." });
     }
 }
+
 
 /**
  *
@@ -192,7 +191,6 @@ const updateUserData = async (req, res)=> {
 }
 
 
-
 /**
  * delete an stored user out of the db under the condition logged is true
  * @param req nothing
@@ -211,6 +209,7 @@ const deleteUser = async (req, res) => {
         return res.status(404).json({msg: "Nobody found."});
     }
 }
+
 
 /**
  * verification of an user
@@ -231,9 +230,6 @@ const checkUser = async (req, res) => {
         return res.status(500).json({msg: "Server error."});
     }
 }
-
-
-
 
 export default {
     createUser,

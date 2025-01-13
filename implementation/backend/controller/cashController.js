@@ -1,5 +1,4 @@
 import { Cash } from "../modell/cashModell.js";
-import mongoose from "mongoose";
 import { Decimal } from "decimal.js";
 
 /**
@@ -13,11 +12,6 @@ const getCurrentStand = async (req, res) => {
     const transformedResult = cash.kassenstand.toString();
     res.status(200).json(transformedResult);
 }
-
-const convertToDecimal128 = (betrag) => {
-    const formattedBetrag = betrag.replace(",", "."); // Ersetze Komma durch Punkt für Dezimalzahlen
-    return mongoose.Types.Decimal128.fromString(formattedBetrag);
-};
 
 
 /**
@@ -73,12 +67,10 @@ const payout = async (req, res)=> {
         return res.status(200).json({msg: "Die Kasse ist leer."});
     }
 
-
     //Sicherheitsprüfung
     if(pruefBetrag.greaterThan(savedValue)){
         return res.status(200).json({msg: "Dieser Betrag ist nicht in der Kasse vorhanden."});
     }
-
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse

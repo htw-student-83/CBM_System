@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { PiWarningOctagonFill } from "react-icons/pi";
 
 const ProzessNichtErfolgreich = () => {

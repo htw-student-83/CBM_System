@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "../components_css/datachange.css"
 import axios from "axios";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function DataChange() {
 
@@ -10,13 +10,20 @@ function DataChange() {
     const [selectedOption, setSelectedOption] = useState("Nachname");
     const [inputValue, setInputValue] = useState("");
 
-    const location = useLocation();
+    //Message for server connection is completed
+    const storedLocalAdress = sessionStorage.getItem('localAddress');
+    const storedIpAdress = sessionStorage.getItem('ipServer');
+
+
+    let verbindungstyp = storedLocalAdress ? storedLocalAdress : storedIpAdress;
+
+   // const location = useLocation();
 
     const [updateData, setUpdateData] = useState({
         nachname: '',
         mobile: '',
     });
-
+/*
     const [verbindungstyp, setVerbindungstyp] =  useState(() => {
         //TODO recherchieren, was sessionStorage genau ist und tut!
         return sessionStorage.getItem("verbindungstyp") || location.state?.message;
@@ -27,6 +34,8 @@ function DataChange() {
             sessionStorage.setItem("verbindungstyp", verbindungstyp);
         }
     }, [verbindungstyp]);
+
+ */
 
     const handleCancel = () => {
         setModalOpen(false); // Formular nach dem Abbrechen schließen
