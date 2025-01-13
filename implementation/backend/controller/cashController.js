@@ -68,14 +68,17 @@ const payout = async (req, res)=> {
     //Operation minus
     const differenz = savedValue.minus(new Decimal(neuerAuszahlungsbetrag.replace(",", ".")));
 
+
+    if(savedValue.isZero()){
+        return res.status(200).json({msg: "Die Kasse ist leer."});
+    }
+
+
     //Sicherheitsprüfung
     if(pruefBetrag.greaterThan(savedValue)){
         return res.status(200).json({msg: "Dieser Betrag ist nicht in der Kasse vorhanden."});
     }
 
-    if(savedValue === 0){
-        return res.status(200).json({msg: "Die Kasse ist leer."});
-    }
 
     const cashStandUpdated = await Cash.findOneAndUpdate(
         {}, // Suche die erste passende Kasse

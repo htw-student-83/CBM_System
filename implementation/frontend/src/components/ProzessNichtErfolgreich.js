@@ -4,14 +4,25 @@ import { PiWarningOctagonFill } from "react-icons/pi";
 
 const ProzessNichtErfolgreich = () => {
 
-    const location = useLocation();
-    const message = location.state?.message  || 'Keine Nachricht verfügbar';
     const [showMessage, setShowMessage] = useState(true);
     const navigate = useNavigate();
+
+    let server_message = "";
+
+    const betragIstZuGross = sessionStorage.getItem("Betrag nicht vorhanden");
+    const keinBetrag = sessionStorage.getItem("Kasse leer");
+
+    if(betragIstZuGross){
+        server_message = betragIstZuGross;
+    }else{
+        server_message = keinBetrag;
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowMessage(false);
+            sessionStorage.removeItem("Betrag nicht vorhanden");
+            sessionStorage.removeItem("Kasse leer");
             navigate('/cashbox/auszahlung');
         } , 4000);
         return () => clearTimeout(timer);
@@ -30,7 +41,7 @@ const ProzessNichtErfolgreich = () => {
                 </div>
                 <div className="text-lg w-fit ml-auto mr-auto mt-30">
                     <div className="p-1 py-2 text-center text-2xl font-bold ml-auto mr-auto mt-5">
-                        {message}
+                        {server_message}
                     </div>
                 </div>
             </div>

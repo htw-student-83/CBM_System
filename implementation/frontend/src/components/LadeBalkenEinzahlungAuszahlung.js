@@ -43,13 +43,17 @@ const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) =>
                 }
             } else {
                 const server_response = await startPayout(verbindungsart);
-                if (server_response) {
+                if (server_response === "Dieser Betrag ist nicht in der Kasse vorhanden.") {
+                    sessionStorage.setItem("Betrag nicht vorhanden", "Dieser Betrag ist nicht in der Kasse vorhanden.")
+                    navigate(`/cashbox/prozess_nicht_erfolgreich`);
+                }else if(server_response === "Die Kasse ist leer.") {
+                    sessionStorage.setItem("Kasse leer", "Die Kasse ist leer.")
+                    navigate(`/cashbox/prozess_nicht_erfolgreich`);
+                }else{
                     sessionStorage.removeItem("Auszahlungsprozess");
                     sessionStorage.removeItem("auszahlenderBetrag");
                     sessionStorage.setItem("Auszahlung erfolgreich", server_response);
                     navigate(`/cashbox/prozess_erfolgreich`);
-                } else {
-                    navigate(`/cashbox/prozess_nicht_erfolgreich`);
                 }
             }
         }
