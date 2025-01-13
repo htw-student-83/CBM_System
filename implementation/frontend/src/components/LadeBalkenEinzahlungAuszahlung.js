@@ -1,40 +1,53 @@
 import {startPayment} from "./APIEinzahlung";
 import {startPayout} from "./APIPayout";
 
-import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
 const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) => {
+
+    let message_payment_payout_is_working = "";
 
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     //Message for server connection is working
     const storedLocalAdress = sessionStorage.getItem('localAddress');
     const storedIpAdress = sessionStorage.getItem('ipServer');
 
     //Message for payment and payout is working
-    const [message_payment_payout_is_working] = useState(location.state?.message);
-    const [message_betrag] = useState(location.state?.betrag);
+    const message_payment_is_working = sessionStorage.getItem('Einzahlungsprozess');
+    const message_payout_is_working = sessionStorage.getItem('Auszahlungsprozess');
 
     let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
+
+    if(message_payment_is_working){
+        message_payment_payout_is_working = message_payment_is_working;
+    }else{
+        message_payment_payout_is_working = message_payout_is_working;
+    }
 
     useEffect( () => {
         const checkCashProzess = async () => {
             if (message_payment_payout_is_working === "Der Einzahlungsprozess läuft...") {
                 const server_response = await startPayment(verbindungsart);
                 if (server_response) {
-                    navigate(`/cashbox/prozess_erfolgreich`, {state: {message: server_response}});
+                    sessionStorage.removeItem("Einzahlungsprozess");
+                    sessionStorage.removeItem("einzahlenderBetrag");
+                    sessionStorage.setItem("Einzahlung erfolgreich",server_response);
+                    navigate(`/cashbox/prozess_erfolgreich`);
                 } else {
                     navigate(`/cashbox/prozess_nicht_erfolgreich`);
                 }
             } else {
-                const server_response = await startPayout(verbindungsart, message_betrag);
+                const server_response = await startPayout(verbindungsart);
                 if (server_response) {
-                    navigate(`/cashbox/prozess_erfolgreich`, {state: {message: server_response}});
+                    sessionStorage.removeItem("Auszahlungsprozess");
+                    sessionStorage.removeItem("auszahlenderBetrag");
+                    sessionStorage.setItem("Auszahlung erfolgreich", server_response);
+                    navigate(`/cashbox/prozess_erfolgreich`);
                 } else {
                     navigate(`/cashbox/prozess_nicht_erfolgreich`);
                 }

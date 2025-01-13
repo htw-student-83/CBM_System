@@ -13,14 +13,15 @@ const SicherheitsabfrageAuszahlung = () => {
     }
 
     function handelAuszahlung() {
-        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft', {state: {message: "Der Auszahlungsprozess läuft...", betrag: message_auszahlenderBetrag}});
+        sessionStorage.setItem("Auszahlungsprozess","Der Auszahlungsprozess läuft...");
+        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft', {state: {betrag: message_auszahlenderBetrag}});
     }
 
     return (
         <div className="bg-sky-400 h-dvh w-auto">
             <div className="py-60">
                 <div className="bg-neutral-100 mx-4 mt-11 border-amber-800 ml-auto mr-auto rounded-2xl p-4 w-fit pl-6 pr-6">
-                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{ message_auszahlenderBetrag }</span> € der Kasse entnehmen?</h1>
+                    <h1 className="text-2xl text-center">Sie wollen <span className="font-bold">{sessionStorage.getItem("auszahlenderBetrag")}</span> € der Kasse entnehmen?</h1>
                     <div className="flex flex-grow mx-20">
                         <button
                             id='ok'

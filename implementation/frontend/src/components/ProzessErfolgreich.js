@@ -1,46 +1,44 @@
 import React from 'react';
-import { useEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import IconProzessErfolgreich from "./IconProzessErfolgreich";
 
 const ProzessErfolgreich = () => {
     const navigate = useNavigate();
-    const location = useLocation();
 
     let message_server = "";
-
-    //server addresses
-    const storedLocalAddress = sessionStorage.getItem('localAddress');
-    const storedIpAdress = sessionStorage.getItem('ipServer');
 
     //server connection successful
     const local_server = sessionStorage.getItem('server_response_for_local_connection_successfully');
     const ip_server = sessionStorage.getItem('server_response_for_remote_connection_successfully');
 
-    //process successful
-    const payment_successful = location.state?.message || 'Keine Nachricht verfügbar';
-    const payout_successful = location.state?.message || 'Keine Nachricht verfügbar';
+    //Einzahlung erfolgreich
+    const signalWortEinzahlung = sessionStorage.getItem("Einzahlung erfolgreich");
+    const signalWortAuszahlung = sessionStorage.getItem("Auszahlung erfolgreich");
 
-    if (payment_successful) {
-        message_server = payment_successful;
-        // Nachricht für erfolgreichen Einzahlungsprozess
-    } else if (payout_successful) {
-        message_server = payout_successful; // Nachricht für erfolgreichen Auszahlungsprozess
-    } else if(local_server) {
-        // Nachricht für erfolgreiche Serververbindung
-        message_server = local_server
-    }else{
-        message_server = ip_server
+    //Festlegung, welcher Text ausgegeben werden soll
+    if(signalWortEinzahlung){
+        message_server = signalWortEinzahlung;
+    } else if(signalWortAuszahlung){
+        message_server = signalWortAuszahlung;
+    }else if(local_server){
+        message_server = local_server;
+    }else {
+        message_server = ip_server;
     }
 
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if(payment_successful || payout_successful){
-                navigate('/cashbox/hauptmenu' , { replace: true, state: null });
-            }else if(storedLocalAddress){
+            if(signalWortEinzahlung){
+                sessionStorage.removeItem("Einzahlung erfolgreich")
+                navigate('/cashbox/hauptmenu');
+            }else if(signalWortAuszahlung){
+                sessionStorage.removeItem("Auszahlung erfolgreich")
+                navigate('/cashbox/hauptmenu');
+            }else if(local_server){
                 navigate('/cashbox/login');
-            }else if(storedIpAdress){
+            }else if(ip_server){
                 navigate('/cashbox/login');
             }
         }, 4000 );

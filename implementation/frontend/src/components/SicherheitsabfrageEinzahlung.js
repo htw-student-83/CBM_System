@@ -10,7 +10,8 @@ const SicherheitsabfrageEinzahlung = () => {
     }
 
     function handelEinzahlung() {
-        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft', {state: {message: "Der Einzahlungsprozess läuft..."}});
+        sessionStorage.setItem('Einzahlungsprozess','Der Einzahlungsprozess läuft...');
+        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
     }
 
     return (
