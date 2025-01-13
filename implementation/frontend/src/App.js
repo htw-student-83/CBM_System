@@ -21,6 +21,7 @@ import SicherheitsabfrageAuszahlung from "./components/SicherheitsabfrageAuszahl
 import ServerIsDown from "./components/ServerIsDown";
 import LadeBalkenServerVerbindung from "./components/LadeBalkenServerVerbindung";
 import LadeBalkenEinzahlungAuszahlung from "./components/LadeBalkenEinzahlungAuszahlung";
+import Registration_Success from "./components/Registration_successfully";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Route path = '/cashbox/serverFail' element = {<ServerIsDown/>}/>
             <Route path = '/cashbox/user/passwordforgot' element = {<PasswortVergessen/>}/>
             <Route path = '/cashbox/user/registrierung' element = {<Registrierung/>}/>
+            <Route path = '/cashbox/user/registrierung_erfolgreich' element = {<Registration_Success/>}/>
             <Route path = '/cashbox/login' element = {<Login/>}/>
             <Route path = '/cashbox/userdataview' element = {<User/>}/>
             <Route path = '/cashbox/logout/:id' element = {<Logout/>}/>
