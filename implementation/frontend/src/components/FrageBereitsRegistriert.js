@@ -1,6 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
+/**
+ * Component for the case that an user already registered
+ * @returns {Element}
+ * @constructor
+ */
 const FrageBereitsRegistriert = () => {
     return (
         <p>Bereits registriet?

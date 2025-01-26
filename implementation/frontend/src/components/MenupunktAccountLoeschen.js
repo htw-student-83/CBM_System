@@ -2,6 +2,11 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import IconAccountLoeschen from "./IconAccountLoeschen";
 
+/**
+ * The component for the services account deleting
+ * @returns {Element}
+ * @constructor
+ */
 const MenupunktAccountLoeschen = () => {
 
     return (

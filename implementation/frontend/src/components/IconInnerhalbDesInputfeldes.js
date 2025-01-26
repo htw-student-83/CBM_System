@@ -1,6 +1,11 @@
 import React from 'react';
 import {CiMobile4} from "react-icons/ci";
 
+/**
+ * Icon for the input field password forgotten
+ * @returns {Element}
+ * @constructor
+ */
 const  IconInnerhalbDesInputfeldes = () => {
     return (
         <div className="p-2">

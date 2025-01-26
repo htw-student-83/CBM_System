@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 
 /**
- * Represent the case if a service going successfully
+ * This component will be printed if the registration was successfully
  * @returns {JSX.Element} a colorfull object as a symbol for success
  */
 export default function Registration_Success() {

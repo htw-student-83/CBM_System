@@ -2,6 +2,12 @@ import React from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
+
+/**
+ * the event if the password was forgotten as a component
+ * @param mobile the input from an user
+ * @constructor
+ */
 const ButtonPasswortVergessen = ({ mobile }) => {
     const navigate = useNavigate();
     const storedLocalAdress = sessionStorage.getItem('localAddress');

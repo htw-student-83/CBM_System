@@ -1,6 +1,12 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
+
+/**
+ * The component to navigate to password forgotten
+ * @returns {Element}
+ * @constructor
+ */
 const NavigierenZuPasswortVergessen = () => {
 
     return (

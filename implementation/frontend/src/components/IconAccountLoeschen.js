@@ -1,6 +1,12 @@
 import React from 'react';
 import {MdDelete} from "react-icons/md";
 
+
+/**
+ * The delete icon
+ * @returns {Element}
+ * @constructor
+ */
 const IconAccountLoeschen = () => {
     return (
         <div className="py-1 px-3">

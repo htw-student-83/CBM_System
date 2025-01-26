@@ -1,6 +1,11 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
+/**
+ * This component asks is the input correct before the process is going on
+ * @returns {Element}
+ * @constructor
+ */
 const SicherheitsabfrageEinzahlung = () => {
 
     const navigate = useNavigate();

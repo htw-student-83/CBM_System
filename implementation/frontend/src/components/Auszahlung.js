@@ -4,6 +4,12 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import { inputcheck } from "./Inputcheck";
 
+
+/**
+ * the component to manage the payout process
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Auszahlung() {
 
     const [neuerAuszahlungsBetrag, setNeuerAuszahlungsBetrag] = useState("");

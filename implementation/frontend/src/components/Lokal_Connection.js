@@ -1,5 +1,10 @@
 import {useNavigate} from 'react-router-dom'
 
+/**
+ * The component for the local server connection
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Lokal_Connection = () => {
     const navigate = useNavigate();
 

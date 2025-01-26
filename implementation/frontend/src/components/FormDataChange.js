@@ -3,6 +3,10 @@ import "../components_css/datachange.css"
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * the component handle the process if stored data must be changed
+ * @constructor
+ */
 function DataChange() {
 
     const navigate = useNavigate();

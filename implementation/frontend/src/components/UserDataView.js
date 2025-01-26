@@ -5,6 +5,11 @@ import "../components_css/UserDataView.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+/**
+ * The component, which loads and prints the details of an user
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function User() {
 
     const [user, setUser] = useState({});

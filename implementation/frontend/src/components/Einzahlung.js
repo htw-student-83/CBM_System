@@ -4,6 +4,12 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { inputcheck } from "./Inputcheck";
 
+
+/**
+ * the component manages the whole process of payment
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Einzahlung() {
 
     const [neuerbetrag, setneuerBetrag] = useState("");
@@ -11,7 +17,7 @@ function Einzahlung() {
 
 
     /**
-     * go back to the hauptmenu
+     * go back to hauptmenu
      */
     function handelCancle(){
         navigate(`/cashbox/hauptmenu`);

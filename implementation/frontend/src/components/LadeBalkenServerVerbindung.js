@@ -4,6 +4,11 @@ import { useNavigate} from "react-router-dom";
 import {connectToLocalhost} from "./Frontend_localServer";
 import {connectToRemoteServer} from "./Frontend_RemoteServerVerbindung";
 
+
+/**
+ * The component, which will be printed when the process (server connection is building) is going on
+ * @constructor
+ */
 const CircularLoader = ({ size = 150, strokeWidth = 10 }) => {
 
     const radius = (size - strokeWidth) / 2;

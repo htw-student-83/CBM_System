@@ -2,6 +2,12 @@ import {useNavigate} from "react-router-dom";
 import CrySmily from "../pictures/saidEmoji.jpg";
 import React from "react";
 
+
+/**
+ * The page, which will be print when the server connection was failed.
+ * @returns {Element}
+ * @constructor
+ */
 const ServerDown = () => {
 
     const navigate = useNavigate();

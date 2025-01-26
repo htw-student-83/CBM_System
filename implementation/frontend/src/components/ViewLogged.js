@@ -1,6 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+
+/**
+ * The component, which loads and prints the logged user
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function User() {
 
     const [user, setUser] = useState({});

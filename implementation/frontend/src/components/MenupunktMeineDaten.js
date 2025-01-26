@@ -2,6 +2,11 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import IconMeineDaten from "./IconMeineDaten";
 
+/**
+ * The component for the services data changing
+ * @returns {Element}
+ * @constructor
+ */
 const MenupunktMeineDaten = () => {
 
     return (

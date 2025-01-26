@@ -3,6 +3,12 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import IconProzessErfolgreich from "./IconProzessErfolgreich";
 
+/**
+ * The component, which will be print if a process (server connection, payment, payout or data changing)
+ * was successfully
+ * @returns {Element}
+ * @constructor
+ */
 const ProzessErfolgreich = () => {
     const navigate = useNavigate();
 

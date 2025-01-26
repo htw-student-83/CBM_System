@@ -12,6 +12,12 @@ import {useNavigate} from "react-router-dom";
 import MainIcon from "./MainIcon";
 import { startsWithUpperCaseAndMinLength } from "./CheckInputForRegistration";
 
+
+/**
+ * The component handles the whole registration
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function HandelRegistrierung(){
 
     const navigate = useNavigate();

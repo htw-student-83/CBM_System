@@ -2,6 +2,11 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import IconLogout from "./IconLogout";
 
+/**
+ * The component for the services logout
+ * @returns {Element}
+ * @constructor
+ */
 const MenupunktLogout = ({id}) => {
 
     return (

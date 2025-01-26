@@ -2,6 +2,11 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import IconProzessAccountDeletingErfolgreich from "../pictures/account_loeschung.png";
 
+/**
+ * the component to manage the case if the delete process was successfully
+ * @returns {Element}
+ * @constructor
+ */
 const AccountDeletingSuccessful = () => {
 
     const result_account_deleting = sessionStorage.getItem("Account_Loeschung")

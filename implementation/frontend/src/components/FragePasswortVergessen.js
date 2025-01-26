@@ -1,24 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import NavigierenZuPasswortVergessen from "./NavigierenZuPasswortVergessen";
-import {useLocation} from "react-router-dom";
 
+/**
+ * The component for the cass the user has forgotten his password
+ * @constructor
+ */
 const FragePasswortVergessen = () => {
-
-    /*
-    const location = useLocation();
-
-    const [verbindungstyp, setVerbindungstyp] =  useState(() => {
-        //TODO recherchieren, was sessionStorage genau ist und tut!
-        return sessionStorage.getItem("verbindungstyp") || location.state?.message;
-    });
-
-    useEffect(() => {
-        if (verbindungstyp) {
-            sessionStorage.setItem("verbindungstyp", verbindungstyp);
-        }
-    }, [verbindungstyp]);
-     */
-
 
     return (
         <p className="text-sm mt-2">

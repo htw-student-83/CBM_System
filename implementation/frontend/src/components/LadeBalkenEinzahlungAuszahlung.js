@@ -3,6 +3,10 @@ import {startPayout} from "./APIPayout";
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
+/**
+ * The component, which will be printed when a process (payment, payout or data changing) is going on
+ * @constructor
+ */
 const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) => {
 
     let message_payment_payout_is_working = "";

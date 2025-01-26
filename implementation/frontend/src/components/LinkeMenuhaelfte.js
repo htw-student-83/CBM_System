@@ -1,9 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import MenupunktEinzahlung from "./MenupunktEinzahlung";
 import MenupunktAuszahlung from "./MenupunktAuszahlung";
 import DataChange from "./FormDataChange";
 import IconDatenaenderung from "./IconDatenaenderung";
 
+/**
+ * The component represents the left area of services of the system
+ * @constructor
+ */
 const Linkemenuhaelfte = () => {
 
     const [isModalOpen, setModalOpen] = useState(false);

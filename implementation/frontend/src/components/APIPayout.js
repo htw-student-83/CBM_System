@@ -1,4 +1,11 @@
 import axios from "axios";
+
+
+/**
+ * handle the payout process
+ * @param verbindungstyp local or ip
+ * @returns {Promise<number|*>} answer from server as a string
+ */
 export const startPayout = async (verbindungstyp) => {
 
     try {

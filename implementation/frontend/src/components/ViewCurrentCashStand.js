@@ -1,6 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+/**
+ * The component, which loads and prints the current stand  in the box
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Cash() {
 
     const [currentCash, setCurrentCash] = useState({});
@@ -22,6 +27,7 @@ function Cash() {
                 console.log("Data couldn't loaded: " + error.message);
             });
     }, [])
+
     return (
         <div className="pr-10">
             <span className="font-bold">Stand:</span> <span className="font-mono"> {currentCash.kassenstand} €</span>

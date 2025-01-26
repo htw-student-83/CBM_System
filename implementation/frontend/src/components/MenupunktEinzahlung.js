@@ -2,6 +2,11 @@ import React from 'react';
 import {PiHandDeposit} from "react-icons/pi";
 import {Link} from "react-router-dom";
 
+/**
+ * The component for the services payment
+ * @returns {Element}
+ * @constructor
+ */
 const MenupunktEinzahlung = () => {
 
     return (

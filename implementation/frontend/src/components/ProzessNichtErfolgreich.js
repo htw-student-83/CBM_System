@@ -2,6 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import { PiWarningOctagonFill } from "react-icons/pi";
 
+/**
+ * This component will be printed if a process (payment, payout or data changing) was failed
+ * @returns {React.JSX.Element|null}
+ * @constructor
+ */
 const ProzessNichtErfolgreich = () => {
 
     const [showMessage, setShowMessage] = useState(true);

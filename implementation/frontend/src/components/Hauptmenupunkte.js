@@ -2,6 +2,11 @@ import React, {} from 'react';
 import LinkeMenuhaelfte from "./LinkeMenuhaelfte";
 import RechteMenuhaelfte from "./RechteMenuhaelfte";
 
+/**
+ * The component to separate all services in two areas.
+ * @returns {Element}
+ * @constructor
+ */
 const Hauptmenupunkte = () => {
 
     return (

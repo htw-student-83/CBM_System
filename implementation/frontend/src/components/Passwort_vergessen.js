@@ -4,7 +4,7 @@ import InputfeldPasswortVergessen from "./InputfeldPasswortVergessen";
 import React from "react";
 
 /**
- * The component about password forgot
+ * The component about password forgotten
  * @returns {JSX.Element}
  * @constructor
  */

@@ -1,5 +1,10 @@
 import { FaCashRegister } from "react-icons/fa";
 
+/**
+ * The component, which represents the picture in the background
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ForegroundWatermark = () => {
     return (
         <div className="relative bg-blue-400 h-screen">

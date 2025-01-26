@@ -1,6 +1,12 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
+
+/**
+ * This component gives the instruction to start the remote server
+ * @returns {Element}
+ * @constructor
+ */
 const TCP_Connection = () => {
 
     const location = useLocation();

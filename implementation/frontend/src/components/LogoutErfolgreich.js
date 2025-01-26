@@ -2,6 +2,11 @@ import React, {useEffect} from 'react';
 import iconHand from '../pictures/winkendeHand.png'
 import {useNavigate} from "react-router-dom";
 
+/**
+ * The icon, which will be printed when an user could log out successfully
+ * @returns {Element}
+ * @constructor
+ */
 const LogoutErfolgreich = () => {
 
     const navigate = useNavigate();

@@ -1,6 +1,11 @@
 import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 
+/**
+ * a component to handle the delete process
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AccountDelete = () => {
     const navigate = useNavigate();
 

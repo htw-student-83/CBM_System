@@ -1,6 +1,11 @@
 import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 
+/**
+ * The component for whole logout
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Logout = () => {
 
     const navigate = useNavigate();

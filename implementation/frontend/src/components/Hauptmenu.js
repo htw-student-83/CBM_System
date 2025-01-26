@@ -4,6 +4,11 @@ import Wasserzeichen from "./Wasserzeichen";
 import Uebersicht_AngemeldeterUser_AktuellerKassenstand from "./Uebersicht_AngemeldeterUser_AktuellerKassenstand";
 import Hauptmenupunkte from "./Hauptmenupunkte";
 
+/**
+ * The main menu of the system, where all services will be listed.
+ * @returns {Element}
+ * @constructor
+ */
 function Mainmenu() {
 
     return (

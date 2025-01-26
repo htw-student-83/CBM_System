@@ -4,6 +4,12 @@ import IconInnerhalbDesINputfeldes from "./IconInnerhalbDesInputfeldes";
 import {useNavigate} from "react-router-dom";
 import LabelPasswortVergessen from "./LabelPasswortVergessen";
 
+
+/**
+ * The input field of password forgotten
+ * @returns {Element}
+ * @constructor
+ */
 const InputfeldPasswortVergessen = () => {
 
     const[mobile, setMobile] = useState("");

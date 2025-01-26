@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import IconInnerhalbDesInputfeldesLogin from "./IconInnerhalbDesInputfeldesLogin";
 import { validationOfNumber, validationOfLength } from "./CheckInputForLogin"
 
+
+/**
+ * The component to handle the case when an user wants to login
+ * @returns {Element}
+ * @constructor
+ */
 const InputfeldLogin = () => {
 
     const[password, setPassword] = useState("");

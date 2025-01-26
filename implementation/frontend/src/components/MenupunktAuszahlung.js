@@ -2,6 +2,11 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import IconAuszahlung from "./IconAuszahlung";
 
+/**
+ * The component for the services payout
+ * @returns {Element}
+ * @constructor
+ */
 const MenupunktAuszahlung = () => {
 
     return (

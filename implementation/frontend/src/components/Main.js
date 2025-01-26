@@ -1,5 +1,10 @@
 import HauptIcon from "./HauptIcon";
 
+/**
+ * The first page, which will print if the system was started successfully
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Main(){
 
     return(

@@ -1,5 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 
+/**
+ * The page, where the user decides which server should be used
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Server_Connection = () => {
     const ip_address = "192.168.178.23"
     const local_address = "localhost"
