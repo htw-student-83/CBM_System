@@ -13,7 +13,7 @@ const Logout = () => {
         try {
             await axios.patch(`http://${verbindungsart}:4000/api/user/logout/changeState`)
                 .then(()=>{
-                    navigate( '/cashbox/login');
+                    navigate('/cashbox/logout_erfolgreich')
                 })
                 .catch((error) => {
                     console.log("Not answer from the server." + error)
@@ -21,7 +21,6 @@ const Logout = () => {
         } catch (error) {
             console.error('Fehler beim Aktualisieren des Logged-Attributs:', error);
         }
-        navigate( '/cashbox/login');
     }
 
     const goToMainPage = () =>{

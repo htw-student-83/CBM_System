@@ -23,6 +23,7 @@ import LadeBalkenServerVerbindung from "./components/LadeBalkenServerVerbindung"
 import LadeBalkenEinzahlungAuszahlung from "./components/LadeBalkenEinzahlungAuszahlung";
 import Registration_Success from "./components/Registration_successfully";
 import AccountDeletingSuccessful from "./components/AccountDeletingSuccessful";
+import LogoutErfolgreich from "./components/LogoutErfolgreich";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
             <Route path = '/cashbox/login' element = {<Login/>}/>
             <Route path = '/cashbox/userdataview' element = {<User/>}/>
             <Route path = '/cashbox/logout/:id' element = {<Logout/>}/>
+            <Route path = '/cashbox/logout_erfolgreich' element = {<LogoutErfolgreich/>}/>
             <Route path = '/cashbox/account_loeschung' element = {<AccountDelete/>}/>
             <Route path = '/cashbox/account_loeschung_erfolgreich' element = {<AccountDeletingSuccessful/>}/>
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
