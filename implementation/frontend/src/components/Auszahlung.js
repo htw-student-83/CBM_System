@@ -40,10 +40,10 @@ function Auszahlung() {
     }
 
     return (
-        <div className="flex flex-col bg-blue-500 h-dvh" id="mainscreen">
+        <div className="flex flex-col bg-blue-400 h-dvh" id="mainscreen">
             <div className="mt-32">
                 <div className="w-96 mt-28 ml-auto mr-auto mb-10">
-                    <img src={IconAuszahlung} style={{width: '150px', height: '150px', marginLeft: "120px"}}
+                    <img src={IconAuszahlung} style={{width: '150px', height: '150px', marginLeft: "120px", filter: "hue-rotate(370deg) brightness(0.8) contrast(1.5)"}}
                          alt="Geld einzahlen"/>
                 </div>
                 <div className="text-lg w-96 ml-auto mr-auto mt-30">

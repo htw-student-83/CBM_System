@@ -14,7 +14,7 @@ function Mainmenu() {
     return (
         <div className="bg-blue-400 h-screen overflow-hidden" id="mainscreen">
             <Uebersicht_AngemeldeterUser_AktuellerKassenstand/>
-            <div className="flex justify-center items-center bg-blue-400 relative h-screen">
+            <div className="flex justify-center items-center relative h-screen">
                 <Wasserzeichen/>
                 <Hauptmenupunkte/>
             </div>

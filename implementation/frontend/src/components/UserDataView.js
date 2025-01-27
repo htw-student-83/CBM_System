@@ -37,9 +37,9 @@ function User() {
             });
     }, [])
     return (
-        <div className="flex flex-col w-96 ml-auto mr-auto mt-32 bg-blue-100 rounded-2xl h-auto " id="mainscreen">
-            <div className="mt-10">
-                <div className="w-96 mt-4 ml-auto mr-auto mb-10">
+        <div className="flex flex-col w-96 ml-auto mr-auto mt-32 h-auto " id="mainscreen">
+            <div className="mt-10 bg-gray-200 rounded-tl-3xl rounded-tr-3xl">
+                <div className="w-96 mt-4 ml-auto mr-auto mb-10 pt-10 bg-gray-200">
                     <img src={IconUser} style={{width: '150px', height: '150px', marginLeft: "120px"}}
                          alt="Geld einzahlen"/>
                 </div>
@@ -58,11 +58,13 @@ function User() {
                     </div>
                 </div>
             </div>
-            <Link to='/cashbox/hauptmenu'>
-                <div className="p-2 text-center w-96 ml-auto mr-auto mt-3 font-bold bg-blue-200 hover:counter-pointer">
-                    <button>zurück</button>
-                </div>
-            </Link>
+            <div className="mt-2">
+                <Link to='/cashbox/hauptmenu'>
+                    <div className="p-2 text-center w-96 ml-auto mr-auto font-bold counter-pointer bg-orange-200 hover:rounded-3xl">
+                        <button>zurück</button>
+                    </div>
+                </Link>
+            </div>
         </div>
     )
 }

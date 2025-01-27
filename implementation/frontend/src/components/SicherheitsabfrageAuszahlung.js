@@ -9,9 +9,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 const SicherheitsabfrageAuszahlung = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
-
-    const [message_auszahlenderBetrag] = useState(location.state?.message);
 
     const goToPayout = async () => {
         navigate(`/cashbox/auszahlung`);
@@ -19,7 +16,7 @@ const SicherheitsabfrageAuszahlung = () => {
 
     function handelAuszahlung() {
         sessionStorage.setItem("Auszahlungsprozess","Der Auszahlungsprozess läuft...");
-        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft', {state: {betrag: message_auszahlenderBetrag}});
+        navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
     }
 
     return (

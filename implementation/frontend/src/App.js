@@ -24,6 +24,7 @@ import LadeBalkenEinzahlungAuszahlung from "./components/LadeBalkenEinzahlungAus
 import Registration_Success from "./components/Registration_successfully";
 import AccountDeletingSuccessful from "./components/AccountDeletingSuccessful";
 import LogoutErfolgreich from "./components/LogoutErfolgreich";
+import DataChange from "./components/FormDataChange";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route path = '/cashbox/account_loeschung' element = {<AccountDelete/>}/>
             <Route path = '/cashbox/account_loeschung_erfolgreich' element = {<AccountDeletingSuccessful/>}/>
             <Route path = '/cashbox/hauptmenu' element = {<Hauptmenu/>}/>
+            <Route path = '/cashbox/hauptmenu/datachange' element = {<DataChange/>}/>
             <Route path = '/cashbox/einzahlung' element = {<Einzahlung/>}/>
             <Route path = '/cashbox/einzahlung/abfrage' element = {<SicherheitsabfrageEinzahlung/>}/>
             <Route path = '/cashbox/prozess_server_connection_laeuft' element = {<LadeBalkenServerVerbindung/>}/>

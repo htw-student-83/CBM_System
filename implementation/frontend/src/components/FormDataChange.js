@@ -7,10 +7,9 @@ import {useNavigate} from "react-router-dom";
  * the component handle the process if stored data must be changed
  * @constructor
  */
-function DataChange() {
+const DataChange = () => {
 
     const navigate = useNavigate();
-    const [isModalOpen, setModalOpen] = useState(true);
     const [selectedOption, setSelectedOption] = useState("Nachname");
     const [inputValue, setInputValue] = useState("");
 
@@ -26,7 +25,7 @@ function DataChange() {
     });
 
     const handleCancel = () => {
-        setModalOpen(false); // Formular nach dem Abbrechen schließen
+        navigate('/cashbox/hauptmenu');
     };
 
     const handleOptionChange = (event) => {
@@ -78,14 +77,12 @@ function DataChange() {
         }
 
         try {
-
             await axios.patch(`http://${verbindungstyp}:4000/api/user/change/profil`, dataToUpdate,{
                 headers: {
                     'Content-Type': 'application/json',
                 }
             })
                 .then(()=>{
-                    setModalOpen(false);
                     navigate('/cashbox/hauptmenu');
                 })
                 .catch((error) => {
@@ -98,39 +95,37 @@ function DataChange() {
 
 
     return (
-                <div>
-                    {isModalOpen ? (
-                        <div className="modal">
-                            <form className="flex flex-col gap-4 bg-gray-200 py-10 px-14 rounded-xl">
-                                <h1 className="large-text">Datenänderung</h1>
-                                <div className="flex flex-grow">
-                                    <select value={selectedOption} onChange={handleOptionChange}
-                                            style={{padding: "0.5rem"}}>
-                                        <option value="Nachname">Nachname</option>
-                                        <option value="Mobile">Mobile</option>
-                                    </select>
-                                    <input type="text"
-                                           name={selectedOption.toLowerCase()}
-                                           value={inputValue}
-                                           onChange={handleInputChange}
-                                           className="border p-2"/>
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={handleSubmit}
-                                    className="bg-gray-400 font-bold p-2 mt-3 cursor-pointer hover:rounded-full">
-                                    ändern
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={handleCancel}
-                                    className="bg-sky-300 font-bold p-2 mt-3 cursor-pointer hover:rounded-full">
-                                    abbrechen
-                                </button>
-                            </form>
-                        </div>
-                    ):("")}
-                </div>
+        <div className="flex flex-col bg-blue-400 h-dvh">
+            <div className="modal">
+                <form className="flex flex-col gap-4 bg-gray-200 py-10 px-14 rounded-xl">
+                    <h1 className="large-text">Datenänderung</h1>
+                    <div className="flex flex-grow">
+                        <select value={selectedOption} onChange={handleOptionChange}
+                                style={{padding: "0.5rem"}}>
+                            <option value="Nachname">Nachname</option>
+                            <option value="Mobile">Mobile</option>
+                        </select>
+                        <input type="text"
+                               name={selectedOption.toLowerCase()}
+                               value={inputValue}
+                               onChange={handleInputChange}
+                               className="border p-2"/>
+                    </div>
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        className="bg-gray-400 font-bold p-2 mt-3 cursor-pointer hover:rounded-full">
+                        ändern
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleCancel}
+                        className="bg-sky-300 font-bold p-2 mt-3 cursor-pointer hover:rounded-full">
+                        abbrechen
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }
 
