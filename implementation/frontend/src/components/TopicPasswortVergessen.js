@@ -7,7 +7,7 @@ import React from 'react';
  */
 const TopicPasswortVergessen = () => {
     return (
-        <h1 className="text-xl mb-8 mt-5 italic font-bold text-center">Passwort vergessen</h1>
+        <h1 className="text-xl mb-8 mt-5 pb-10 italic font-bold text-center">Passwort vergessen</h1>
     )
 }
 

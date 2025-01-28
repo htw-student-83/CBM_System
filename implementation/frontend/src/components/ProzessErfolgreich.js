@@ -21,12 +21,15 @@ const ProzessErfolgreich = () => {
     //Einzahlung erfolgreich
     const signalWortEinzahlung = sessionStorage.getItem("Einzahlung erfolgreich");
     const signalWortAuszahlung = sessionStorage.getItem("Auszahlung erfolgreich");
+    const signalWortDatenaenderung = sessionStorage.getItem("Datenänderung erfolgreich");
 
     //Festlegung, welcher Text ausgegeben werden soll
     if(signalWortEinzahlung){
         message_server = signalWortEinzahlung;
     } else if(signalWortAuszahlung){
         message_server = signalWortAuszahlung;
+    }else if(signalWortDatenaenderung){
+        message_server = signalWortDatenaenderung;
     }else if(local_server){
         message_server = local_server;
     }else {
@@ -41,6 +44,9 @@ const ProzessErfolgreich = () => {
                 navigate('/cashbox/hauptmenu');
             }else if(signalWortAuszahlung){
                 sessionStorage.removeItem("Auszahlung erfolgreich")
+                navigate('/cashbox/hauptmenu');
+            }else if(signalWortDatenaenderung){
+                sessionStorage.removeItem("Datenänderung erfolgreich")
                 navigate('/cashbox/hauptmenu');
             }else if(local_server){
                 navigate('/cashbox/login');

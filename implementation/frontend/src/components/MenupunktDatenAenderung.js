@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import IconDatenaenderung from "./IconDatenaenderung";
-import IconAuszahlung from "./IconAuszahlung";
 
 const Datenaenderung = () => {
     return (

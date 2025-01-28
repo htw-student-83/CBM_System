@@ -2,6 +2,7 @@ import {startPayment} from "./APIEinzahlung";
 import {startPayout} from "./APIPayout";
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import {startDataChanging} from "./APIDataChanging";
 
 /**
  * The component, which will be printed when a process (payment, payout or data changing) is going on
@@ -9,7 +10,7 @@ import {useNavigate} from "react-router-dom";
  */
 const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) => {
 
-    let message_payment_payout_is_working = "";
+    let message_process_is_working = "";
 
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -23,18 +24,21 @@ const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) =>
     //Message for payment and payout is working
     const message_payment_is_working = sessionStorage.getItem('Einzahlungsprozess');
     const message_payout_is_working = sessionStorage.getItem('Auszahlungsprozess');
+    const message_datachanging_is_working = sessionStorage.getItem('Datenaenderung');
 
     let verbindungsart = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     if(message_payment_is_working){
-        message_payment_payout_is_working = message_payment_is_working;
+        message_process_is_working = message_payment_is_working;
+    }else if(message_payout_is_working){
+        message_process_is_working = message_payout_is_working;
     }else{
-        message_payment_payout_is_working = message_payout_is_working;
+        message_process_is_working = message_datachanging_is_working
     }
 
     useEffect( () => {
         const checkCashProzess = async () => {
-            if (message_payment_payout_is_working === "Der Einzahlungsprozess läuft...") {
+            if (message_process_is_working === "Der Einzahlungsprozess läuft...") {
                 const server_response = await startPayment(verbindungsart);
                 if (server_response) {
                     sessionStorage.removeItem("Einzahlungsprozess");
@@ -44,7 +48,7 @@ const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) =>
                 } else {
                     navigate(`/cashbox/prozess_nicht_erfolgreich`);
                 }
-            } else {
+            } else if(message_process_is_working === "Der Auszahlungsprozess läuft..."){
                 const server_response = await startPayout(verbindungsart);
                 if (server_response === "Dieser Betrag ist nicht in der Kasse vorhanden.") {
                     sessionStorage.setItem("Betrag nicht vorhanden", "Dieser Betrag ist nicht in der Kasse vorhanden.")
@@ -56,6 +60,16 @@ const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) =>
                     sessionStorage.removeItem("Auszahlungsprozess");
                     sessionStorage.removeItem("auszahlenderBetrag");
                     sessionStorage.setItem("Auszahlung erfolgreich", server_response);
+                    navigate(`/cashbox/prozess_erfolgreich`);
+                }
+            }else{
+                const server_response = await startDataChanging(verbindungsart);
+                console.log("Server für die Datenänderung hat geantwortet.")
+                console.log("Server: " + server_response)
+                if (server_response === "Die Daten wurden erfolgreich geändert.") {
+                    sessionStorage.removeItem("datenaenderung");
+                    sessionStorage.removeItem("Datenaenderung");
+                    sessionStorage.setItem("Datenänderung erfolgreich", server_response);
                     navigate(`/cashbox/prozess_erfolgreich`);
                 }
             }
@@ -103,7 +117,7 @@ const Ladevorgang_Einzahlung_Auszahlung  = ({ size = 150, strokeWidth = 10 }) =>
                     />
                 </svg>
                 <div className="mt-11 text-2xl font-bold">
-                    {message_payment_payout_is_working}
+                    {message_process_is_working}
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 /**
  * This component asks is the input correct before the process is going on

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import '../components_css/process_successfully.css'
 import IconProzessRegistrationErfolgreich from "../pictures/registration_erfolgreich.jpg";
 import {useNavigate} from "react-router-dom";

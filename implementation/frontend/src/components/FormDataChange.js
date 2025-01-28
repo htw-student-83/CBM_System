@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../components_css/datachange.css"
-import axios from "axios";
+import memoryStorage from './memoryStorage'
 import {useNavigate} from "react-router-dom";
 
 /**
@@ -12,12 +12,6 @@ const DataChange = () => {
     const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState("Nachname");
     const [inputValue, setInputValue] = useState("");
-
-    //Message for server connection is completed
-    const storedLocalAdress = sessionStorage.getItem('localAddress');
-    const storedIpAdress = sessionStorage.getItem('ipServer');
-
-    let verbindungstyp = storedLocalAdress ? storedLocalAdress : storedIpAdress;
 
     const [updateData, setUpdateData] = useState({
         nachname: '',
@@ -64,6 +58,9 @@ const DataChange = () => {
                 alert("Deine Eingabe ist ungültig.");
             }else{
                 dataToUpdate.nachname = updateData.nachname;
+                memoryStorage.set('user',dataToUpdate);
+                sessionStorage.setItem("Datenaenderung","Die Daten werden geändert...");
+                navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
             }
         }else if (selectedOption === "Mobile" && updateData.mobile.trim()) {
             // prüft, ob überhaupt eine gültige Nummer eingegeben wurde
@@ -71,26 +68,14 @@ const DataChange = () => {
                 alert("Deine Eingabe ist ungültig.");
             }else{
                 dataToUpdate.mobile = updateData.mobile;
+                memoryStorage.set('user', dataToUpdate);
+                sessionStorage.setItem("Datenaenderung","Die Daten werden geändert...");
+                navigate('/cashbox/prozess_einzahlung_auszahlung_laeuft');
             }
         }else {
-            return; // Abbrechen, wenn kein gültiger Wert vorhanden ist
+            return ""; // Abbrechen, wenn kein gültiger Wert vorhanden ist
         }
 
-        try {
-            await axios.patch(`http://${verbindungstyp}:4000/api/user/change/profil`, dataToUpdate,{
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-                .then(()=>{
-                    navigate('/cashbox/hauptmenu');
-                })
-                .catch((error) => {
-                    console.log("Not answer from the server." + error)
-                })
-        } catch (error) {
-            console.error('Fehler beim Aktualisieren des Logged-Attributs:', error);
-        }
     };
 
 

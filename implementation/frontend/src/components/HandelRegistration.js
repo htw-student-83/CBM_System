@@ -129,7 +129,6 @@ export default function HandelRegistrierung(){
      * print the message if the registration was sucessfully
      */
     const handleSuccessfullyRegistration = () => {
-        console.log("handleSuccessfullyRegistration aufgerufen")
         navigate('/cashbox/user/registrierung_erfolgreich')
     }
 

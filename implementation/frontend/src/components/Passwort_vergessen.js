@@ -11,7 +11,7 @@ import React from "react";
 export default function PasswortVergessen(){
 
     return(
-        <div className="bg-sky-300 h-dvh pt-40">
+        <div className="bg-sky-300 pt-32 h-dvh">
             <div className="flex flex-col justify-center bg-white w-fit p-10 mt-10 ml-auto mr-auto rounded-3xl">
                 <MainIcon/>
                 <TopicPasswortVergessen/>

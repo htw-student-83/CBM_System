@@ -176,6 +176,7 @@ const changeUserStateToFalse = async (req, res)=> {
  * @returns {Promise<*>}
 */
 const updateUserData = async (req, res)=> {
+    console.log("Function is calling")
     const user = await User.findOne({ logged: true });
     if(!user){
         return res.status(404).json({msg: "Not user found for changing data."});
@@ -187,7 +188,7 @@ const updateUserData = async (req, res)=> {
     if(!user_updated){
         return res.status(500).json({msg: "Server error."});
     }
-    res.status(204).end();
+    res.status(200).json({msg: "Die Daten wurden erfolgreich geändert."});
 }
 
 

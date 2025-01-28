@@ -1,5 +1,3 @@
-
-
 /**
  * checks the length and the upper case of user's input
  * @param str input
