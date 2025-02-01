@@ -29,9 +29,6 @@ cd CBM_System\implementation\frontend
 npm install
 ```
 ```bash
-cd CBM_System\implementation\frontend/
-```
-```bash
 npm start
 ```
 
