@@ -16,10 +16,15 @@ git clone https://github.com/htw-student-83/CBM_System.git
 #Navigate to the backend and install all dependencies
 ```bash
 cd CBM_System\implementation\backend
+```
+```bash
 npm install
 ```
+
 #Navigate to the fronend and start the app
 ```bash
 cd CBM_System\implementation\frontend
+```
+```bash
 npm start
 ```
