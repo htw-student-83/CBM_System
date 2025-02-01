@@ -9,12 +9,17 @@ manage either the cash in the box as also too the user data. The Full MERN Stack
 
 #Common Setup
 - clone the project
+```bash
 git clone https://github.com/htw-student-83/CBM_System.git
+```
 
 #Navigate to the backend and install all dependencies
+```bash
 cd CBM_System\implementation\backend
 npm install
-
+```
 #Navigate to the fronend and start the app
+```bash
 cd CBM_System\implementation\frontend
 npm start
+```
