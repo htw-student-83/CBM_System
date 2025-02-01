@@ -25,7 +25,7 @@ npm install
 node index.js
 ```
 
-#Navigate to the fronend and start the app
+#Navigate to the fronend install all dependencies and start the app
 ```bash
 cd CBM_System\implementation\frontend
 ```
