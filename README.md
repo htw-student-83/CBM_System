@@ -23,8 +23,15 @@ npm install
 
 #Navigate to the fronend and start the app
 ```bash
-cd CBM_System\implementation\frontend
+cd CBM_System\implementation\frontend/package.json
+```
+```bash
+npm install
+```
+```bash
+cd CBM_System\implementation\frontend/
 ```
 ```bash
 npm start
 ```
+
