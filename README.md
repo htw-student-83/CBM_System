@@ -21,6 +21,10 @@ cd CBM_System\implementation\backend
 npm install
 ```
 
+```bash
+node index.js
+```
+
 #Navigate to the fronend and start the app
 ```bash
 cd CBM_System\implementation\frontend
