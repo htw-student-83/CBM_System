@@ -21,10 +21,10 @@ const LogoutErfolgreich = () => {
     return (
         <div className="flex flex-col bg-blue-400 h-dvh" id="mainscreen">
             <div className="mt-60 ml-auto mr-auto">
-                <img src={iconHand} width={"150"} alt="hand"/>
+                <img src={iconHand} width={"170"} alt="hand" style={{ marginTop: 8}}/>
             </div>
             <div>
-                <h1 className="text-center text-2xl font-bold mt-8">Bis zum nächsten Mal.</h1>
+                <h1 className="text-center text-2xl font-bold mt-11">Bis zum nächsten Mal -)</h1>
             </div>
         </div>
     )
