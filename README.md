@@ -7,7 +7,7 @@ manage either the cash in the box as also too the user data. The Full MERN Stack
 - Node v20.14.0
 - two documents in the MongoDB
 
-#Common Setup
+#Setup
 - clone the project
 ```bash
 git clone https://github.com/htw-student-83/CBM_System.git
