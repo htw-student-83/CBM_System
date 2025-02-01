@@ -1,3 +1,30 @@
 # CBM_System
-A system, which manages the cash in the box. It's a combination of frontend, backend and database. 
-Furthermore, there are two different servers, local and remote and a registered user can choose between both.
+The app was developted as a private project. It includes the possibily to choose between two different servers (local or remote), a login page and the main menu with six service points to
+manage either the cash in the box as also too the user data. The Full MERN Stack inlcudes frontend (React), backend (node.js) and database (MongoDB). 
+
+#Requirements
+- Git
+- Node v20.14.0
+- two documents in the MongoDB
+
+#Setup
+- clone the project
+```bash
+git clone https://github.com/htw-student-83/CBM_System.git
+```
+
+#Navigate to the backend and install all dependencies
+```bash
+cd CBM_System\implementation\backend
+```
+```bash
+npm install
+```
+
+#Navigate to the fronend and start the app
+```bash
+cd CBM_System\implementation\frontend
+```
+```bash
+npm start
+```
